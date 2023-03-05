@@ -25,8 +25,7 @@ PRODUCTION = os.environ.get('DATABASE_HOST') != None
 SECRET_KEY = 'django-insecure-z8u&_f#ujoyklxi+343pq*^k0tkxgvsb5g440&tu(pc87$f#dm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = not PRODUCTION
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -79,22 +78,16 @@ WSGI_APPLICATION = 'propensi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'lPH4Mruih6bG5xxp',
+        'HOST': 'db.xnxflqjznuslqpsuwrrr.supabase.co',
+        'PORT': '5432',
     }
+
 }
 
-if PRODUCTION:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'lPH4Mruih6bG5xxp',
-            'HOST': 'db.xnxflqjznuslqpsuwrrr.supabase.co',
-            'PORT': '5432',
-        }
-    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
