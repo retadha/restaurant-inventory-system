@@ -25,7 +25,7 @@ PRODUCTION = os.environ.get('DATABASE_HOST') != None
 SECRET_KEY = 'django-insecure-z8u&_f#ujoyklxi+343pq*^k0tkxgvsb5g440&tu(pc87$f#dm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
