@@ -1,0 +1,24 @@
+{% extends "../base.html" %}
+{% load crispy_forms_tags %}
+{% load static%}
+
+{% block content %}  
+<div class="content-section">
+  {{ form.media }}
+   <h2 class ="my-4">Create Resep</h2>
+   <form method="POST" enctype="multipart/form-data">
+    <fieldset>
+      <legend class="border-bottom pd-2 mb-4 text-center">Buat Resep</legend>
+      {% csrf_token %}
+
+        <div class="form-group">
+          {{ form|crispy }}
+        </div>
+        <div>
+          <button class ="btn btn-outline-primary" type="submit">Simpan</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+{% endblock %}
