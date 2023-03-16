@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-9 mx-auto">
+        <h5>DAFTAR SUPPLIER</h5>
+        <hr style="background-color: #cc526a; height: 2px">
+        <div class="card card-body" style="background-color: #d69ca8">
+            <table class="table table-sm">
+                <tr>
+                    <th class="teks-table">Nama Supplier</th>
+                    <th class="teks-table">Alamat Supplier</th>
+                    <th class="teks-table">PIC</th>
+                    <th class="teks-table">No Handphone Supplier</th>
+                </tr>
+                {% for i in suppliers %}
+                    <tr>
+                        <th class="teks-table">{{i.nama}}</th>
+                        <th class="teks-table">{{i.alamat}}</th>
+                        <th class="teks-table">{{i.pic}}</th>
+                        <th class="teks-table">{{i.nohp}}</th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

@@ -4,15 +4,15 @@ from .models import Supplier
 
 # Create your views here.
 def create_supplier(request):
-    if request.method == "POST":
-        add = AddSupplierForm(request.POST)
-        if add.is_valid():
-            add.save()
-        return redirect("supplier:create_supplier")
-    add = AddSupplierForm()     
-    return render(request, 'supplier/create_supplier.html', {'form':add})
+    context = {}
+    form = AddSupplierForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()  
+    context['form']= form
+    return render(request, "add_supplier_form.html", context)
+
 
 def list_supplier(request):
     suppliers = Supplier.objects.all()
-    response = {'supplier':suppliers}
-    return render(request, 'supplier/list_supplier.html', response)
+    response = {'suppliers':suppliers}
+    return render(request, 'list_supplier.html', response)
