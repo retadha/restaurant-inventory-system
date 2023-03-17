@@ -12,6 +12,7 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
     <title>{{title}} | Noorumi System</title>
   </head>
   <body>
@@ -50,6 +51,9 @@
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item navbar-text">{% now "l, d F Y H:i" %}</li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout/">Logout</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="#"
                 ><svg
@@ -91,5 +95,6 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+    
   </body>
 </html>
