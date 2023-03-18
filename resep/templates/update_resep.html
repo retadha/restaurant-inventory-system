@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static%}
+
+{% block body %}
+    <h1 class="text-center">{{ nama }}</h1>
+
+    <br>
+    <br>
+    <h2 class="text-center">Bahan</h2>
+    <div class="d-flex justify-content-center">
+        <pre>{{ bahan }}</pre>
+    </div>
+
+    <br>
+    <br>
+    <h2 class="text-center">Langkah</h2>
+    <div class="d-flex justify-content-center">
+        <pre>{{ cara_memasak }}</pre>
+    </div>
+{% endblock %}

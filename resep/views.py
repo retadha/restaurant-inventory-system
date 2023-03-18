@@ -1,17 +1,17 @@
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from .forms import AddResepForm
+from .forms import ResepForm
 from .models import Resep
 
 
 def create_resep(request):
     if request.method == "POST":
-        add = AddResepForm(request.POST)
+        add = ResepForm(request.POST)
         if add.is_valid():
             add.save()
         return redirect("resep:create_resep")
-    add = AddResepForm()     
-    return render(request, 'resep/create.html', {'form':add})
+    add = ResepForm()
+    return render(request, 'resep/templates/create.html', {'form':add})
 
 def viewall_resep(request):
     daftar_resep = Resep.objects.all()
