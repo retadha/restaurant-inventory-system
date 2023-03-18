@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static%}
+
+{% block body %}
+    <h1 class="text-center">Daftar Resep</h1>
+    <br>
+    <br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for resep in daftar_resep %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ resep.nama }}</td>
+              <td>
+                  <a class="btn btn-success" href="{% url 'resep:view_resep' resep.id_resep %}" role="button">View</a>
+                  <a class="btn btn-danger" href="{% url 'resep:delete_resep' resep.id_resep %}" role="button">Delete</a>
+              </td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}
