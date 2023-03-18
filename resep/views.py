@@ -35,14 +35,22 @@ def edit_resep(request, id_resep):
         resep = Resep.objects.get(pk=id_resep)
     except Resep.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
-    form = ResepForm(request.POST or None, instance= resep)
-    if form.is_valid():
-        form.save()
+
+    if request.method == "POST":
+        resep = Resep.objects.get(pk=id_resep)
+        resep.nama = request.POST["nama"]
+        resep.bahan = request.POST["bahan"]
+        resep.cara_memasak = request.POST["cara_memasak"]
+        resep.save()
+
         return HttpResponseRedirect('/resep/viewall')
 
     context = {
         'id_resep' : resep.id_resep,
-        'form' : form
+        'nama' : resep.nama,
+        'bahan' : resep.bahan,
+        'cara_memasak' : resep.cara_memasak
+
     }
     return render(request, "update_resep.html", context)
 

@@ -11,16 +11,21 @@
                 <br>
                 <br>
                 <form action="{% url 'resep:edit_resep' id_resep %}" method="POST">
+
                     {% csrf_token %}
                     <div class="d-flex flex-column justify-content-start align-items-center">
                         <h2 class="text-center">Nama</h2>
-                        <input id="id_nama" name="nama" type="text" placeholder="{{ form.nama }}">
+                        <input type="number" name="id_resep" hidden>
+                        <input name="nama" type="text" class="rounded" value="{{ nama }}">
 
-                        <h2 class="text-center">Bahan</h2>
-                        <textarea id="id_bahan" name="bahan" cols="70" rows="10" placeholder="{{ form.bahan }}"></textarea>
 
-                        <h2 class="text-center">Cara Memasak</h2>
-                        <textarea id="id_cara_memasak" name="cara_memasak" cols="70" rows="10" placeholder="{{ form.cara_memasak }}"></textarea>
+                        <h2 class="text-center mt-3">Bahan</h2>
+                        <textarea name="bahan" class="rounded" cols="70" rows="10">{{ bahan }}</textarea>
+
+
+                        <h2 class="text-center mt-3">Cara Memasak</h2>
+                        <textarea name="cara_memasak" class="rounded" cols="70" rows="10">{{ cara_memasak }}</textarea>
+
 
                         <div class="d-flex justify-content-center mt-3" style="gap: 10px">
                             <a class="btn btn-danger" href="{% url 'resep:view_resep' id_resep %}" role="button">Batalkan</a>
