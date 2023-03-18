@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Employee
+from gedung.models import Gedung
 from .forms import EmployeeCreationForm
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
@@ -24,7 +25,8 @@ def employee_list(request):
     employees = Employee.objects.filter(
         Q(nama__icontains=query) |
         Q(email__icontains=query) |
-        Q(role__icontains=query)
+        Q(role__icontains=query) |
+        Q(id_gedung__nama__icontains=query)
         )
     return render(request, 'employee_list.html', {'employees': employees})
 
