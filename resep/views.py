@@ -43,7 +43,7 @@ def edit_resep(request, id_resep):
         resep.cara_memasak = request.POST["cara_memasak"]
         resep.save()
 
-        return HttpResponseRedirect('/resep/viewall')
+        return HttpResponseRedirect('/resep/view/'+id_resep)
 
     context = {
         'id_resep' : resep.id_resep,

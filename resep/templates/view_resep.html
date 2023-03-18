@@ -25,10 +25,39 @@
 
                     <br>
                     <br>
+
+
+
                     <div class="d-flex justify-content-center" style="gap: 10px">
                         <a class="btn btn-warning" href="{% url 'resep:viewall_resep' %}" role="button">Kembali</a>
                         <a class="btn btn-success" href="{% url 'resep:edit_resep' id_resep %}" role="button">Update</a>
-                        <a class="btn btn-danger" href="{% url 'resep:delete_resep' id_resep %}" role="button">Delete</a>
+{#                        <a class="btn btn-danger" href="{% url 'resep:delete_resep' id_resep %}" role="button">Delete</a>#}
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
+                          Hapus
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Penghapusan Resep</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                Apakah Anda yakin ingin menghapus resep {{ nama }}?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Batalkan</button>
+                                <a class="btn btn-danger" href="{% url 'resep:delete_resep' id_resep %}" role="button">Hapus</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                     </div>
 
                 </div>
