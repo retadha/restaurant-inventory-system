@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-9 mx-auto">
+        <h5>DATA SUPPLIER</h5>
+        <hr style="background-color: #cc526a; height: 2px">
+        <div class="card card-body" style="background-color: #d69ca8">
+            <table class="table table-sm">
+                <tr>
+                    <th>{{ supplier.nama }}</th>
+                    <th>{{ supplier.alamat }}</th>
+                    <th>{{ supplier.pic }}</th>
+                    <th>{{ supplier.nohp }}</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}
