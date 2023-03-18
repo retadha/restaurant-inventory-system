@@ -32,11 +32,19 @@ def view_resep(request, id_resep):
 
 def edit_resep(request, id_resep):
     try:
-        sesi = Resep.objects.get(pk=id_resep)
+        resep = Resep.objects.get(pk=id_resep)
     except Resep.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
+    form = ResepForm(request.POST or None, instance= resep)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/resep/viewall')
 
-
+    context = {
+        'id_resep' : resep.id_resep,
+        'form' : form
+    }
+    return render(request, "update_resep.html", context)
 
 def delete_resep(request, id_resep):
     try:

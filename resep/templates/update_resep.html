@@ -2,19 +2,38 @@
 {% load static%}
 
 {% block body %}
-    <h1 class="text-center">{{ nama }}</h1>
+<div class="container">
+    <div class="card m-4 p-4 shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h1 class="text-center">Update Resep</h1>
 
-    <br>
-    <br>
-    <h2 class="text-center">Bahan</h2>
-    <div class="d-flex justify-content-center">
-        <pre>{{ bahan }}</pre>
-    </div>
+                <br>
+                <br>
+                <form action="{% url 'resep:edit_resep' id_resep %}" method="POST">
+                    {% csrf_token %}
+                    <h2 class="text-center">Nama</h2>
+                    <div class="d-flex justify-content-center">
+                        <input id="id_nama" name="nama" type="text" placeholder="{{ form.nama }}">
+                    </div>
 
-    <br>
-    <br>
-    <h2 class="text-center">Langkah</h2>
-    <div class="d-flex justify-content-center">
-        <pre>{{ cara_memasak }}</pre>
+
+                    <h2 class="text-center">Bahan</h2>
+                    <div class="d-flex justify-content-center">
+                        <textarea id="id_bahan" name="bahan" cols="70" rows="10" placeholder="{{ form.bahan }}"></textarea>
+                    </div>
+
+
+                    <h2 class="text-center">Cara Memasak</h2>
+                    <div class="d-flex justify-content-center">
+                        <textarea id="id_cara_memasak" name="cara_memasak" cols="70" rows="10" placeholder="{{ form.cara_memasak }}"></textarea>
+                    </div>
+
+                </form>
+
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}
