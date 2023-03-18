@@ -17,16 +17,22 @@ def list_supplier(request):
     return render(request, 'list_supplier.html', response)
 
 def update_supplier(request,id):
-    supplier = Supplier.objects.get(id=id)
-    # form = AddSupplierForm(request.POST, instance=supplier)
-    print(request.data)
-    return render(request, 'update_supplier.html', supplier)
+    context = {}
+    supplier = Supplier.objects.get(id_supplier=id)
+    if(request.POST):
+        supplier.nama = request.POST["nama"]
+        supplier.alamat = request.POST["alamat"]
+        supplier.pic = request.POST["pic"]
+        supplier.nohp = request.POST["nohp"]
+        supplier.save()
+    context['Supplier']= supplier
+    return render(request, 'update_supplier_form.html', {'supplier':supplier})
 
 def get_supplier(request,id):
-        supplier = Supplier.objects.get(id=id)  
+        supplier = Supplier.objects.get(id_supplier=id)  
         return render(request,'get_supplier.html', {'supplier':supplier})
 
 def delete_supplier(request,id):
-    supplier = Supplier.objects.get(id=id)
+    supplier = Supplier.objects.get(id_supplier=id)
     supplier.delete()
-    return redirect("/list_supplier")
+    return redirect("/supplier/list_supplier")
