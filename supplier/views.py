@@ -18,9 +18,8 @@ def list_supplier(request):
 
 def update_supplier(request,id):
     supplier = Supplier.objects.get(id=id)
-    form = AddSupplierForm(request.POST, instance=supplier)
-    if form.is_valid():  
-        form.save()
+    # form = AddSupplierForm(request.POST, instance=supplier)
+    print(request.data)
     return render(request, 'update_supplier.html', supplier)
 
 def get_supplier(request,id):

@@ -6,9 +6,12 @@
     <h5 style="text-align: center;">Update Data Supplier</h5>
     <hr style="height: 2px">
     <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input class="btn btn-sm btn-light btn-outline-success" type="submit" name="Submit">
+        <input class="form-control" type="text" name="nama" value="{{supplier.nama}}">
+        <input class="form-control" type="text" name="alamat" value="{{supplier.alamat}}">
+        <input class="form-control" type="text" name="pic" value="{{supplier.pic}}">
+        <input class="form-control" type="text" name="nohp" value="{{supplier.nohp}}">
+        <button class="btn btn-success" type="submit">Submit</button>
+        <a class="btn btn-primary" href="/list_supplier">Kembali</a>
     </form>
 </div>
 {% endblock body %}
