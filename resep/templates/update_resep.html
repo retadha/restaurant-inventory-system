@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static%}
+{% load static %}
 
 {% block body %}
 <div class="container">
@@ -12,26 +12,29 @@
                 <br>
                 <form action="{% url 'resep:edit_resep' id_resep %}" method="POST">
                     {% csrf_token %}
-                    <h2 class="text-center">Nama</h2>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex flex-column justify-content-start align-items-center">
+                        <h2 class="text-center">Nama</h2>
                         <input id="id_nama" name="nama" type="text" placeholder="{{ form.nama }}">
-                    </div>
 
-
-                    <h2 class="text-center">Bahan</h2>
-                    <div class="d-flex justify-content-center">
+                        <h2 class="text-center">Bahan</h2>
                         <textarea id="id_bahan" name="bahan" cols="70" rows="10" placeholder="{{ form.bahan }}"></textarea>
-                    </div>
 
-
-                    <h2 class="text-center">Cara Memasak</h2>
-                    <div class="d-flex justify-content-center">
+                        <h2 class="text-center">Cara Memasak</h2>
                         <textarea id="id_cara_memasak" name="cara_memasak" cols="70" rows="10" placeholder="{{ form.cara_memasak }}"></textarea>
+
+                        <div class="d-flex justify-content-center mt-3" style="gap: 10px">
+                            <a class="btn btn-danger" href="{% url 'resep:view_resep' id_resep %}" role="button">Batalkan</a>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </div>
+
+
+
 
                 </form>
 
-                <button type="submit" class="btn btn-primary">Simpan</button>
+
+
             </div>
         </div>
     </div>
