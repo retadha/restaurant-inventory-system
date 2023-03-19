@@ -27,11 +27,11 @@ def update_supplier(request,id):
         supplier.nohp = request.POST["nohp"]
         supplier.save()
         return redirect("/supplier/list_supplier")
-    return render(request, 'update_supplier_form.html', {'supplier':supplier})
+    return render(request, 'list_supplier.html', {'supplier':supplier})
 
 def get_supplier(request,id):
         supplier = Supplier.objects.get(id_supplier=id)  
-        return render(request,'get_supplier.html', {'supplier':supplier})
+        return render(request,'list_supplier.html', {'supplier':supplier})
 
 def delete_supplier(request,id):
     supplier = Supplier.objects.get(id_supplier=id)

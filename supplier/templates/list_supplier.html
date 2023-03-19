@@ -7,29 +7,158 @@
         <div class="card-body">
             <div class="justify-content-center">
                 <table class="table">
-                    <h2>DATA SUPPLIER</h2>
-                    <a class="btn btn-warning" href="/supplier/create_supplier">Add New Supplier</a>
+                    <h4>DATA SUPPLIER</h4>
+                   
+                     <!--Modal Create-->
+                     <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#createSupplier">
+                        + Tambah Supplier
+                    </button>
+                    <br>
+                        <div class="modal fade" id="createSupplier" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form id="1" action="{% url 'create_supplier' %}" method="POST">
+                                        <div class="modal-body">
+                                            <h5 style="text-align: center;">Tambah Supplier</h5>
+                                            <hr style="height: 2px">
+
+                                                {% csrf_token %}
+                                                <p>Nama Supplier</p>
+                                                <input class="form-control" type="text" name="nama" value="{{i.nama}}">
+                                                <br>
+                                                <p>Alamat</p>
+                                                <input class="form-control" type="text" name="alamat" value="{{i.alamat}}">
+                                                <br>
+                                                <p>PIC</p>
+                                                <input class="form-control" type="text" name="pic" value="{{i.pic}}">
+                                                <br>
+                                                <p>No Telp</p>
+                                                <input class="form-control" type="text" name="nohp" value="{{i.nohp}}">
+                                                <br>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Batal</button>
+                                            <button class="btn btn-warning" type="submit">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     <br>
                     <thead>
                         <tr>
                             <td class="teks-table">Nama Supplier</td>
-                            <td class="teks-table">Alamat Supplier</td>
                             <td class="teks-table">PIC</td>
-                            <td class="teks-table">No Handphone Supplier</td>
                             <td class="teks-table">Action</td>
                         </tr>
                     </thead>
+                    <div>
+                        
+                    </div>
                     <tbody>
                         {% for i in suppliers %}
                         <tr>
                             <th class="teks-table">{{i.nama}}</th>
-                            <th class="teks-table">{{i.alamat}}</th>
                             <th class="teks-table">{{i.pic}}</th>
-                            <th class="teks-table">{{i.nohp}}</th>
                             <th>
-                                <a class="btn btn-primary" href="/supplier/get_supplier/{{i.id_supplier}}">Detail</a>
-                                <a class="btn btn-warning" href="/supplier/update_supplier/{{i.id_supplier}}">Update</a>
-                                <a class="btn btn-danger" href="/supplier/delete_supplier/{{i.id_supplier}}">Delete</a>
+                                <!--Modal Detail-->
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#detail{{i.id_supplier}}">
+                                    Detail
+                                </button>
+                                <div class="modal fade" id="detail{{i.id_supplier}}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Detail Supplier</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Nama: {{i.nama}}</p>
+                                                <p>Alamat: {{i.alamat}}</p>
+                                                <p>PIC: {{i.pic}}</p>
+                                                <p>No Handphone: {{i.nohp}}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Kembali</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Modal Modify-->
+                                <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modify{{i.id_supplier}}">
+                                    Modify
+                                </button>
+                                <div class="modal fade" id="modify{{i.id_supplier}}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Detail Supplier</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form id="2" action="/supplier/update_supplier/{{i.id_supplier}}" method="POST">
+                                                <div class="modal-body">
+                                                    <h5 style="text-align: center;">Edit Supplier</h5>
+                                                    <hr style="height: 2px">
+
+                                                    {% csrf_token %}
+                                                    <p>Nama Supplier</p>
+                                                    <input class="form-control" type="text" name="nama" value="{{i.nama}}">
+                                                    <br>
+                                                    <p>Alamat</p>
+                                                    <input class="form-control" type="text" name="alamat" value="{{i.alamat}}">
+                                                    <br>
+                                                    <p>PIC</p>
+                                                    <input class="form-control" type="text" name="pic" value="{{i.pic}}">
+                                                    <br>
+                                                    <p>No Telp</p>
+                                                    <input class="form-control" type="text" name="nohp" value="{{i.nohp}}">
+                                                    <br>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Kembali</button>
+                                                    <button class="btn btn-warning" type="submit">Simpan</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Modal Hapus Supplier -->
+                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmDelete{{i.id_supplier}}">
+                                        Hapus
+                                </button>
+                                <div class="modal fade" id="confirmDelete{{i.id_supplier}}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Penghapusan Supplier</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Apakah Anda yakin ingin menghapus supplier {{i.nama}}? 
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Batal</button>
+                                                <a class="btn btn-danger" href="/supplier/delete_supplier/{{i.id_supplier}}" role="button">Hapus</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                         {% endfor %}
