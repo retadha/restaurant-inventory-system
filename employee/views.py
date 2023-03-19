@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import Employee
-from gedung.models import Gedung
 from .forms import EmployeeCreationForm
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
