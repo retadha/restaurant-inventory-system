@@ -1,0 +1,43 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block body %}
+  <div class="d-flex justify-content-between py-2">
+    <h2>Employee List</h2>
+      <button class="btn btn-primary">Add Employee</button>
+    </a>
+  </div>
+
+   <!-- <form method="GET">
+    <input type="text" name="search-area" id="search-area">
+    <input type="submit" value="Search">
+  </form> -->
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>PIC</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for supplier in suppliers %}
+      <tr>
+        <td>{{ supplier.nama }}</td>
+        <td>{{ supplier.pic }}</td>
+        <td> Test
+        </td>
+      </tr>
+      {% empty %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+<script>
+  let table = new DataTable(".table", {
+    // options
+  });
+</script>
+{% endblock %}
