@@ -29,9 +29,9 @@
 
 
                     <div class="d-flex justify-content-center" style="gap: 10px">
-                        <a class="btn btn-warning" href="{% url 'resep:viewall_resep' %}" role="button">Kembali</a>
-                        <a class="btn btn-success" href="{% url 'resep:edit_resep' id_resep %}" role="button">Update</a>
-{#                        <a class="btn btn-danger" href="{% url 'resep:delete_resep' id_resep %}" role="button">Delete</a>#}
+                        <a class="btn btn-outline-dark" href="{% url 'resep:viewall_resep' %}" role="button">Kembali</a>
+                        <a class="btn btn-success" href="{% url 'resep:edit_resep' id_resep %}" role="button">Modifiy</a>
+
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
                           Hapus
@@ -51,7 +51,7 @@
                                 Apakah Anda yakin ingin menghapus resep {{ nama }}?
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Batalkan</button>
+                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Batal</button>
                                 <a class="btn btn-danger" href="{% url 'resep:delete_resep' id_resep %}" role="button">Hapus</a>
                               </div>
                             </div>
