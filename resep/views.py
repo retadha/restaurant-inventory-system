@@ -3,8 +3,9 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from .forms import ResepForm
 from .models import Resep
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='/login/')
 def create_resep(request):
     if request.method == "POST":
         add = ResepForm(request.POST)
@@ -16,7 +17,7 @@ def create_resep(request):
     add = ResepForm()
     return render(request, 'create.html', {'form':add})
 
-
+@login_required(login_url='/login/')
 def viewall_resep(request):
     daftar_resep = Resep.objects.all()
     context = {
@@ -24,6 +25,7 @@ def viewall_resep(request):
     }
     return render(request, 'viewall_resep.html', context)
 
+@login_required(login_url='/login/')
 def view_resep(request, id_resep):
     resep = Resep.objects.get(pk=id_resep)
     context = {
@@ -34,6 +36,7 @@ def view_resep(request, id_resep):
     }
     return render(request, 'view_resep.html', context)
 
+@login_required(login_url='/login/')
 def edit_resep(request, id_resep):
     try:
         resep = Resep.objects.get(pk=id_resep)
@@ -58,6 +61,7 @@ def edit_resep(request, id_resep):
     }
     return render(request, "update_resep.html", context)
 
+@login_required(login_url='/login/')
 def delete_resep(request, id_resep):
     try:
         resep = Resep.objects.get(pk=id_resep)
