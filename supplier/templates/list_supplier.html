@@ -2,34 +2,41 @@
 {% load static %}
 
 {% block body %}
-<div class="row">
-    <div class="col-md-9 mx-auto">
-        <h5>DAFTAR SUPPLIER</h5>
-        <hr style="background-color: #cc526a; height: 2px">
-        <a class="btn btn-warning" href="/supplier/create_supplier">Add New Supplier</a>
-        <div class="card card-body" style="background-color: #d69ca8">
-            <table class="table table-sm">
-                <tr>
-                    <th class="teks-table">Nama Supplier</th>
-                    <th class="teks-table">Alamat Supplier</th>
-                    <th class="teks-table">PIC</th>
-                    <th class="teks-table">No Handphone Supplier</th>
-                    <th class="teks-table">Action</th>
-                </tr>
-                {% for i in suppliers %}
-                    <tr>
-                        <th class="teks-table">{{i.nama}}</th>
-                        <th class="teks-table">{{i.alamat}}</th>
-                        <th class="teks-table">{{i.pic}}</th>
-                        <th class="teks-table">{{i.nohp}}</th>
-                        <th>
-                            <a class="btn btn-primary" href="/supplier/get_supplier/{{i.id_supplier}}">Detail</a>
-                            <a class="btn btn-warning" href="/supplier/update_supplier/{{i.id_supplier}}">Update</a>
-                            <a class="btn btn-danger" href="/supplier/delete_supplier/{{i.id_supplier}}">Delete</a>
-                        </th>
-                    </tr>
-                {% endfor %}
-            </table>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <table class="table">
+                    <h2>DATA SUPPLIER</h2>
+                    <a class="btn btn-warning" href="/supplier/create_supplier">Add New Supplier</a>
+                    <br>
+                    <thead>
+                        <tr>
+                            <td class="teks-table">Nama Supplier</td>
+                            <td class="teks-table">Alamat Supplier</td>
+                            <td class="teks-table">PIC</td>
+                            <td class="teks-table">No Handphone Supplier</td>
+                            <td class="teks-table">Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in suppliers %}
+                        <tr>
+                            <th class="teks-table">{{i.nama}}</th>
+                            <th class="teks-table">{{i.alamat}}</th>
+                            <th class="teks-table">{{i.pic}}</th>
+                            <th class="teks-table">{{i.nohp}}</th>
+                            <th>
+                                <a class="btn btn-primary" href="/supplier/get_supplier/{{i.id_supplier}}">Detail</a>
+                                <a class="btn btn-warning" href="/supplier/update_supplier/{{i.id_supplier}}">Update</a>
+                                <a class="btn btn-danger" href="/supplier/delete_supplier/{{i.id_supplier}}">Delete</a>
+                            </th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
         </div>
     </div>
 </div>
