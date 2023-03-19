@@ -9,9 +9,10 @@ def create_resep(request):
         add = ResepForm(request.POST)
         if add.is_valid():
             add.save()
-        return redirect("resep:create_resep")
+        return redirect("resep:viewall_resep")
     add = ResepForm()
-    return render(request, 'resep/templates/create.html', {'form':add})
+    return render(request, 'create.html', {'form':add})
+
 
 def viewall_resep(request):
     daftar_resep = Resep.objects.all()
