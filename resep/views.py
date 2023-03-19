@@ -1,5 +1,6 @@
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from .forms import ResepForm
 from .models import Resep
 
@@ -8,10 +9,13 @@ def create_resep(request):
     if request.method == "POST":
         add = ResepForm(request.POST)
         if add.is_valid():
+            namaResep = add.cleaned_data.get('nama')
             add.save()
-        return redirect("resep:create_resep")
+        messages.success(request, f'Resep {namaResep} berhasil dibuat.')
+        return redirect("resep:viewall_resep")
     add = ResepForm()
-    return render(request, 'resep/templates/create.html', {'form':add})
+    return render(request, 'create.html', {'form':add})
+
 
 def viewall_resep(request):
     daftar_resep = Resep.objects.all()
@@ -42,7 +46,7 @@ def edit_resep(request, id_resep):
         resep.bahan = request.POST["bahan"]
         resep.cara_memasak = request.POST["cara_memasak"]
         resep.save()
-
+        messages.success(request, f'Resep {resep.nama} berhasil diubah.')
         return HttpResponseRedirect('/resep/view/'+id_resep)
 
     context = {
@@ -61,7 +65,3 @@ def delete_resep(request, id_resep):
         return HttpResponseRedirect('/resep/viewall')
     except Resep.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
-
-
-
-
