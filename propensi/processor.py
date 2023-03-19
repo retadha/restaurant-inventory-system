@@ -3,7 +3,11 @@ from employee.models import Employee
 
 def role_processor(request):
     if (request.user.is_authenticated):
-        employee = Employee.objects.get(user=request.user)
+        try:
+            employee = Employee.objects.get(user=request.user)
+        except:
+            employee = None
+            return {}
         role = get_role(request)
         context = {
             'username':employee.nama,
