@@ -4,36 +4,26 @@
 {% block body %}
     <div class="container">
         <div class="card m-4 p-4 shadow p-3 mb-5 bg-white rounded">
-            <div class="card-body">
-                <div class="justify-content-center">
+            <div class="card-body d-flex justify-content-center">
+                <div class="d-flex flex-column align-items-stretch w-75 gap-3">
                     <h1 class="text-center">{{ nama }}</h1>
 
-                    <br>
-                    <br>
-                    <h2 class="text-center mb-3">Bahan</h2>
-                    <div class="d-flex justify-content-center">
-                        <pre style="font-family: system-ui; line-height: 1.8">{{ bahan }}</pre>
+                    <div class="d-flex flex-column align-items-stretc">
+                        <h2 class="text-center">Bahan</h2>
+                        <pre class="" style="font-family: system-ui; line-height: 1.8">{{ bahan }}</pre>
                     </div>
-
-
-                    <br>
-                    <br>
-                    <h2 class="text-center mb-3">Langkah</h2>
-                    <div class="d-flex justify-content-center">
-                        <pre style="font-family: system-ui; line-height: 1.8">{{ cara_memasak }}</pre>
+                    <div class="d-flex flex-column align-items-stretch">
+                        <h2 class="text-center">Langkah</h2>
+                    <pre class="" style="font-family: system-ui; line-height: 1.8; white-space: pre-wrap; word-break: break-word;">{{ cara_memasak }}</pre>
                     </div>
-
-                    <br>
-                    <br>
 
 
 
                     <div class="d-flex justify-content-center" style="gap: 10px">
                         <a class="btn btn-outline-dark" href="{% url 'resep:viewall_resep' %}" role="button">Kembali</a>
-                        <a class="btn btn-outline-dark" style="background: #BFA89B;" href="{% url 'resep:edit_resep' id_resep %}" role="button">Modifiy</a>
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmDelete">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
                           Hapus
                         </button>
 
