@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,6 +47,19 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Link 2</a>
             </li>
+            {% if role == '0' %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link Manager</a>
+            </li>
+            {% elif role == '1' %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link Staff</a>
+            </li>
+            {% elif role == '2' %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link Admin</a>
+            </li>
+            {% else %} {% endif %}
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item navbar-text">{% now "l, d F Y H:i" %}</li>
@@ -76,9 +88,7 @@
       </div>
     </nav>
 
-    <div class="p-3">
-      {% block body %}{% endblock body %}
-    </div>
+    <div class="p-3">{% block body %}{% endblock body %}</div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -95,6 +105,5 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-    
   </body>
 </html>

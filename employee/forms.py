@@ -10,7 +10,7 @@ E164_REGEX = re.compile(r"^(\+[1-9])?\d{1,14}$")
 
 class EmployeeCreationForm(UserCreationForm):
     nama = forms.CharField(max_length=100)
-    role = forms.ChoiceField(choices=[('MANAGER', 'MANAGER'), ('STAFF', 'STAFF')])
+    role = forms.ChoiceField(choices=[('0', 'Manager'), ('1', 'Staff')])
     email = forms.EmailField()
     nohp = forms.CharField(validators=[
         RegexValidator(E164_REGEX, "Please enter a valid phone number.")

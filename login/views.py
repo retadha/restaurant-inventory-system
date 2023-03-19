@@ -9,7 +9,6 @@ def login_page(request):
         return redirect('/')
     
     if request.method == "POST":
-        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)

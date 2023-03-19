@@ -6,7 +6,7 @@ from gedung.models import Gedung
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nama = models.CharField(max_length=100)
-    role = models.CharField(max_length=10, choices=[('MANAGER', 'MANAGER'), ('STAFF', 'STAFF'), ('ADMIN', 'ADMIN')])
+    role = models.CharField(max_length=10, choices=[('0', 'MANAGER'), ('1', 'STAFF'), ('2', 'ADMIN')])
     email = models.CharField(max_length=100)
     
     phone_regex = RegexValidator(regex=r"^(\+[1-9])?\d{1,14}$", message="Masukkan nomor telepon dengan benar")
