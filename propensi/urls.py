@@ -8,4 +8,6 @@ urlpatterns = [
     path("login/", login_page, name="login"),
     path("logout/", logout_page, name="logout"),
     path("user/", include('user.urls'), name="user"),
+    path('', include('employee.urls')),
+
 ]

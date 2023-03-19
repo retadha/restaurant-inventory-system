@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'home',
     'login',
     'user',
+    'employee',
+    'gedung',
 ]
 
 MIDDLEWARE = [
