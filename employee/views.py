@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Employee
 from gedung.models import Gedung
 from .forms import EmployeeCreationForm
-from django.db.models import Q
 from propensi.utils import is_admin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -19,20 +18,20 @@ def create_employee(request):
             return redirect('employee_list')
     else:
         form = EmployeeCreationForm()
-    return render(request, 'create_employee.html', {'title': "Buat Employee", 'form': form})
+    gedung = Gedung.objects.all()
+    context = {
+        'title': "Buat Employee", 
+        'form': form,
+        'gedung':gedung,
+    }
+    return render(request, 'create_employee.html', context)
 
 
 @login_required(login_url='/login/')
 def employee_list(request):
     if (is_admin(request) == False):
         return render(request, 'error/403.html')
-    query = request.GET.get('search-area', '')
-    employees = Employee.objects.filter(
-        Q(nama__icontains=query) |
-        Q(email__icontains=query) |
-        Q(role__icontains=query) |
-        Q(id_gedung__nama__icontains=query)
-    )
+    employees = Employee.objects.all()
     return render(request, 'employee_list.html', {'title': "Daftar Employee", 'employees': employees})
 
 
