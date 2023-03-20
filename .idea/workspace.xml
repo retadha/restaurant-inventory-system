@@ -2,62 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7480038f-d233-422e-b340-4e643131930d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/migrations/0002_alter_employee_role.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/templates/create_employee.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/templates/employee_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/templates/employee_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/migrations/0002_gedung_status.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/migrations/0003_alter_gedung_status.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gedung/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/migrations/0002_delete_testmodel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/templates/login/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/propensi/processor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/propensi/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/auth/login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/base/base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/auth/login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/error/400.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/error/403.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/error/404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/error/500.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/admin.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/admin.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/models.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/models.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/views.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/views.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resep/templates/view_resep.html" beforeDir="false" afterPath="$PROJECT_DIR$/resep/templates/view_resep.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resep/templates/viewall_resep.html" beforeDir="false" afterPath="$PROJECT_DIR$/resep/templates/viewall_resep.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resep/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/resep/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/employee/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/messages.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +41,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230319_0003",
-    "last_opened_file_path": "C:/Users/Retad/OneDrive/Desktop/Propensi/d10",
+    "com.google.cloudcode.ide_session_index": "20230320_0001",
+    "last_opened_file_path": "C:/Users/Retad/OneDrive/Desktop/Archives/Academic Archives/Semester 3/PBP/PBP/PTS/uts-pbp-e03",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.fileTypes"
   }
@@ -108,6 +58,61 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DjangoTestsConfigurationType">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="d10" type="Python.DjangoServer" factoryName="Django server">
       <module name="d10" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -131,6 +136,64 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="Python.FlaskServer">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Docutils task">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Sphinx task">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -150,6 +213,7 @@
       <workItem from="1679197408897" duration="12479000" />
       <workItem from="1679230975911" duration="843000" />
       <workItem from="1679233434679" duration="1453000" />
+      <workItem from="1679274153912" duration="6294000" />
     </task>
     <servers />
   </component>

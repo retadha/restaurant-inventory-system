@@ -50,7 +50,7 @@ def edit_resep(request, id_resep):
         resep.cara_memasak = request.POST["cara_memasak"]
         resep.save()
         messages.success(request, f'Resep {resep.nama} berhasil diubah.')
-        return HttpResponseRedirect('/resep/view/'+id_resep)
+        return HttpResponseRedirect('/resep/viewall')
 
     context = {
         'id_resep' : resep.id_resep,
