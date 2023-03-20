@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'login',
     'employee',
     'gedung',
-    'supplier'
+    'supplier',
     'resep',
 ]
 
