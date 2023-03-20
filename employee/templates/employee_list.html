@@ -6,11 +6,6 @@
   </a>
 </div>
 
-<!-- <form method="GET">
-    <input type="text" name="search-area" id="search-area">
-    <input type="submit" value="Search">
-  </form> -->
-
 {% for message in messages %} {% if message.tags == 'success' %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   {{ message }}

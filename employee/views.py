@@ -15,10 +15,18 @@ def create_employee(request):
         form = EmployeeCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            nama = form.cleaned_data.get('nama')
+            messages.success(request, f'Karyawan {nama} berhasil ditambahkan')
             return redirect('employee_list')
+        else:
+            for field_name, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'{error}')
     else:
         form = EmployeeCreationForm()
+    
     gedung = Gedung.objects.all()
+
     context = {
         'title': "Buat Employee", 
         'form': form,
