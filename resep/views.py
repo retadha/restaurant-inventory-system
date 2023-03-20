@@ -4,9 +4,12 @@ from django.contrib import messages
 from .forms import ResepForm
 from .models import Resep
 from django.contrib.auth.decorators import login_required
+from propensi.utils import is_restoran
 
 @login_required(login_url='/login/')
 def create_resep(request):
+    if (is_restoran(request) == False):
+        return render(request, 'error/403.html')
     if request.method == "POST":
         add = ResepForm(request.POST)
         if add.is_valid():
@@ -19,6 +22,8 @@ def create_resep(request):
 
 @login_required(login_url='/login/')
 def viewall_resep(request):
+    if (is_restoran(request) == False):
+        return render(request, 'error/403.html')
     daftar_resep = Resep.objects.all()
     context = {
         "daftar_resep" : daftar_resep
@@ -27,6 +32,8 @@ def viewall_resep(request):
 
 @login_required(login_url='/login/')
 def view_resep(request, id_resep):
+    if (is_restoran(request) == False):
+        return render(request, 'error/403.html')
     resep = Resep.objects.get(pk=id_resep)
     context = {
         "id_resep" : resep.id_resep,
@@ -38,6 +45,8 @@ def view_resep(request, id_resep):
 
 @login_required(login_url='/login/')
 def edit_resep(request, id_resep):
+    if (is_restoran(request) == False):
+        return render(request, 'error/403.html')
     try:
         resep = Resep.objects.get(pk=id_resep)
     except Resep.DoesNotExist:
@@ -63,6 +72,8 @@ def edit_resep(request, id_resep):
 
 @login_required(login_url='/login/')
 def delete_resep(request, id_resep):
+    if (is_restoran(request) == False):
+        return render(request, 'error/403.html')
     try:
         resep = Resep.objects.get(pk=id_resep)
         resep.delete()
