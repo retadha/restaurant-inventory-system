@@ -63,19 +63,16 @@
                       <tr>
                         <td>{{ supplier.nama }}</td>
                         <td>{{ supplier.pic }}</td>
-                        <td> 
-                            <div class="d-flex justify-content-start align-items-center gap-2">
-                                <img src="{% static 'logo/detail.png'  %}" alt="" width="18" height="18">
-                                <a data-toggle="modal" data-target="#detail{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">Detail</a>
+                        <td>
+                            <div class="btn" data-toggle="modal" data-target="#detail{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">
+                                <img src="{% static 'logo/detail.png'  %}" alt="" width="18" height="18">Detail
                             </div>
-                            <div class="d-flex justify-content-start align-items-center gap-2">
-                                <img src="{% static 'logo/modify.png'  %}" alt="" width="18" height="18">
-                                <a data-toggle="modal" data-target="#modify{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">Modify</a>
+                            <div class="btn" data-toggle="modal" data-target="#modify{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">
+                                <img src="{% static 'logo/modify.png'  %}" alt="" width="18" height="18">Modify
                             </div>
-                            <div class="d-flex justify-content-start align-items-center gap-2">
-                                <img src="{% static 'logo/remove.png'  %}" alt="" width="18" height="18">
-                                <a data-toggle="modal" data-target="#confirmDelete{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">Remove</a>
-                            </div>  
+                            <div class="btn" data-toggle="modal" data-target="#confirmDelete{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">
+                                <img src="{% static 'logo/remove.png'  %}" alt="" width="18" height="18">Remove
+                            </div> 
                 
                             <!--Modal Detail-->
                             <div class="modal fade" id="detail{{supplier.id_supplier}}" tabindex="-1" role="dialog">
