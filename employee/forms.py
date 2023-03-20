@@ -19,7 +19,7 @@ class EmployeeCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'nama', 'role', 'email', 'nohp')
+        fields = ('username', 'password1', 'password2', 'nama', 'role', 'email', 'nohp', 'id_gedung')
 
     def save(self, commit=True):
         user = super(EmployeeCreationForm, self).save(commit=False)
