@@ -27,16 +27,16 @@
 
                                         {% csrf_token %}
                                         <p>Nama Supplier</p>
-                                        <input class="form-control" type="text" name="nama" value="{{i.nama}}">
+                                        <input class="form-control" type="text" name="nama" required>
                                         <br>
                                         <p>Alamat</p>
-                                        <input class="form-control" type="text" name="alamat" value="{{i.alamat}}">
+                                        <input class="form-control" type="text" name="alamat" required>
                                         <br>
                                         <p>PIC</p>
-                                        <input class="form-control" type="text" name="pic" value="{{i.pic}}">
+                                        <input class="form-control" type="text" name="pic" required>
                                         <br>
                                         <p>No Telp</p>
-                                        <input class="form-control" type="text" name="nohp" value="{{i.nohp}}">
+                                        <input class="form-control" type="text" name="nohp" pattern="[0-9]+" required>
                                         <br>
 
                                 </div>
@@ -114,16 +114,16 @@
                                             <div class="modal-body">
                                                 {% csrf_token %}
                                                 <p>Nama Supplier</p>
-                                                <input class="form-control" type="text" name="nama" value="{{supplier.nama}}">
+                                                <input class="form-control" type="text" name="nama" value="{{supplier.nama}}" required>
                                                 <br>
                                                 <p>Alamat</p>
-                                                <input class="form-control" type="text" name="alamat" value="{{supplier.alamat}}">
+                                                <input class="form-control" type="text" name="alamat" value="{{supplier.alamat}}" required>
                                                 <br>
                                                 <p>PIC</p>
-                                                <input class="form-control" type="text" name="pic" value="{{supplier.pic}}">
+                                                <input class="form-control" type="text" name="pic" value="{{supplier.pic}}" required>
                                                 <br>
                                                 <p>No Telp</p>
-                                                <input class="form-control" type="text" name="nohp" value="{{supplier.nohp}}">
+                                                <input class="form-control" type="text" name="nohp" value="{{supplier.nohp}}"  pattern="[0-9]+" required>
                                                 <br>
 
                                             </div>
