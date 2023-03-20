@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static%}
+{% block style %}
+
+{% endblock %}
+{% block body %}
+    <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+        {% include "messages.html" %}
+        <div class="card m-4 p-4 shadow p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="text-center">Daftar Resep</h1>
+                    <a class="btn" style="background: #987554; color: white" href="{% url 'resep:create_resep' %}" role="button">Tambah Resep</a>
+                </div>
+                <br>
+                <br>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nama Menu</th>
+                      <th scope="col" class="d-flex justify-content-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for resep in daftar_resep %}
+                        <tr>
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td>{{ resep.nama }}</td>
+                          <td class="d-flex justify-content-center gap-5">
+                              <div class="d-flex justify-content-start align-items-center gap-2">
+                                <img src="{% static 'resep/detail_resep.png'  %}" alt="" width="18" height="18">
+                                <a href="{% url 'resep:view_resep' resep.id_resep %}" style="color: inherit; text-decoration: none">Detail</a>
+                              </div>
+                              <div class="d-flex justify-content-start align-items-center gap-2">
+                                <img src="{% static 'resep/modify.png'  %}" alt="" width="18" height="18">
+                                <a href="{% url 'resep:edit_resep' resep.id_resep %}" style="color: inherit; text-decoration: none">Modify</a>
+                              </div>
+                              <div class="d-flex justify-content-start align-items-center gap-2">
+                                <img src="{% static 'resep/remove.png'  %}" alt="" width="18" height="18">
+                                <a href="" data-toggle="modal" data-target="#confirmDelete{{resep.id_resep}}" style="color: inherit; text-decoration: none">Remove</a>
+                              </div>
+                          </td>
+                        </tr>
+                        <div class="modal fade" id="confirmDelete{{resep.id_resep}}" tabindex="-1" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Penghapusan Resep</h5>
+                                <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
+                              </div>
+                              <div class="modal-body">
+                                Apakah Anda yakin ingin menghapus resep {{ nama }}?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Batal</button>
+                                <a class="btn btn-danger" href="{% url 'resep:delete_resep' resep.id_resep %}" role="button">Hapus</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

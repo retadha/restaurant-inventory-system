@@ -39,16 +39,17 @@
     ></script>
     <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
     <title>{{title}} | Noorumi System</title>
+      {% block style %}{% endblock style %}
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
           <img
-            src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
-            alt="Bootstrap"
-            width="30"
-            height="24"
+            src='{% static "/logo/NOORUMI.png" %}'
+            alt="Restaurant"
+            width="90"
+            height="30"
           />
         </a>
         <button
@@ -70,6 +71,7 @@
             {% if role == '0' %}
             <li class="nav-item">
               <a class="nav-link" href="#">Request List</a>
+              <a class="nav-link" href="{% url 'resep:viewall_resep' %}">Resep</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Riwayat</a>
