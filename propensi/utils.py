@@ -24,3 +24,25 @@ def is_admin(request):
     if (get_role(request) == '2'):
         return True
     return False
+
+def get_gedung(request):
+    user = request.user
+    if user.is_authenticated:
+        try:
+            employee = Employee.objects.get(user=user)
+            gedung = Gedung.objects.get(id_gedung=employee.id_gedung)
+            return gedung
+        except:
+            return ""
+    return ""
+
+
+def is_gudang_pusat(request):
+    if (get_gedung(request) == '0'):
+        return True
+    return False
+
+def is_restoran(request):
+    if (get_gedung(request) == '1'):
+        return True
+    return False
