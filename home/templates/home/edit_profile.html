@@ -22,15 +22,15 @@
     {% csrf_token %}
     <div class="d-flex flex-column gap-3">
       <div class="form-floating">
-        <input type="text" class="form-control" id="nama" name="nama" placeholder=" " required value="{{ employee.nama }}" disabled/>
+        <input type="text" class="form-control" id="nama" name="nama" placeholder=" " value="{{ employee.nama }}" required disabled/>
         <label for="nama">Nama</label>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="username" name="username" placeholder=" " value="{{ employee.user.username }}" disabled/>
+        <input type="text" class="form-control" id="username" name="username" placeholder=" " value="{{ employee.user.username }}" required disabled/>
         <label for="username">Username</label>
       </div>
       <div class="form-floating">
-        <select class="form-select" id="role" name="role" disabled>
+        <select class="form-select" id="role" name="role" required disabled>
           <option value="0" {% if employee.role == '0' %} selected {% endif %} >
             Manager
           </option>
@@ -44,7 +44,7 @@
         <label for="role">Role</label>
       </div>
       <div class="form-floating">
-        <select class="form-select" id="gedung" name="gedung" disabled>
+        <select class="form-select" id="gedung" name="gedung" required disabled>
           {% for gd in gedung %}
             <option value="{{ gd.id_gedung }}" {% if gd.id_gedung == employee.id_gedung.id_gedung %} selected {% endif %}>
               {{ gd.nama }}

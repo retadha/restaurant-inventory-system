@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from django.contrib.auth.models import User
 
+from .forms import UserUpdateForm
 from employee.models import Employee
 from gedung.models import Gedung
 
@@ -24,32 +25,27 @@ def profile_view(request):
 @login_required(login_url='/login/')
 def edit_profile(request):
     if request.method == 'POST':
-        body = request.POST
-        username = body['username']
-        nama = body['nama']
-        email = body['email']
-        role = body['role']
-        gd = body['gedung']
-        phone = body['phone']
-        try:
-            employee = Employee.objects.get(user=request.user)
-            employee.user.username = username
-            employee.user.email = email
-            employee.nama = nama
-            employee.role = role
-            employee.nohp = phone
-            employee.id_gedung = Gedung.objects.get(pk=gd)
-            employee.save()
-            messages.success(request, f'Berhasil diperbarui')
+        form = UserUpdateForm(request.POST)
+        if form.is_valid():
+            form.save()
             return redirect('home')
-        except:
-            messages.error(request, f'Error')
+        else:
+            for field_name, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'{error}')
+    else:
+        form = UserUpdateForm()
 
     employee = Employee.objects.get(user=request.user)
     gedung = Gedung.objects.all()
+
     context = {
-        'title': "Update Profile", 
+        'title': "Edit",
+        'form': form,
         'employee': employee,
-        'gedung':gedung,
+        'gedung': gedung,
     }
-    return render(request, 'home/edit_profile.html', context,)
+    return render(request, 'home/edit_profile.html', context)
+
+
+
