@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Supplier
+from django.contrib import messages
 
 # Create your views here.
 def create_supplier(request):
@@ -10,6 +11,7 @@ def create_supplier(request):
         supplier.pic = request.POST["pic"]
         supplier.nohp = request.POST["nohp"]
         supplier.save()
+        messages.success(request, f'Supplier {supplier.nama} berhasil ditambahkan.')
         return redirect("/supplier/list_supplier")
     return render(request, 'list_supplier_datatables.html')
 
@@ -26,6 +28,7 @@ def update_supplier(request,id):
         supplier.pic = request.POST["pic"]
         supplier.nohp = request.POST["nohp"]
         supplier.save()
+        messages.success(request, f'Supplier {supplier.nama} berhasil diubah.')
         return redirect("/supplier/list_supplier")
     return render(request, 'list_supplier_datatables.html', {'supplier':supplier})
 
