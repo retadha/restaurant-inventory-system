@@ -30,8 +30,7 @@ def get_gedung(request):
     if user.is_authenticated:
         try:
             employee = Employee.objects.get(user=user)
-            gedung = Gedung.objects.get(id_gedung=employee.id_gedung)
-            return gedung.status
+            return employee.id_gedung.status
         except:
             return ""
     return ""
