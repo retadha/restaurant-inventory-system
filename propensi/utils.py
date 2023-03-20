@@ -7,7 +7,7 @@ def get_role(request):
             employee = Employee.objects.get(user=user)
             return employee.role
         except:
-            return ""
+            return "2" # role admin
     return ""
 
 def is_manager(request):
