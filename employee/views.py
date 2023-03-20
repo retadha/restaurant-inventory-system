@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 
+
 @login_required(login_url='/login/')
 def create_employee(request):
     if (is_admin(request) == False):
@@ -24,13 +25,13 @@ def create_employee(request):
                     messages.error(request, f'{error}')
     else:
         form = EmployeeCreationForm()
-    
+
     gedung = Gedung.objects.all()
 
     context = {
-        'title': "Buat Employee", 
+        'title': "Buat Employee",
         'form': form,
-        'gedung':gedung,
+        'gedung': gedung,
     }
     return render(request, 'create_employee.html', context)
 
@@ -67,44 +68,46 @@ def update_employee(request, employee_id):
         pwd = body['password']
         confirmPwd = body['confirmPwd']
         try:
-            if (len(pwd) == 0):
-                employee = Employee.objects.get(id=employee_id)
-                employee.user.username = username
-                employee.user.email = email
-                employee.nama = nama
-                employee.role = role
-                employee.nohp = phone
-                employee.id_gedung = Gedung.objects.get(pk=gd)
-                employee.save()
-                messages.success(request, f'Karyawan {nama} berhasil diperbarui')
-                return redirect('employee_list')
-            else:
+            employee = Employee.objects.get(id=employee_id)
+            employee.user.username = username
+            employee.user.email = email
+            employee.nama = nama
+            employee.role = role
+            employee.nohp = phone
+            employee.id_gedung = Gedung.objects.get(pk=gd)
+            employee.save()
+
+            if (len(pwd) != 0):
                 if (pwd == confirmPwd):
-                    pass
                     user = User.objects.get(username=username)
                     user.set_password(password)
                     user.save()
-                    messages.success(request, f'Karyawan {nama} berhasil diperbarui')
-                    return redirect('employee_list')
+                    messages.success(
+                        request, f'Data Karyawan {nama} berhasil diperbarui')
                 else:
                     messages.error(request, f'Password tidak sama')
+            else:
+                messages.success(
+                    request, f'Data Karyawan {nama} berhasil diperbarui')
+            return redirect('employee_list')
         except:
             messages.error(request, f'Error')
 
     employee = Employee.objects.get(id=employee_id)
     gedung = Gedung.objects.all()
     context = {
-        'title': "Update Employee", 
+        'title': "Update Employee",
         'employee': employee,
-        'gedung':gedung,
+        'gedung': gedung,
     }
     return render(request, 'update_employee.html', context,)
+
 
 @login_required(login_url='/login/')
 def delete_employee(request, employee_id):
     if (is_admin(request) == False):
         return render(request, 'error/403.html')
-    
+
     employee = Employee.objects.get(id=employee_id)
     employee.delete()
     User.objects.get(username=employee.user.username).delete()
