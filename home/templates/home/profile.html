@@ -2,16 +2,30 @@
 {% load static %}
 
 {% block body %}
-<div class="content-section">
+<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+  <div class="card m-4 p-4 shadow p-3 mb-5 bg-white rounded">
+    <h1 class="text-center">User Profile</h1>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
 
-      <div class="media-body">
-        <p class="text-secondary">{{ profile.nama }}</p>
-        <p class="text-secondary">{{ profile.user }}</p>
-        <p class="text-secondary">{{ profile.role }}</p>
-        <p class="text-secondary">{{ profile.id_gedung }}</p>
-        <p class="text-secondary">{{ profile.nohp }}</p>
-        <p class="text-secondary">{{ profile.email }}</p>
-      </div>
+        <div class="content-section">
 
+              <div class="media-body">
+                Nama : <p class="text-secondary">{{ profile.nama }}</p>
+                Username : <p class="text-secondary">{{ profile.user }}</p>
+                Role : <p class="text-secondary">
+                  {% if profile.role == '0' %} Manager
+                  {% elif profile.role == '1' %} Staff
+                  {% elif profile.role == '2' %} Admin
+                  {% endif%}
+                </p>
+                
+                Cabang : <p class="text-secondary">{{ profile.id_gedung }}</p>
+                No Telp : <p class="text-secondary">{{ profile.nohp }}</p>
+                Email : <p class="text-secondary">{{ profile.email }}</p>
+              </div>
+            </div>
+          </div>
+  
   </div>
 {% endblock body %}

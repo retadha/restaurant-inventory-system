@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
+from django.contrib.auth.forms import UserChangeForm
 from employee.forms import E164_REGEX
 from gedung.models import Gedung
 
 
-class UserUpdateForm(forms.ModelForm):
+class UserUpdateForm(UserChangeForm):
     nama = forms.CharField(max_length=100)
     role = forms.ChoiceField(choices=[('0', 'Manager'), ('1', 'Staff')])
     email = forms.EmailField()
