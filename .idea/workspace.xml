@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ee2cb33-697e-4870-9ed5-72abafc555ee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/utils.py" afterDir="false" />
-    </list>
+    <list default="true" id="1ee2cb33-697e-4870-9ed5-72abafc555ee" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1679321286638</updated>
-      <workItem from="1679321287878" duration="380000" />
+      <workItem from="1679321287878" duration="554000" />
     </task>
     <servers />
   </component>
