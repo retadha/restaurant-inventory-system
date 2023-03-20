@@ -8,5 +8,5 @@ urlpatterns = [
     path("login/", login_page, name="login"),
     path("logout/", logout_page, name="logout"),
     path('employee/', include('employee.urls')),
-
+    path("supplier/", include('supplier.urls')),
 ]
