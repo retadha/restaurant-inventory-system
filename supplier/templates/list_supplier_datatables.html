@@ -16,15 +16,13 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
+                                <h5 style="text-align: center;">Tambah Supplier</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <form id="1" action="{% url 'create_supplier' %}" method="POST">
                                 <div class="modal-body">
-                                    <h5 style="text-align: center;">Tambah Supplier</h5>
-                                    <hr style="height: 2px">
-
                                         {% csrf_token %}
                                         <p>Nama Supplier</p>
                                         <input class="form-control" type="text" name="nama" required>
