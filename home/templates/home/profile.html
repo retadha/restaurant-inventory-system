@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="content-section">
+
+      <div class="media-body">
+        <p class="text-secondary">{{ profile.nama }}</p>
+        <p class="text-secondary">{{ profile.user }}</p>
+        <p class="text-secondary">{{ profile.role }}</p>
+        <p class="text-secondary">{{ profile.id_gedung }}</p>
+        <p class="text-secondary">{{ profile.nohp }}</p>
+        <p class="text-secondary">{{ profile.email }}</p>
+      </div>
+
+  </div>
+{% endblock body %}
