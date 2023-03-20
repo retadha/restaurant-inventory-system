@@ -3,8 +3,11 @@ from employee.models import Employee
 def get_role(request):
     user = request.user
     if user.is_authenticated:
-        employee = Employee.objects.get(user=user)
-        return employee.role
+        try:
+            employee = Employee.objects.get(user=user)
+            return employee.role
+        except:
+            return ""
     return ""
 
 def is_manager(request):
