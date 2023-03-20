@@ -19,8 +19,13 @@ def create_employee(request):
             return redirect('employee_list')
     else:
         form = EmployeeCreationForm()
-    return render(request, 'create_employee.html', {'title': "Buat Employee", 'form': form})
-
+    gedung = Gedung.objects.all()
+    context = {
+        'title': "Buat Employee", 
+        'form': form,
+        'gedung':gedung,
+    }
+    return render(request, 'create_employee.html', context)
 
 @login_required(login_url='/login/')
 def employee_list(request):
