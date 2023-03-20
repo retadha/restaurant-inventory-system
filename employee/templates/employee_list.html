@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% load static %} {% block body %}
 <div class="d-flex justify-content-between py-2">
-  <h2>Employee List</h2>
+  <h2>List User</h2>
   <a href="{% url 'create_employee' %}">
-    <button class="btn btn-primary">Add Employee</button>
+    <button class="btn btn-primary">Tambah User</button>
   </a>
 </div>
 
@@ -31,9 +31,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Nama Lengkap</th>
-      <th>Role</th>
-      <th>Gedung</th>
+      <th>Nama</th>
+      <th>User Role</th>
+      <th>Cabang</th>
       <th>Action</th>
     </tr>
   </thead>

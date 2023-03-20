@@ -24,7 +24,7 @@
 {% endif %} {% endfor %}
 
   <div class="Container">
-    <h2>Create Employee</h2>
+    <h2>Tambah User</h2>
 
     <form method="POST">
       {% csrf_token %}
@@ -48,6 +48,7 @@
       <div class="form-group">
         <label for="id_role">User Role</label>
         <select class="form-select" id="id_role" name="role" required>
+          <option value="" disabled selected>Pilih role user</option>
           <option value="0" {% if form.role  == '0' %} selected {% endif %} >
             Manager
           </option>
@@ -62,6 +63,7 @@
       <div class="form-group">
         <label for="id_id_gedung">Cabang</label>
         <select class="form-select" id="id_id_gedung" name="id_gedung" required>
+          <option value="" disabled selected>Pilih cabang</option>
           {% for gd in gedung %}
             <option value="{{ gd.id_gedung }}" {% if gd.id_gedung == form.id_gedung  %} selected {% endif %}>
               {{ gd.nama }}
@@ -77,8 +79,8 @@
         <label for="id_email">Email address</label>
         <input type="email" class="form-control" id="id_email" name="email" placeholder="Masukkan email" required>
       </div>
-
-      <button type="submit" class="btn btn-primary">Submit</button>
+      
+      <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 
   </div>
