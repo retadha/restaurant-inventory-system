@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ee2cb33-697e-4870-9ed5-72abafc555ee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/admin.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/admin.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/models.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/models.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/urls.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/urls.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/views.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/views.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/propensi/processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/processor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -185,7 +178,7 @@
       <updated>1679321286638</updated>
       <workItem from="1679321287878" duration="647000" />
       <workItem from="1679321963967" duration="197000" />
-      <workItem from="1679376375405" duration="4448000" />
+      <workItem from="1679376375405" duration="4696000" />
     </task>
     <servers />
   </component>
