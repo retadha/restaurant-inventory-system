@@ -45,11 +45,11 @@
         </div>
 
         <div class="d-flex justify-content-center">
-          {% for message in messages %} 
-            {% if message.tags == 'success' %}
+          {% for message in messages %}
+            {% if message.tags == 'alert-success' %}
               <div role="alert" class="my-2">{{ message }}</div>
             {% endif %} 
-            {% if message.tags == 'error' %}
+            {% if message.tags == 'alert-danger' %}
             <div class="alert alert-danger alert-dismissible fade show my-2" role="alert">
               {{ message }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

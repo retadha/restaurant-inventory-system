@@ -8,7 +8,7 @@
   </a>
 </div>
 
-{% for message in messages %} {% if message.tags == 'success' %}
+{% for message in messages %} {% if message.tags == 'alert-success' %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   {{ message }}
   <button
@@ -18,7 +18,7 @@
     aria-label="Close"
   ></button>
 </div>
-{% endif %} {% if message.tags == 'error' %}
+{% endif %} {% if message.tags == 'alert-error' %}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   {{ message }}
   <button
