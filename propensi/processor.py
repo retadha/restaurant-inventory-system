@@ -12,6 +12,7 @@ def role_processor(request):
         context = {
             'username':employee.nama,
             'role': role,
+            'status_gedung': employee.gedung.status
         }
         return context
     return {}
