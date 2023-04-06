@@ -10,4 +10,5 @@ urlpatterns = [
     path("logout/", logout_page, name="logout"),
     path('employee/', include('employee.urls')),
     path("supplier/", include('supplier.urls')),
+    path("inventori/", include('inventori.urls')),
 ]

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'gedung',
     'supplier',
     'resep',
+    'inventori',
 ]
 
 MIDDLEWARE = [
