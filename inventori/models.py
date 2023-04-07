@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.db.models import UniqueConstraint
+from django.db.models.functions import Lower
 from gedung.models import Gedung
 
 class Inventori(models.Model):
@@ -14,6 +15,16 @@ class Inventori(models.Model):
     
     id_gedung = models.ForeignKey(Gedung, on_delete=models.CASCADE)
 
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                Lower('nama'),
+                Lower('id_gedung').desc(),
+                name='inventory_gedung_unique',
+                violation_error_message='Inventory sudah terdaftar dalam sistem'
+            ),
+        ]
     
     def __str__(self) -> str:
         return self.nama
+    

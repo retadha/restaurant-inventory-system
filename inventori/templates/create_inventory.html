@@ -8,7 +8,8 @@
       {{ message }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-  {% endif %} {% if message.tags == 'alert-error' %}
+  {% endif %}
+  {% if message.tags == 'alert-danger' %}
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       {{ message }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -44,10 +45,6 @@
       <div class="form-floating">
         <input type="text" class="form-control" id="satuan" name="satuan" placeholder=" " required/>
         <label for="satuan">Satuan</label>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="id_gedung" name="id_gedung" placeholder=" " value="gedung"required hidden/>
-        <label for="id_gedung"></label>
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Tambah</button>

@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
@@ -17,9 +18,14 @@ def create_inventory(request):
             idgedung = emp.id_gedung
             obj = add.save(commit=False)
             obj.id_gedung = idgedung
-            obj.save()
-            messages.success(request, f'Inventori {add.instance.nama} berhasil dibuat.')
-        return redirect('inventori:create_inventory')
-    
+            try:
+                obj.save()
+                messages.success(request, f'Inventori {add.instance.nama} berhasil dibuat.')
+                return redirect('inventori:create_inventory')
+            except IntegrityError as e:
+                if 'UNIQUE constraint' in str(e.args):
+                    messages.error(request, f'Input gagal. Inventori {add.instance.nama} sudah terdaftar.')
+                    return redirect('inventori:create_inventory')
+        
     add = InventoriForm()
     return render(request, 'create_inventory.html', {'form':add})
