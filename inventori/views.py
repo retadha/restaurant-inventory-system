@@ -29,3 +29,23 @@ def create_inventory(request):
         
     add = InventoriForm()
     return render(request, 'create_inventory.html', {'form':add})
+
+def update_stok(request,id):
+    inventori = Inventori.objects.get(id_inventory=id)
+    if(request.POST):
+        inventori.stok = request.POST['stok']
+        inventori.save()
+        messages.success(request, f'Stok untuk inventori {inventori.nama} berhasil diperbarui.')
+        # Ganti redirect nya ke list inventori ketika sudah ada
+        return redirect("/inventori/")
+    return render(request, 'list_inventori.html', {'inventori':inventori})
+
+def update_threshold(request,id):
+    inventori = Inventori.objects.get(id_inventory=id)
+    if(request.POST):
+        inventori.threshold = request.POST['threshold']
+        inventori.save()
+        messages.success(request, f'Ambang batas stok untuk inventori {inventori.nama} berhasil diperbarui.')
+        # Ganti redirect nya ke list inventori ketika sudah ada
+        return redirect("/inventori/")
+    return render(request, 'list_inventori.html', {'inventori':inventori})
