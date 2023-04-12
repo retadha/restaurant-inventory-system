@@ -3,7 +3,7 @@ from django.db.models import UniqueConstraint
 from django.db.models.functions import Lower
 from gedung.models import Gedung
 
-class Inventori(models.Model):
+class Inventory(models.Model):
     id_inventory = models.AutoField(primary_key=True)
     nama = models.CharField(max_length=50, null=False, blank=False)
     stok = models.IntegerField(null=False, blank=False)

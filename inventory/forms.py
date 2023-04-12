@@ -1,9 +1,9 @@
 from django import forms
 
 from gedung.models import Gedung
-from .models import Inventori
+from .models import Inventory
 
-class InventoriForm(forms.ModelForm):
+class InventoryForm(forms.ModelForm):
     class Meta:
-        model = Inventori
+        model = Inventory
         fields = ['id_inventory','nama', 'stok', 'threshold', 'default_request_qty', 'harga', 'satuan']
