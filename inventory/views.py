@@ -3,6 +3,8 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from employee.models import Employee
+from inventory_default.models import InventoryDefault
+from inventory_default.models import InventoryDefault
 
 from .forms import InventoryForm
 from .models import Inventory
@@ -18,17 +20,30 @@ def create_inventory(request):
             idgedung = emp.id_gedung
             obj = add.save(commit=False)
             obj.id_gedung = idgedung
+            
+            nama = add.instance.id_inventory_default
+            
             try:
                 obj.save()
-                messages.success(request, f'Inventori {add.instance.nama} berhasil dibuat.')
-                return redirect('inventori:create_inventory')
+                messages.success(request, f'Inventori {nama} berhasil dibuat.')
+                return redirect('inventory:create_inventory')
             except IntegrityError as e:
                 if 'UNIQUE constraint' in str(e.args):
-                    messages.error(request, f'Input gagal. Inventori {add.instance.nama} sudah terdaftar.')
-                    return redirect('inventori:create_inventory')
-        
-    add = InventoryForm()
-    return render(request, 'create_inventory.html', {'form':add})
+                    messages.error(request, f'Input gagal. Inventori {nama} sudah terdaftar.')
+                    return redirect('inventory:create_inventory')
+        else:
+            print("Anj")
+                
+    else:
+        add = InventoryForm()    
+    
+    inventory_default = InventoryDefault.objects.all()
+
+    context = {
+        'form': add,
+        'inventory_default': inventory_default,
+    }
+    return render(request, 'create_inventory.html', context)
 
 def update_stok(request,id):
     inventori = Inventory.objects.get(id_inventory=id)
