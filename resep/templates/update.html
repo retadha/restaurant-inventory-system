@@ -18,7 +18,7 @@
 
                 <br>
                 <br>
-                <form class="d-flex justify-content-center" action="{% url 'resep:edit_resep' id_resep %}" method="POST">
+                <form class="d-flex justify-content-center" action="{% url 'resep:update' id_resep %}" method="POST">
 
                     {% csrf_token %}
 
@@ -49,7 +49,7 @@
 
 
                         <div class="d-flex justify-content-center align-items-center gap-3">
-                            <a class="btn btn-outline-dark" href="{% url 'resep:viewall_resep' %}" role="button">BATAL</a>
+                            <a class="btn btn-outline-dark" href="{% url 'resep:list' %}" role="button">BATAL</a>
                             <button type="submit" class="btn" style="background: #BFA89B;color: white">SIMPAN</button>
                         </div>
                     </div>

@@ -71,7 +71,7 @@
             {% if role == '0' %}
             <li class="nav-item">
               <a class="nav-link" href="#">Request List</a>
-              <a class="nav-link" href="{% url 'resep:viewall_resep' %}">Resep</a>
+              <a class="nav-link" href="{% url 'list' %}">Resep</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Riwayat</a>
@@ -83,7 +83,7 @@
               <a class="nav-link" href="supplier/list_supplier/">Supplier</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="resep/viewall/">Resep</a>
+              <a class="nav-link" href="resep/">Resep</a>
             </li>
             {% elif role == '1' %}
             <li class="nav-item">

@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1ee2cb33-697e-4870-9ed5-72abafc555ee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/propensi/processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resep/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/resep/templates/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resep/templates/update_resep.html" beforeDir="false" afterPath="$PROJECT_DIR$/resep/templates/update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resep/templates/view_resep.html" beforeDir="false" afterPath="$PROJECT_DIR$/resep/templates/view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resep/templates/viewall_resep.html" beforeDir="false" afterPath="$PROJECT_DIR$/resep/templates/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resep/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/resep/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resep/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/resep/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +36,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230321_0001",
+    "com.google.cloudcode.ide_session_index": "20230412_0001",
     "last_opened_file_path": "C:/Users/Retad/OneDrive/Desktop/Propensi/d10",
-    "nodejs_package_manager_path": "npm"
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
@@ -179,6 +195,7 @@
       <workItem from="1679321287878" duration="647000" />
       <workItem from="1679321963967" duration="197000" />
       <workItem from="1679376375405" duration="4696000" />
+      <workItem from="1681271906397" duration="7722000" />
     </task>
     <servers />
   </component>

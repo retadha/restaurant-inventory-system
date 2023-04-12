@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from propensi.utils import is_restoran
 
 @login_required(login_url='/login/')
-def create_resep(request):
+def create(request):
     if (is_restoran(request) == False):
         return render(request, 'error/403.html')
     if request.method == "POST":
@@ -16,22 +16,22 @@ def create_resep(request):
             namaResep = add.cleaned_data.get('nama')
             add.save()
         messages.success(request, f'Resep {namaResep} berhasil dibuat.')
-        return redirect("resep:viewall_resep")
+        return redirect("resep:list")
     add = ResepForm()
     return render(request, 'create.html', {'form':add})
 
 @login_required(login_url='/login/')
-def viewall_resep(request):
+def list(request):
     if (is_restoran(request) == False):
         return render(request, 'error/403.html')
     daftar_resep = Resep.objects.all()
     context = {
         "daftar_resep" : daftar_resep
     }
-    return render(request, 'viewall_resep.html', context)
+    return render(request, 'list.html', context)
 
 @login_required(login_url='/login/')
-def view_resep(request, id_resep):
+def view(request, id_resep):
     if (is_restoran(request) == False):
         return render(request, 'error/403.html')
     resep = Resep.objects.get(pk=id_resep)
@@ -41,10 +41,10 @@ def view_resep(request, id_resep):
         "bahan" : resep.bahan,
         "cara_memasak" : resep.cara_memasak
     }
-    return render(request, 'view_resep.html', context)
+    return render(request, 'view.html', context)
 
 @login_required(login_url='/login/')
-def edit_resep(request, id_resep):
+def update(request, id_resep):
     if (is_restoran(request) == False):
         return render(request, 'error/403.html')
     try:
@@ -59,7 +59,7 @@ def edit_resep(request, id_resep):
         resep.cara_memasak = request.POST["cara_memasak"]
         resep.save()
         messages.success(request, f'Resep {resep.nama} berhasil diubah.')
-        return HttpResponseRedirect('/resep/viewall')
+        return HttpResponseRedirect('/resep/')
 
     context = {
         'id_resep' : resep.id_resep,
@@ -68,15 +68,15 @@ def edit_resep(request, id_resep):
         'cara_memasak' : resep.cara_memasak
 
     }
-    return render(request, "update_resep.html", context)
+    return render(request, "update.html", context)
 
 @login_required(login_url='/login/')
-def delete_resep(request, id_resep):
+def delete(request, id_resep):
     if (is_restoran(request) == False):
         return render(request, 'error/403.html')
     try:
         resep = Resep.objects.get(pk=id_resep)
         resep.delete()
-        return HttpResponseRedirect('/resep/viewall')
+        return HttpResponseRedirect('/resep/')
     except Resep.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
