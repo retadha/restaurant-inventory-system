@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% load static %} 
+
+{% block body %}
+
+{% for message in messages %}
+  {% if message.tags == 'alert-success' %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+  {% if message.tags == 'alert-danger' %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %} 
+{% endfor %}
+
+<div class="p-2 d-flex flex-column align-items-center">
+  <h1 class="py-4">Tambah Inventory</h1>
+  <form class="d-flex flex-column gap-4 w-50" action="{% url 'inventory:create_inventory' %}" method="POST">
+    {% csrf_token %}
+    <div class="d-flex flex-column gap-3">
+      <div class="form-floating">
+        <select class="form-select" id="add.id_inventory_default" name="id_inventory_default" required>
+          <option value="" disabled selected>Pilih Inventory</option>
+          {% for inv in inventory_default %}
+            <option value="{{ inv.id_inventory_default}}" {% if add.id_inventory_default == inv.id_inventory_default  %} selected {% endif %}>
+              {{ inv.nama }}
+            </option>
+          {% endfor %}
+        </select>
+        <label for="id_inventory_default">Nama</label>
+      </div>
+      <div class="form-floating">
+        <input type="number" class="form-control" id="stok" name="stok" placeholder=" " required/>
+        <label for="stok">Stok</label>
+      </div>
+      <div class="form-floating">
+        <input type="number" class="form-control" id="threshold" name="threshold" placeholder=" " />
+          <label for="threshold">Threshold</label>
+      </div>
+      <div class="form-floating">
+        <input type="number" class="form-control" id="default_request_qty" name="default_request_qty" placeholder=" " required/> 
+        <label for="default_request_qty">Default Request Qty</label>
+      </div>
+    </div>
+    <button type="submit" class="btn" style="background: #987554;color: white">Tambah</button>
+  </form>
+</div>
+{% endblock %}

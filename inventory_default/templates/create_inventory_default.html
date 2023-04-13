@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% load static %} 
+
+{% block body %}
+
+{% for message in messages %}
+  {% if message.tags == 'alert-success' %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+  {% if message.tags == 'alert-danger' %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %} 
+{% endfor %}
+
+<div class="p-2 d-flex flex-column align-items-center">
+  <h1 class="py-4">Buat Inventory Default</h1>
+  <form class="d-flex flex-column gap-4 w-50" action="{% url 'inventory_default:create_inventory_default' %}" method="POST">
+    {% csrf_token %}
+    <div class="d-flex flex-column gap-3">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="nama" name="nama" placeholder=" " required/>
+        <label for="nama">Nama</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="satuan" name="satuan" placeholder=" " required/>
+        <label for="satuan">Satuan</label>
+      </div>
+      <div class="form-floating">
+        <input type="number" step="any"class="form-control" id="harga" name="harga" placeholder=" " required/>
+        <label for="harga">Harga</label>
+      </div>
+    </div>
+    <button type="submit" class="btn" style="background: #987554;color: white">Simpan</button>
+  </form>
+</div>
+{% endblock %}
