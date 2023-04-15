@@ -11,6 +11,14 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script>
+      $(document).ready(function(){
+        $('#dropDown').click(function(){
+          $('.drop-down').toggleClass('drop-down--active');
+        });
+      });
+    </script>
     <script
         src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -87,7 +95,7 @@
             </li>
             {% elif role == '1' %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Inventory</a>
+              <a class="nav-link" href="{% url 'inventori:create_inventory' %}">Inventory</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Daftar Pesanan</a>
@@ -110,8 +118,8 @@
               <a class="nav-link" href="/logout/">Logout</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/profile"
-                ><svg
+              <a class="nav-link" href="/profile">
+                <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
                   height="32"
@@ -134,3 +142,4 @@
     <div class="p-3">{% block body %}{% endblock body %}</div>
   </body>
 </html>
+
