@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models import UniqueConstraint
-from django.db.models.functions import Lower
 from gedung.models import Gedung
 from inventory_default.models import InventoryDefault
 
