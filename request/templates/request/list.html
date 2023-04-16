@@ -42,13 +42,36 @@
                           {% if is_restoran == False %}
                             <td class="text-center" >{{ request.id_supplier.pic }}</td>
                           {% endif %}
-                          <td class="text-center" >{{ request.get_status_display }}</td>
+                          <td class="text-center" >
+                              {{ request.get_status_display }}
+                          </td>
                           <td class="d-flex justify-content-center gap-5">
+                              <div class="btn" data-bs-toggle="modal" data-bs-target="#confirm{{request.id_request}}" style="color: inherit; text-decoration: none">
+                                <img src="{% static 'logo/detail.png'  %}" alt="" width="18" height="18">
+                              </div>
                               <div class="btn" data-bs-toggle="modal" data-bs-target="#detail{{request.id_request}}" style="color: inherit; text-decoration: none">
                                 <img src="{% static 'logo/detail.png'  %}" alt="" width="18" height="18">
                               </div>
                           </td>
                         </tr>
+
+{#                        Dibawah ini kirim pesan whatsapp ke supplier pas udah dikonfirmasi#}
+                        <div class="modal fade" id="confirm{{request.id_request}}" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pengiriman Request</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        Apakah Anda yakin ingin mengirim request ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Batal</button>
+                                        <a class="btn btn-danger" href="{% url 'request:list' %}" role="button">Hapus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="modal fade" id="detail{{request.id_request}}" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">

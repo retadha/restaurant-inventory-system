@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1ee2cb33-697e-4870-9ed5-72abafc555ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/request/templates/request/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/request/templates/request/list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230416_0001",
+    "com.google.cloudcode.ide_session_index": "20230416_0003",
     "last_opened_file_path": "C:/Users/Retad/OneDrive/Desktop/Propensi/d10",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -216,7 +209,8 @@
       <workItem from="1681271906397" duration="10941000" />
       <workItem from="1681357852063" duration="591000" />
       <workItem from="1681550461686" duration="1504000" />
-      <workItem from="1681637059314" duration="4669000" />
+      <workItem from="1681637059314" duration="4778000" />
+      <workItem from="1681644977555" duration="769000" />
     </task>
     <servers />
   </component>
