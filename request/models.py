@@ -1,3 +1,6 @@
+import string
+from random import random
+
 from django.db import models
 from employee.models import Employee
 from gedung.models import Gedung
@@ -7,8 +10,9 @@ from inventory_default.models import InventoryDefault
 class Request(models.Model):
     id_request = models.AutoField(primary_key=True)
     status = models.CharField(max_length=10, default="0", choices=[('0', 'WAITING FOR APPROVAL'), ('1', 'SUBMITTING'), ('2', 'PROCESSING'), ('3', 'COMPLETED')])
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(null=True, blank=True)
     received = models.DateTimeField(null=True, blank=True)
+    # token = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))
 
     pic = models.ForeignKey(Employee, on_delete=models.CASCADE)
     id_gedung = models.ForeignKey(Gedung, on_delete=models.CASCADE)
