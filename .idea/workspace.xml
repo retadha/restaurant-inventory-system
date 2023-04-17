@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1ee2cb33-697e-4870-9ed5-72abafc555ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gedung/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/gedung/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/request/templates/request/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/request/templates/request/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/request/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/request/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/views.py" afterDir="false" />
@@ -44,7 +45,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "com.google.cloudcode.ide_session_index": "20230416_0003",
-    "last_opened_file_path": "C:/Users/Retad/OneDrive/Desktop/Propensi/d10/static/logo",
+    "last_opened_file_path": "C:/Users/Retad/OneDrive/Desktop/Propensi/d10/request/templates/request",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -56,6 +57,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Retad\OneDrive\Desktop\Propensi\d10\request\templates\request" />
       <recent name="C:\Users\Retad\OneDrive\Desktop\Propensi\d10\static\logo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -215,7 +217,7 @@
       <workItem from="1681357852063" duration="591000" />
       <workItem from="1681550461686" duration="1504000" />
       <workItem from="1681637059314" duration="4778000" />
-      <workItem from="1681644977555" duration="16404000" />
+      <workItem from="1681644977555" duration="20552000" />
     </task>
     <servers />
   </component>
