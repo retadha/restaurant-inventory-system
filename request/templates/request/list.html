@@ -96,8 +96,16 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Kembali</button>
-
                                             {% if request.get_status_display == 'WAITING FOR APPROVAL' %}
+                                                <button
+                                                type="button"
+                                                class="btn btn-danger"
+{#                                                data-bs-dismiss="modal"#}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#cancel{{request.id_request}}"
+                                                >
+                                                    Batalkan
+                                                </button>
                                                 <a
                                                 type="button"
                                                 href="#"
@@ -126,6 +134,35 @@
                                     </div>
                                 </div>
                             </div>
+{#                            Konfirmasi pembatalan request#}
+                            {% if request.get_status_display == "WAITING FOR APPROVAL" %}
+
+                                <div class="modal fade" id="cancel{{request.id_request}}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pembatalan Request</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                Apakah Anda yakin ingin membatalkan request ini?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-dark"
+    {#                                                data-bs-dismiss="modal"#}
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#detail{{request.id_request}}"
+                                                >
+                                                    Kembali
+                                                </button>
+                                                <a class="btn btn-danger" href="{% url 'request:delete' request.id_request %}" role="button">Batalkan</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endif %}
 {#                            Dibawah ini kirim pesan whatsapp ke supplier pas udah dikonfirmasi#}
                             {% if request.get_status_display == "WAITING FOR APPROVAL" %}
 

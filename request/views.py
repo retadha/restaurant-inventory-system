@@ -52,3 +52,13 @@ def receive(request, id_request):
 
     inv_request.save()
     return HttpResponseRedirect('/request/')
+
+@login_required(login_url='/login/')
+def delete(request, id_request):
+    try:
+        inv_request = Request.objects.get(pk=id_request)
+        inv_request.delete()
+        return HttpResponseRedirect('/request/')
+
+    except Request.DoesNotExist:
+        raise Http404("Objek tidak ditemukan")
