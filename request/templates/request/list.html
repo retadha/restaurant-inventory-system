@@ -9,7 +9,13 @@
         <div class="card m-4 p-4 shadow p-3 mb-5 bg-white rounded">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h1 class="text-center">Daftar Request</h1>
+
+                    {% if is_restoran == True %}
+                        <h1 class="text-center">Request menuju Gudang Pusat</h1>
+                    {% else %}
+                        <h1 class="text-center">Request menuju Supplier</h1>
+                    {% endif %}
+
                     <a class="btn" style="background: #987554; color: white" href="{% url 'request:list' %}" role="button">Buat Request</a>
                 </div>
                 <br>
@@ -38,7 +44,13 @@
                         <tr>
                           <th class="text-center" scope="row">{{ forloop.counter }}</th>
                           <td class="text-center" >{{ request.token }}</td>
-                          <td class="text-center" >{{ request.created }}</td>
+{#                          <td class="text-center" >{{ request.approved }}</td>#}
+
+                          {% if request.get_status_display == 'WAITING FOR APPROVAL' %}
+                              <td class="text-center" >-</td>
+                          {% else %}
+                              <td class="text-center" >{{ request.approved }}</td>
+                          {% endif %}
 
                           {% if request.get_status_display != 'COMPLETED' %}
                               <td class="text-center" >-</td>
@@ -78,7 +90,7 @@
                                                 <p>Supplier : {{ request.id_supplier.nama }}</p>
                                                 <p>Supplier : {{ request.id_supplier.pic }}</p>
                                             {% endif %}
-                                            <p>Dibuat : {{ request.created }}</p>
+                                            <p>Dibuat : {{ request.approved }}</p>
                                             {% if request.received == None %}
                                             <p>Diterima: -</p>
                                             {% else %}
@@ -102,7 +114,7 @@
                                             {% if request.get_status_display == 'WAITING FOR APPROVAL' %}
                                                 <button
                                                 type="button"
-                                                class="btn btn-danger"
+                                                class="btn btn-outline-danger"
 {#                                                data-bs-dismiss="modal"#}
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#cancel{{request.id_request}}"
@@ -110,24 +122,37 @@
                                                     Batalkan
                                                 </button>
 
-{#                                                #A2 Tombol konfirmasi buat request#}
+{#                                                #A2 Tombol kirim request#}
                                                 <a
                                                 type="button"
                                                 href="#"
-                                                class="btn btn-success"
+                                                class="btn btn-primary"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#confirm{{request.id_request}}"
                                                 >
-                                                    Konfirmasi
+                                                    Kirim
                                                 </a>
                                             {% endif %}
 
 {#                                            #A3 Tombol terima request#}
+                                            {% if request.get_status_display == 'SUBMITTING' %}
+                                                <a
+                                                type="button"
+                                                href="#"
+                                                class="btn btn-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#process{{request.id_request}}"
+                                                >
+                                                    DIPROSES SUPPLIER
+                                                </a>
+                                            {% endif %}
+
+{#                                            #A4 Tombol terima request#}
                                             {% if request.get_status_display == 'PROCESSING' %}
                                                 <a
                                                 type="button"
                                                 href="#"
-                                                class="btn btn-success"
+                                                class="btn btn-primary"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#receive{{request.id_request}}"
                                                 >
@@ -163,7 +188,7 @@
                                                 >
                                                     Kembali
                                                 </button>
-                                                <a class="btn btn-danger" href="{% url 'request:delete' request.id_request %}" role="button">Batalkan</a>
+                                                <a class="btn btn-outline-danger" href="{% url 'request:delete' request.id_request %}" role="button">Batalkan</a>
                                             </div>
                                         </div>
                                     </div>
@@ -171,7 +196,7 @@
 
                             {% endif %}
 
-{#                            A2 Modal konfirmasi untuk konfirmasi request#}
+{#                            A2 Modal konfirmasi untuk kirim request#}
                             {% if request.get_status_display == "WAITING FOR APPROVAL" %}
 
                             <div class="modal fade" id="confirm{{request.id_request}}" tabindex="-1" role="dialog">
@@ -200,7 +225,35 @@
                             </div>
 
                         {% endif %}
-{#                            A3 Modal konfirmasi penerimaan request#}
+{#                          A3 Modal konfirmasi diproses supplier#}
+                            {% if request.get_status_display == 'SUBMITTING' %}
+                            <div class="modal fade" id="process{{request.id_request}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Diproses Supplier</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin supplier bisa memproses request ini?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button
+                                                type="button"
+                                                class="btn btn-outline-dark"
+{#                                                data-bs-dismiss="modal"#}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#detail{{request.id_request}}"
+                                            >
+                                                Kembali
+                                            </button>
+                                            <a class="btn btn-primary" href="{% url 'request:supplier_process' request.id_request %}" role="button">Diproses supplier</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+{#                            A4 Modal konfirmasi penerimaan request#}
                             {% if request.get_status_display == 'PROCESSING' %}
                             <div class="modal fade" id="receive{{request.id_request}}" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
@@ -221,7 +274,7 @@
                                             >
                                                 Kembali
                                             </button>
-                                            <a class="btn btn-success" href="{% url 'request:receive' request.id_request %}" role="button">Terima</a>
+                                            <a class="btn btn-primary" href="{% url 'request:receive' request.id_request %}" role="button">Terima</a>
                                         </div>
                                     </div>
                                 </div>

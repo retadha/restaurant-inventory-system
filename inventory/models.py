@@ -9,4 +9,7 @@ class Inventory(models.Model):
 
     id_gedung = models.ForeignKey(Gedung, on_delete=models.CASCADE)
     default = models.ForeignKey(InventoryDefault, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.default} - {self.id_gedung.nama}"
     
