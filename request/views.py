@@ -12,7 +12,7 @@ import keyboard
 from django.contrib import messages
 
 
-
+# Daftar request yang ingin dikirim
 @login_required(login_url='/login/')
 def list(request):
     employee = Employee.objects.get(user=request.user)
@@ -26,6 +26,7 @@ def list(request):
 
     return render(request, 'request/list.html', context)
 
+# Konfirmasi suatu request agar bisa dikirim
 @login_required(login_url='/login/')
 def confirm(request, id_request):
     try:
@@ -45,6 +46,7 @@ def confirm(request, id_request):
     messages.success(request, f'Request {inv_request.token} telah dikirim')
     return redirect("request:list")
 
+# Daftar request restoran yang diterima oleh gudang
 @login_required(login_url='/login/')
 def to_process(request):
     requests = Request.objects.all()
@@ -56,6 +58,7 @@ def to_process(request):
 
     return render(request, 'request/list_to_process.html', context)
 
+# Gudang memproses request restoran
 @login_required(login_url='/login/')
 def process(request, id_request):
     try:
@@ -79,6 +82,7 @@ def process(request, id_request):
     messages.success(request, f'Request {inv_request.token} telah diproses')
     return redirect("request:to_process")
 
+# Gudang melakukan konfirmasi bahwa supplier bisa memproses request gudang
 @login_required(login_url='/login/')
 def supplier_process(request, id_request):
     try:
@@ -94,7 +98,7 @@ def supplier_process(request, id_request):
     messages.success(request, f'Request {inv_request.token} sedang diproses oleh supplier')
     return redirect("request:list")
 
-
+# Konfirmasi bahwa inventory yang direquest sudah sampai
 @login_required(login_url='/login/')
 def receive(request, id_request):
     try:
