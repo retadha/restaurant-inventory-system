@@ -36,7 +36,7 @@ def confirm(request, id_request):
         inv_request.save()
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
-    wa_supplier = inv_request.id_supplier.nohp
+    # wa_supplier = inv_request.id_supplier.nohp
 
     # INTEGRASI WHATSAPP
     # Kalau request dari Resto, kirim WA ke Gudang Pusat
