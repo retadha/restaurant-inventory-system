@@ -56,17 +56,15 @@
         <a href="#" class="btn btn-danger">Delete</a>
       </td>
     </tr>
-    {% empty %}
-    <tr>
-      <td colspan="5">No inventory found.</td>
-    </tr>
     {% endfor %}
   </tbody>
 </table>
 
 <script>
   let table = new DataTable(".table", {
-    // options
+    "language": {
+      "emptyTable": "No inventory found."
+    }
   });
 </script>
 {% endblock %}
