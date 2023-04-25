@@ -52,21 +52,21 @@ def update_pos(request):
         file = request.FILES['pos_file'].read().decode("utf-8").split("\n")
         data = []
         for i in range(1, len(file)-1):
-            line = file[i].split(";")
+            line = file[i].split(",")
+            print(line)
             data.append({
                 "id": line[0],
-                'name': line[1],
-                "stok": int(line[2]),
-                "threshold": int(line[3]),
-                "harga": int(line[4]),
+                'product': line[1],
+                "total": int(line[2]),
+                "price": int(line[3]),
+                'notes': line[4],
             })
         # print(data)
         for i in data:
-            inventory = Inventory.objects.filter(id_gedung__exact=gedung).filter(default__nama__exact=i['name'])
+            inventory = Inventory.objects.filter(id_gedung__exact=gedung).filter(default__nama__exact=i['product'])
             if (len(inventory) != 0):
                 inventory = inventory[0]
                 # print(inventory)
-                inventory.stok = inventory.stok - i['stok']
-                inventory.threshold = inventory.threshold - i['threshold']
+                inventory.stok = inventory.stok - i['total']
                 inventory.save()
     return redirect("/inventory/")
