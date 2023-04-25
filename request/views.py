@@ -6,6 +6,8 @@ from inventory.models import Inventory
 from employee.models import Employee
 from propensi.utils import is_restoran
 from gedung.models import Gedung
+from supplier.models import Supplier
+from inventory_default.models import InventoryDefault
 import datetime
 import pywhatkit
 import keyboard
@@ -18,10 +20,17 @@ def list(request):
     employee = Employee.objects.get(user=request.user)
     gedung = employee.id_gedung
     requests = gedung.request_set.all()
+    inventoryDefault = InventoryDefault.objects.all()
+    suppliers = Supplier.objects.all()
+    employees = Employee.objects.all()
 
     context = {
         "requests" : requests,
         "is_restoran" : is_restoran(request),
+        "pic" : employee.nama,
+        "inventoryDefault" : inventoryDefault,
+        'suppliers' : suppliers,
+        'employees' : employees
     }
 
     return render(request, 'request/list.html', context)
@@ -132,3 +141,81 @@ def delete(request, id_request):
 
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
+    
+
+@login_required(login_url='/login/')
+def create(request):
+    if(request.method == 'POST'):
+        employee = Employee.objects.get(user=request.user)
+        id_gedung = employee.id_gedung
+        supplier_id = request.POST['supplier']
+        supplier = Supplier.objects.get(id_supplier=supplier_id)
+
+        inv_request = Request.objects.create(
+        pic = employee,
+        id_supplier = supplier,
+        id_gedung = id_gedung,
+        )
+        inv_request.save()
+
+        items = request.POST.getlist('item')
+        prices = request.POST.getlist('item-price')
+        quantities = request.POST.getlist('item-quantity')
+
+        for i in range(len(items)):
+            item_id = int(items[i])
+            price = float(prices[i])
+            quantity = int(quantities[i])
+
+            inventory_line = Inventory_Line.objects.create(
+                qty = quantity,
+                harga = price,
+                id_inventory_default = InventoryDefault.objects.get(id_inventory_default=item_id),
+                id_request = inv_request
+            )
+            inventory_line.save()
+
+        messages.success(request, f'Request {inv_request.token} berhasil ditambahkan')
+
+
+        # phone_number = "+6282170402949"
+        # message = "test"
+        # pywhatkit.sendwhatmsg_instantly(phone_number, message, 30, tab_close=True)
+
+        
+    return redirect("request:list")
+
+@login_required(login_url='/login/')
+def update(request,id_request):
+    inv_request = Request.objects.get(id_request=id_request)
+    inventory_lines = Inventory_Line.objects.filter(id_request=id_request)
+
+    if(request.method == 'POST'):
+        supplier_id = request.POST['supplier']
+        supplier = Supplier.objects.get(id_supplier=supplier_id)
+
+        inv_request.supplier = supplier
+
+        inventory_lines = Inventory_Line.objects.filter(id_request=id)
+        inventory_lines.delete()
+
+        items = request.POST.getlist('item')
+        prices = request.POST.getlist('item-price')
+        quantities = request.POST.getlist('item-quantity')
+
+        for i in range(len(items)):
+            item_id = int(items[i])
+            price = float(prices[i])
+            quantity = int(quantities[i])
+
+            inventory_line = Inventory_Line.objects.create(
+                qty = quantity,
+                harga = price,
+                id_inventory_default = InventoryDefault.objects.get(id_inventory_default=item_id),
+                id_request = inv_request
+            )
+            inventory_line.save()
+        
+        messages.success(request, f'Request {inv_request.token} berhasil diperbarui')
+
+    return redirect("request:list")
