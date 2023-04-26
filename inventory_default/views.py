@@ -27,11 +27,11 @@ def create_inventory_default(request):
             add.save()
             messages.success(
                 request, f'Inventori {add.instance.nama} berhasil dibuat.')
-            return redirect('inventory_default:create_inventory_default')
+            return redirect('inventory_default:list_inventory_default')
         else:
             messages.error(
                 request, f'Input gagal. Inventori {add.instance.nama} sudah terdaftar.')
-            return redirect('inventory_default:create_inventory_default')
+            return redirect('inventory_default:list_inventory_default')
 
     add = InventoryDefaultForm()
     return render(request, 'create_inventory_default.html', {'form': add})
@@ -42,6 +42,6 @@ def delete(request, id_inventory_default):
     try:
         inv = InventoryDefault.objects.get(pk=id_inventory_default)
         inv.delete()
-        return HttpResponseRedirect('/inventory_default/create')
+        return HttpResponseRedirect('/inventory_default')
     except InventoryDefault.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
