@@ -239,76 +239,6 @@
                                 </div>
                             </div>
 
-                            <!--Modal Update-->   
-                            <div class="modal fade" id="update{{request.id_supplier}}" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Update Request</h5>
-                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form id="2" action="{% url 'request:update' request.id_request %}" method="POST">
-                                            <div class="modal-body">
-                                                {% csrf_token %}
-                                                <p>PIC:</p>
-                                                <input class="form-control" type="text" name="pic" required value="{{ pic }}" disabled>
-                                                <br>
-                                                <p>Supplier:</p>
-                                                <select class="form-select" name="supplier" id="supplier" required>
-                                                    {% for supplier in suppliers %}
-                                                      {% if supplier.id_supplier == inv_request.supplier.id_supplier %}
-                                                        <option value="{{ supplier.id_supplier }}" selected>{{ supplier.nama }}</option>
-                                                      {% else %}
-                                                        <option value="{{ supplier.id_supplier }}">{{ supplier.nama }}</option>
-                                                      {% endif %}
-                                                    {% endfor %}
-                                                </select>  
-                                                <br>
-                                                <p>Barang:</p>
-                                                {% for inv_line in inventory_lines %}
-                                                    <div id="inventory-form">
-                                                        <div id="item-form" class="row item-form">
-                                                            <div class="col-md-3">
-                                                            <select class="form-select" name="item" id="item" required>
-                                                                {% for item in inventoryDefault %}
-                                                                {% if item.id_inventory_default == inv_line.id_inventory_default %}
-                                                                    <option value="{{ item.id_inventory_default }}" selected>{{ item.nama }}</option>
-                                                                {% else %}
-                                                                    <option value="{{ item.id_inventory_default }}">{{ item.nama }}</option>
-                                                                {% endif %}
-                                                                {% endfor %}
-                                                            </select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                            <input class="form-control item-price" type="number" name="item-price" placeholder="Harga" required value="{{inv_line.harga}}">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                            <input class="form-control item-quantity" type="number" name="item-quantity" placeholder="Kuantitas" required value="{{inv_line.qty}}">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <button type="button" class="btn btn-outline-danger remove-item">Remove</button>
-                                                            </div>
-                                                            <br><br>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                {% endfor %}
-                                                  
-                                                <button type="button" class="btn btn-outline-primary add-item">Add Item</button>
-                                                <br>
-                                                <br>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Kembali</button>
-                                                <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
 
 {#                            #A1 Modal konfirmasi batalkan request#}
                             {% if request.get_status_display == "WAITING FOR APPROVAL" %}
@@ -356,12 +286,12 @@
                                                 <div class="modal-body">
                                                     {% csrf_token %}
                                                     <p>PIC:</p>
-                                                    <input class="form-control" type="text" name="pic" required value="{{ pic }}" disabled>
+                                                    <input class="form-control" type="text" name="pic" required value="{{request.pic.nama }}" disabled>
                                                     <br>
                                                     <p>Supplier:</p>
                                                     <select class="form-select" name="supplier" id="supplier" required>
                                                         {% for supplier in suppliers %}
-                                                          {% if supplier.id_supplier == inv_request.supplier.id_supplier %}
+                                                          {% if supplier == request.id_supplier %}
                                                             <option value="{{ supplier.id_supplier }}" selected>{{ supplier.nama }}</option>
                                                           {% else %}
                                                             <option value="{{ supplier.id_supplier }}">{{ supplier.nama }}</option>
@@ -371,12 +301,13 @@
                                                     <br>
                                                     <p>Barang:</p>
                                                     {% for inv_line in inventory_lines %}
+                                                        {% if inv_line.id_request == request%}
                                                         <div id="inventory-form">
                                                             <div id="item-form" class="row item-form">
                                                                 <div class="col-md-3">
                                                                 <select class="form-select" name="item" id="item" required>
                                                                     {% for item in inventoryDefault %}
-                                                                    {% if item.id_inventory_default == inv_line.id_inventory_default %}
+                                                                    {% if item == inv_line.id_inventory_default %}
                                                                         <option value="{{ item.id_inventory_default }}" selected>{{ item.nama }}</option>
                                                                     {% else %}
                                                                         <option value="{{ item.id_inventory_default }}">{{ item.nama }}</option>
@@ -394,9 +325,9 @@
                                                                     <button type="button" class="btn btn-outline-danger remove-item">Remove</button>
                                                                 </div>
                                                                 <br><br>
-                                                            </div>
-                                                            
+                                                            </div>  
                                                         </div>
+                                                        {% endif %}
                                                     {% endfor %}
                                                       
                                                     <button type="button" class="btn btn-outline-primary add-item">Add Item</button>

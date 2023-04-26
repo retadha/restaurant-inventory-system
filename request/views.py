@@ -23,6 +23,7 @@ def list(request):
     inventoryDefault = InventoryDefault.objects.all()
     suppliers = Supplier.objects.all()
     employees = Employee.objects.all()
+    inventory_lines = Inventory_Line.objects.all()
 
     context = {
         "requests" : requests,
@@ -30,7 +31,8 @@ def list(request):
         "pic" : employee.nama,
         "inventoryDefault" : inventoryDefault,
         'suppliers' : suppliers,
-        'employees' : employees
+        'employees' : employees,
+        'inventory_lines': inventory_lines,
     }
 
     return render(request, 'request/list.html', context)
@@ -188,7 +190,6 @@ def create(request):
 @login_required(login_url='/login/')
 def update(request,id_request):
     inv_request = Request.objects.get(id_request=id_request)
-    inventory_lines = Inventory_Line.objects.filter(id_request=id_request)
 
     if(request.method == 'POST'):
         supplier_id = request.POST['supplier']
