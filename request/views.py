@@ -24,6 +24,9 @@ def list(request):
     suppliers = Supplier.objects.all()
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
+    
+    gedung_pusat = Gedung.objects.get(status='0')
+    manager_gedung_pusat = Employee.objects.get(role='0',id_gedung=gedung_pusat).nama
 
     context = {
         "requests" : requests,
@@ -33,6 +36,8 @@ def list(request):
         'suppliers' : suppliers,
         'employees' : employees,
         'inventory_lines': inventory_lines,
+        'gedung': gedung,
+        'manager_gedung_pusat': manager_gedung_pusat
     }
 
     return render(request, 'request/list.html', context)
@@ -197,7 +202,7 @@ def update(request,id_request):
 
         inv_request.supplier = supplier
 
-        inventory_lines = Inventory_Line.objects.filter(id_request=id)
+        inventory_lines = Inventory_Line.objects.filter(id_request=id_request)
         inventory_lines.delete()
 
         items = request.POST.getlist('item')
