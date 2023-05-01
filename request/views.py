@@ -211,14 +211,17 @@ def create(request):
     if(request.method == 'POST'):
         employee = Employee.objects.get(user=request.user)
         id_gedung = employee.id_gedung
-        supplier_id = request.POST['supplier']
-        supplier = Supplier.objects.get(id_supplier=supplier_id)
 
         inv_request = Request.objects.create(
         pic = employee,
-        id_supplier = supplier,
         id_gedung = id_gedung,
         )
+
+        if id_gedung.status == '0':
+            supplier_id = request.POST['supplier']
+            supplier = Supplier.objects.get(id_supplier=supplier_id)
+            inv_request.id_supplier = supplier
+
         inv_request.save()
 
         items = request.POST.getlist('item-name')
@@ -273,10 +276,13 @@ def update(request,id_request):
     }
 
     if(request.method == 'POST'):
-        supplier_id = request.POST['supplier']
-        supplier = Supplier.objects.get(id_supplier=supplier_id)
+        employee = Employee.objects.get(user=request.user)
+        id_gedung = employee.id_gedung
 
-        inv_request.id_supplier = supplier
+        if id_gedung.status == '0':
+            supplier_id = request.POST['supplier']
+            supplier = Supplier.objects.get(id_supplier=supplier_id)
+            inv_request.id_supplier = supplier
 
         inventory_lines = Inventory_Line.objects.filter(id_request=id_request)
         inventory_lines.delete()
@@ -299,6 +305,7 @@ def update(request,id_request):
             inventory_line.save()
         
         inv_request.save()
+        
         messages.success(request, f'Request {inv_request.token} berhasil diperbarui')
         return redirect("request:list")
 
