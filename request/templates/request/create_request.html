@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static%}
+{% block style %}
+
+{% endblock %}
+{% block body %}
+    <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+        {% include "messages.html" %}
+        <div class="card m-4 p-4 shadow p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-end">
+
+                    {% if is_restoran == True %}
+                        <h1 class="text-center">Request menuju Gudang Pusat</h1>
+                    {% else %}
+                        <h1 class="text-center">Request menuju Supplier</h1>
+                    {% endif %}
+
+                
+                </div>
+                <br>
+                <form id="1" action="{% url 'request:create' %}" method="POST">
+                        {% csrf_token %}
+                        <p>PIC:</p>
+                        <input class="form-control" type="text" name="pic" required value="{{ pic }}" disabled >
+                        <br>
+                        {% if gedung.status == '1' %}
+                        <p>PIC Gedung Pusat:</p>
+                        <input class="form-control" type="text" name="pic-gedung-pusat" required value="{{ manager_gedung_pusat }}" disabled >
+                        {% else %}
+                        <p>Supplier:</p>
+                        <select  class="form-select" name="supplier" id="supplier" required>
+                            {% for supplier in suppliers %}
+                            <option value="{{ supplier.id_supplier }}">{{ supplier.nama }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <p>Daftar Barang:</p>
+                        {% endif %}
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Barang</th>
+                                  <th>Harga</th>
+                                  <th>Kuantitas</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody id="inventory-form">
+                                        <tr class="item-form">
+                                            <td>
+                                                <select class="form-select" name="item-name" id="item" required>
+                                                    {% for item in inventoryDefault %}
+                                                    <option value="{{ item.id_inventory_default }}">{{ item.nama }}</option>
+                                                    {% endfor %}
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                <input class="form-control item-price" type="number" name="item-price" placeholder="Harga" required>
+                                            </td>
+                                            <td>
+                                                <input class="form-control item-quantity" type="number" name="item-quantity" placeholder="Kuantitas" required>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-danger remove-item">Remove</button>
+                                            </td>
+                                        </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                        <br>
+                        <button type="button" class="btn btn-outline-primary add-item">Tambahkan Barang</button>
+                        <br><br>
+                        <a type="button" class="btn btn-outline-dark" href="{% url 'request:list' %}">Batal</a>
+                        <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .table-responsive {
+          overflow-x: visible;
+        }
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_paginate {
+          display: none;
+        }
+      </style>
+
+    <script>
+      $(document).ready(function() {
+        $('.table').DataTable({
+            "ordering": false
+        });
+
+        // Add item form
+        $(".add-item").click(function() {
+            var newItemForm = $(".item-form").first().clone();
+            newItemForm.find(".item-name").val("");
+            newItemForm.find(".item-price").val("");
+            newItemForm.find(".item-quantity").val("");
+            newItemForm.appendTo("#inventory-form");
+            updateRemoveButtonState();
+        });
+
+        // Remove item form
+        $("#inventory-form").on("click", ".remove-item", function() {
+            $(this).closest("tr").remove();
+            updateRemoveButtonState();
+        });
+
+        // Disable remove button if only one item form exists
+        function updateRemoveButtonState() {
+            var itemForms = $(".item-form");
+            if (itemForms.length == 1) {
+                itemForms.find(".remove-item").prop("disabled", true);
+            } else {
+                itemForms.find(".remove-item").prop("disabled", false);
+            }
+        }
+        
+        // Initialize remove button state
+        updateRemoveButtonState();
+
+    });
+    </script>
+{% endblock %}

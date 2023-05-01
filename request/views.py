@@ -186,6 +186,28 @@ def delete(request, id_request):
 
 @login_required(login_url='/login/')
 def create(request):
+    employee = Employee.objects.get(user=request.user)
+    gedung = employee.id_gedung
+    inventoryDefault = InventoryDefault.objects.all()
+    suppliers = Supplier.objects.all()
+    employees = Employee.objects.all()
+    inventory_lines = Inventory_Line.objects.all()
+    
+    gedung_pusat = Gedung.objects.get(status='0')
+    manager_gedung_pusat = Employee.objects.get(role='0',id_gedung=gedung_pusat).nama
+
+    context = {
+        "is_restoran" : is_restoran(request),
+        "pic" : employee.nama,
+        "inventoryDefault" : inventoryDefault,
+        'suppliers' : suppliers,
+        'employees' : employees,
+        'inventory_lines': inventory_lines,
+        'gedung': gedung,
+        'manager_gedung_pusat': manager_gedung_pusat
+    }
+
+
     if(request.method == 'POST'):
         employee = Employee.objects.get(user=request.user)
         id_gedung = employee.id_gedung
@@ -199,7 +221,7 @@ def create(request):
         )
         inv_request.save()
 
-        items = request.POST.getlist('item')
+        items = request.POST.getlist('item-name')
         prices = request.POST.getlist('item-price')
         quantities = request.POST.getlist('item-quantity')
 
@@ -223,24 +245,43 @@ def create(request):
         # phone_number = "+6282170402949"
         # message = "test"
         # pywhatkit.sendwhatmsg_instantly(phone_number, message, 30, tab_close=True)
+        return redirect("request:list")
 
-        
-    return redirect("request:list")
+    return render(request, 'request/create_request.html', context)
 
 @login_required(login_url='/login/')
 def update(request,id_request):
     inv_request = Request.objects.get(id_request=id_request)
 
+    employee = Employee.objects.get(user=request.user)
+    gedung = employee.id_gedung
+    inventoryDefault = InventoryDefault.objects.all()
+    suppliers = Supplier.objects.all()
+    inventory_lines = Inventory_Line.objects.filter(id_request=inv_request)
+    
+    gedung_pusat = Gedung.objects.get(status='0')
+    manager_gedung_pusat = Employee.objects.get(role='0',id_gedung=gedung_pusat).nama
+
+    context = {
+        "inv_request" : inv_request,
+        "is_restoran" : is_restoran(request),
+        "inventoryDefault" : inventoryDefault,
+        'suppliers' : suppliers,
+        'gedung': gedung,
+        'inventory_lines': inventory_lines,
+        'manager_gedung_pusat': manager_gedung_pusat
+    }
+
     if(request.method == 'POST'):
         supplier_id = request.POST['supplier']
         supplier = Supplier.objects.get(id_supplier=supplier_id)
 
-        inv_request.supplier = supplier
+        inv_request.id_supplier = supplier
 
         inventory_lines = Inventory_Line.objects.filter(id_request=id_request)
         inventory_lines.delete()
 
-        items = request.POST.getlist('item')
+        items = request.POST.getlist('item-name')
         prices = request.POST.getlist('item-price')
         quantities = request.POST.getlist('item-quantity')
 
@@ -257,6 +298,8 @@ def update(request,id_request):
             )
             inventory_line.save()
         
+        inv_request.save()
         messages.success(request, f'Request {inv_request.token} berhasil diperbarui')
+        return redirect("request:list")
 
-    return redirect("request:list")
+    return render(request, 'request/update_request.html', context)
