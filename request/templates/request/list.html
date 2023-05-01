@@ -17,8 +17,8 @@
                     {% endif %}
 
                     <!--Modal Create-->
-                    <div class="btn" data-bs-toggle="modal" data-bs-target="#createRequest" style="color: inherit; text-decoration: none">
-                        <a class="btn" style="background: #987554; color: white" role="button">Buat Request</a>
+                    <div class="btn" style="color: inherit; text-decoration: none">
+                        <a class="btn" href="{% url 'request:create' %}" style="background: #987554; color: white" role="button">Buat Request</a>
                     </div>
                         <div class="modal fade" id="createRequest" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
@@ -193,10 +193,8 @@
                                                 <a
                                                 id="updatee"
                                                 type="button"
-                                                href="#"
+                                                href="{% url 'request:update' request.id_request %}"
                                                 class="btn btn-success"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#update{{request.id_request}}"
                                                 >
                                                     Update
                                                 </a>
