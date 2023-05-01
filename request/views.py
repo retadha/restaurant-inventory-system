@@ -1,3 +1,5 @@
+import urllib
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
@@ -41,6 +43,26 @@ def list(request):
     }
 
     return render(request, 'request/list.html', context)
+def lines_detail(inv_request):
+    lines = """ """
+    for item in inv_request.get_lines:
+        lines += f"{ item.id_inventory_default } @Rp{ item.harga } x { item.qty } { item.id_inventory_default.satuan }\n"
+    return lines
+
+def request_detail(inv_request, message=None):
+    detail = f"""
+    {message}
+    Request Inventory {inv_request.token}
+    =================================
+    Gedung : {inv_request.id_gedung}
+    PIC : {inv_request.pic}
+    Dibuat : {inv_request.approved.strftime("%Y-%m-%d %H:%M")}
+    Detail :{lines_detail(inv_request)}
+    Total Harga : {inv_request.total_price}
+    """
+    return detail
+
+
 
 # Konfirmasi suatu request agar bisa dikirim
 @login_required(login_url='/login/')
@@ -56,8 +78,14 @@ def confirm(request, id_request):
 
     # INTEGRASI WHATSAPP
     # Kalau request dari Resto, kirim WA ke Gudang Pusat
+    if inv_request.id_gedung.get_status_display() == "RESTORAN":
+        gudang = Gedung.objects.get(status='0')
+        manajer_gudang = Employee.objects.get(role='0', id_gedung=gudang)
+        pywhatkit.sendwhatmsg_instantly(manajer_gudang.nohp, request_detail(inv_request, "Inventory Request Baru"))
     # Kalau request dari Gudang Pusat, kirim WA ke Supplier
     # pywhatkit.sendwhatmsg_instantly(wa_supplier, "Cek")
+    if inv_request.id_gedung.get_status_display() == "GUDANG PUSAT":
+        pywhatkit.sendwhatmsg_instantly(inv_request.id_supplier.nohp, request_detail(inv_request, "Inventory Request Baru"))
 
     messages.success(request, f'Request {inv_request.token} telah dikirim')
     return redirect("request:list")
@@ -92,8 +120,8 @@ def process(request, id_request):
         inv_gudang.stok -= line.qty
         inv_gudang.save()
 
-    # kalau mau pake pywhatkit
-    # pywhatkit.sendwhatmsg_instantly(wa_supplier, "Cek")
+    # Whatsapp
+    pywhatkit.sendwhatmsg_instantly(inv_request.pic.nohp, request_detail(inv_request, "Request sedang diproses oleh Gudang Pusat"))
 
     messages.success(request, f'Request {inv_request.token} telah diproses')
     return redirect("request:to_process")
@@ -143,6 +171,12 @@ def delete(request, id_request):
         inv_request = Request.objects.get(pk=id_request)
         inv_request.delete()
 
+        employee = Employee.objects.get(user=request.user)
+        if employee.id_gedung.get_status_display() == "GUDANG PUSAT":
+            pywhatkit.sendwhatmsg_instantly(inv_request.pic.nohp, request_detail(inv_request, "Request Ditolak"))
+
+
+
         messages.success(request, f'Request {inv_request.token} telah dihapus')
         return redirect("request:list")
 
@@ -168,6 +202,7 @@ def create(request):
         items = request.POST.getlist('item')
         prices = request.POST.getlist('item-price')
         quantities = request.POST.getlist('item-quantity')
+
 
         for i in range(len(items)):
             item_id = int(items[i])
