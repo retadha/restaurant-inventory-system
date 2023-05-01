@@ -44,7 +44,7 @@ def list(request):
 
     return render(request, 'request/list.html', context)
 def lines_detail(inv_request):
-    lines = """ """
+    lines = """\n """
     for item in inv_request.get_lines:
         lines += f"{ item.id_inventory_default } @Rp{ item.harga } x { item.qty } { item.id_inventory_default.satuan }\n"
     return lines
@@ -57,7 +57,7 @@ def request_detail(inv_request, message=None):
     Gedung : {inv_request.id_gedung}
     PIC : {inv_request.pic}
     Dibuat : {inv_request.approved.strftime("%Y-%m-%d %H:%M")}
-    Detail :{lines_detail(inv_request)}
+    Detail yang diproses: {lines_detail(inv_request)}
     Total Harga : {inv_request.total_price}
     """
     return detail
@@ -305,8 +305,13 @@ def update(request,id_request):
             inventory_line.save()
         
         inv_request.save()
+
         
         messages.success(request, f'Request {inv_request.token} berhasil diperbarui')
+        employee = Employee.objects.get(user=request.user)
+        if employee.id_gedung.get_status_display() == "GUDANG PUSAT":
+            return redirect("request:to_process")
+
         return redirect("request:list")
 
     return render(request, 'request/update_request.html', context)

@@ -213,3 +213,18 @@ Time: 23:4
 Phone Number: +6287882154944
 Message: Inventory Request Baru Request Inventory HLTNW ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:04 Detail : Total Harga : 0
 --------------------
+Date: 1/5/2023
+Time: 23:31
+Phone Number: +6287882154944
+Message: Inventory Request Baru Request Inventory QY56R ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:31 Detail yang diproses: Ayam @Rp100.000 x 3 kg Total Harga : 300.000
+--------------------
+Date: 1/5/2023
+Time: 23:32
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory HLTNW ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:04 Detail yang diproses: Total Harga : 0
+--------------------
+Date: 1/5/2023
+Time: 23:36
+Phone Number: +6287882154944
+Message: Request sedang diproses oleh Gudang Pusat Request Inventory QY56R ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:31 Detail yang diproses: Ayam @Rp100.000 x 3 kg Total Harga : 300.000
+--------------------
