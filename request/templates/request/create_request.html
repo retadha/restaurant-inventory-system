@@ -25,8 +25,9 @@
                         <input class="form-control" type="text" name="pic" required value="{{ pic }}" disabled >
                         <br>
                         {% if gedung.status == '1' %}
-                        <p>PIC Gedung Pusat:</p>
-                        <input class="form-control" type="text" name="pic-gedung-pusat" required value="{{ manager_gedung_pusat }}" disabled >
+                        <p>Supplier:</p>
+                        <input class="form-control" type="text" name="supplier" id="supplier" required value="Manajer Gudang" disabled >
+                        <br>
                         {% else %}
                         <p>Supplier:</p>
                         <select  class="form-select" name="supplier" id="supplier" required>
