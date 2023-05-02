@@ -11,3 +11,5 @@ sqlparse==0.4.3
 tomli==2.0.1
 tzdata==2022.7
 whitenoise==6.4.0
+pywhatkit==5.4
+keyboard==0.13.5

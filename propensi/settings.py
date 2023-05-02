@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'gedung',
     'supplier',
     'resep',
+    'inventory_default',
+    'inventory',
+    'request'
 ]
 
 MIDDLEWARE = [
