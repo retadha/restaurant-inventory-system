@@ -20,9 +20,12 @@ def create_employee(request):
             messages.success(request, f'Karyawan {nama} berhasil ditambahkan')
             return redirect('employee_list')
         else:
-            for field_name, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f'{error}')
+            # for field_name, errors in form.errors.items():
+            #     for error in errors:
+            #         messages.error(request, f'{error}')
+            # print(form.errors.items())
+            messages.error(request, f'Error')
+            return redirect('employee_list')
     else:
         form = EmployeeCreationForm()
 
@@ -40,8 +43,16 @@ def create_employee(request):
 def employee_list(request):
     if (is_admin(request) == False):
         return render(request, 'error/403.html')
+    
     employees = Employee.objects.all()
-    return render(request, 'employee_list.html', {'title': "Daftar Employee", 'employees': employees})
+    gedung = Gedung.objects.all()
+    
+    context = {
+        'title': "Daftar Employee",
+        'employees': employees,
+        'gedung': gedung,
+    }
+    return render(request, 'employee_list.html', context)
 
 
 @login_required(login_url='/login/')
