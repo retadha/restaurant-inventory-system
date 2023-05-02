@@ -6,6 +6,7 @@ from django.db.models.functions import Lower
 
 
 class Inventory(models.Model):
+    id_inventory = models.AutoField(primary_key=True)
     stok = models.IntegerField(null=False, blank=False)
     threshold = models.IntegerField(null=False, blank=False)
     default_request_qty = models.IntegerField(null=False, blank=False)
