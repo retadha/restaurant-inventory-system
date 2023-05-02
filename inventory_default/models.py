@@ -23,6 +23,4 @@ class InventoryDefault(models.Model):
                 default_request_qty = 0,
                 id_gedung = Gedung.objects.get(id_gedung = a)
             )
-
-    def __str__(self):
-        return f"{self.nama}"
+            
