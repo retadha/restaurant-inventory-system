@@ -17,8 +17,15 @@
                     {% endif %}
 
                     <!--Modal Create-->
-                    <div class="btn" style="color: inherit; text-decoration: none">
-                        <a class="btn" href="{% url 'request:create' %}" style="background: #987554; color: white" role="button">Buat Request</a>
+                    <div class="d-flex gap-1">
+                        {% if is_restoran == False %}
+                        <div class="btn" style="color: inherit; text-decoration: none">
+                            <a class="btn" href="/request/to_process" style="background: #987554; color: white" role="button">Request To Process</a>
+                        </div>
+                        {% endif %}
+                        <div class="btn" style="color: inherit; text-decoration: none">
+                            <a class="btn" href="{% url 'request:create' %}" style="background: #987554; color: white" role="button">Buat Request</a>
+                        </div>
                     </div>
                         <div class="modal fade" id="createRequest" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">

@@ -94,6 +94,8 @@ def confirm(request, id_request):
 @login_required(login_url='/login/')
 def to_process(request):
     requests = Request.objects.all()
+    # requests = Request.objects.all().filter(id_gedung__status__exact="1").filter(status__exact="1")
+    # print(requests)
     restauran_req = [req for req in requests if req.id_gedung.get_status_display() == "RESTORAN" and req.get_status_display() == "SUBMITTING" ]
 
     context = {
