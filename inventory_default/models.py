@@ -24,3 +24,4 @@ class InventoryDefault(models.Model):
                 id_gedung = Gedung.objects.get(id_gedung = a)
             )
             
+            
