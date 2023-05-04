@@ -23,5 +23,3 @@ class InventoryDefault(models.Model):
                 default_request_qty = 0,
                 id_gedung = Gedung.objects.get(id_gedung = a)
             )
-            
-            

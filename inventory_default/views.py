@@ -41,6 +41,7 @@ def create_inventory_default(request):
 def delete(request, id_inventory_default):
     try:
         inv = InventoryDefault.objects.get(pk=id_inventory_default)
+        messages.success(request, f'Inventori {inv.nama} berhasil dihapus.')
         inv.delete()
         return HttpResponseRedirect('/inventory_default')
     except InventoryDefault.DoesNotExist:

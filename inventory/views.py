@@ -6,6 +6,7 @@ from .models import Inventory
 from django.contrib.auth.decorators import login_required
 from propensi.utils import is_restoran, is_manager, is_staff
 
+
 @login_required(login_url='/login/')
 def list_inventory(request):
     if (not is_manager(request) and not is_staff(request)):
@@ -25,8 +26,8 @@ def update_stok(request, id):
         inventori.stok = request.POST['stok']
         inventori.save()
         messages.success(
-            request, f'Stok untuk inventori {inventori.nama} berhasil diperbarui.')
-        return redirect("/inventori/")
+            request, f'Stok untuk inventori {inventori.default.nama} berhasil diperbarui.')
+        return redirect("/inventory/")
     return render(request, 'list_inventori.html', {'inventori': inventori})
 
 
@@ -37,7 +38,7 @@ def update_threshold(request, id):
         inventori.save()
         messages.success(
             request, f'Ambang batas stok untuk inventori {inventori.nama} berhasil diperbarui.')
-        return redirect("/inventori/")
+        return redirect("/inventory/")
     return render(request, 'list_inventori.html', {'inventori': inventori})
 
 
@@ -60,7 +61,8 @@ def update_pos(request):
             })
         # print(data)
         for i in data:
-            inventory = Inventory.objects.filter(id_gedung__exact=gedung).filter(default__nama__exact=i['product'])
+            inventory = Inventory.objects.filter(id_gedung__exact=gedung).filter(
+                default__nama__exact=i['product'])
             if (len(inventory) != 0):
                 inventory = inventory[0]
                 # print(inventory)
