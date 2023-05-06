@@ -23,3 +23,7 @@ class Inventory(models.Model):
     #             violation_error_message='Inventory sudah terdaftar dalam sistem',
     #         ),
     #     ]
+
+    def __str__(self):
+        return (self.default.nama + " - " + self.id_gedung.nama)
+    
