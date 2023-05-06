@@ -1,22 +1,21 @@
-import string
-import random
-
 from django.db import models
 from employee.models import Employee
 from gedung.models import Gedung
 from supplier.models import Supplier
 from inventory_default.models import InventoryDefault
-# Create your models here.
+
+
 class Request(models.Model):
     id_request = models.AutoField(primary_key=True)
     status = models.CharField(max_length=10, default="0", choices=[('0', 'WAITING FOR APPROVAL'), ('1', 'SUBMITTING'), ('2', 'PROCESSING'), ('3', 'COMPLETED')])
     approved = models.DateTimeField(null=True, blank=True)
     received = models.DateTimeField(null=True, blank=True)
-    token = models.CharField(max_length=5, default=''.join(random.choices(string.ascii_uppercase + string.digits, k=5)))
+    token = models.CharField(max_length=5, default='')
 
     pic = models.ForeignKey(Employee, on_delete=models.CASCADE)
     id_gedung = models.ForeignKey(Gedung, on_delete=models.CASCADE)
     id_supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, null=True, blank=True)
+    
     @property
     def get_lines(self):
         return Inventory_Line.objects.filter(id_request=self.id_request)

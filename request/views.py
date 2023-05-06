@@ -14,7 +14,8 @@ import datetime
 import pywhatkit
 import keyboard
 from django.contrib import messages
-
+import string
+import random
 
 # Daftar request yang ingin dikirim
 @login_required(login_url='/login/')
@@ -251,6 +252,7 @@ def create(request):
         inv_request = Request.objects.create(
             pic=employee,
             id_gedung=id_gedung,
+            token=''.join(random.choices(string.ascii_uppercase + string.digits, k=5)),
         )
 
         if id_gedung.status == '0':
