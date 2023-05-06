@@ -1,10 +1,7 @@
-import urllib
-
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, Http404
+from django.http import Http404
 from django.shortcuts import render, redirect
 from request.models import Request, Inventory_Line
-from inventory.models import Inventory
 from employee.models import Employee
 from propensi.utils import is_restoran
 from gedung.models import Gedung
@@ -12,7 +9,6 @@ from supplier.models import Supplier
 from inventory_default.models import InventoryDefault
 import datetime
 import pywhatkit
-import keyboard
 from django.contrib import messages
 import string
 import random
@@ -28,9 +24,9 @@ def list(request):
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
 
-    gedung_pusat = Gedung.objects.get(status='0')
-    manager_gedung_pusat = Employee.objects.get(
-        role='0', id_gedung=gedung_pusat).nama
+    # gedung_pusat = Gedung.objects.get(status='0')
+    # manager_gedung_pusat = Employee.objects.get(
+    #     role='0', id_gedung=gedung_pusat).nama
 
     context = {
         "requests": requests,
@@ -40,8 +36,8 @@ def list(request):
         'suppliers': suppliers,
         'employees': employees,
         'inventory_lines': inventory_lines,
-        'gedung': gedung,
-        'manager_gedung_pusat': manager_gedung_pusat
+        # 'gedung': gedung,
+        # 'manager_gedung_pusat': manager_gedung_pusat
     }
 
     return render(request, 'request/list.html', context)
@@ -94,7 +90,7 @@ def confirm(request, id_request):
     # INTEGRASI WHATSAPP
     # Kalau request dari Resto, kirim WA ke Gudang Pusat
     if inv_request.id_gedung.get_status_display() == "RESTORAN":
-        gudang = Gedung.objects.get(status='0')
+        gudang = Gedung.objects.get(id_gedung=inv_request.id_gedung.id_gedung)
         manajer_gudang = Employee.objects.get(role='0', id_gedung=gudang)
         pywhatkit.sendwhatmsg_instantly(manajer_gudang.nohp, request_detail(
             inv_request, "Inventory Request Baru"))
@@ -136,7 +132,7 @@ def process(request, id_request):
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
 
-    gedung = Gedung.objects.get(status="0")  # Gudang Pusat
+    gedung = Gedung.objects.get(id_gedung=inv_request.id_gedung.id_gedung)  # Gudang Pusat
     list_inv_gudang = gedung.inventory_set.all()
 
     for line in inv_request.get_lines:
@@ -230,9 +226,9 @@ def create(request):
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
 
-    gedung_pusat = Gedung.objects.get(status='0')
-    manager_gedung_pusat = Employee.objects.get(
-        role='0', id_gedung=gedung_pusat).nama
+    # gedung_pusat = Gedung.objects.get(status='0')
+    # manager_gedung_pusat = Employee.objects.get(
+    #     role='0', id_gedung=gedung_pusat).nama
 
     context = {
         "is_restoran": is_restoran(request),
@@ -241,8 +237,8 @@ def create(request):
         'suppliers': suppliers,
         'employees': employees,
         'inventory_lines': inventory_lines,
-        'gedung': gedung,
-        'manager_gedung_pusat': manager_gedung_pusat
+        # 'gedung': gedung,
+        # 'manager_gedung_pusat': manager_gedung_pusat
     }
 
     if (request.method == 'POST'):
@@ -301,9 +297,9 @@ def update(request, id_request):
     suppliers = Supplier.objects.all()
     inventory_lines = Inventory_Line.objects.filter(id_request=inv_request)
 
-    gedung_pusat = Gedung.objects.get(status='0')
-    manager_gedung_pusat = Employee.objects.get(
-        role='0', id_gedung=gedung_pusat).nama
+    # gedung_pusat = Gedung.objects.get(status='0')
+    # manager_gedung_pusat = Employee.objects.get(
+    #     role='0', id_gedung=gedung_pusat).nama
 
     context = {
         "inv_request": inv_request,
@@ -312,7 +308,7 @@ def update(request, id_request):
         'suppliers': suppliers,
         'gedung': gedung,
         'inventory_lines': inventory_lines,
-        'manager_gedung_pusat': manager_gedung_pusat
+        # 'manager_gedung_pusat': manager_gedung_pusat
     }
 
     if (request.method == 'POST'):
