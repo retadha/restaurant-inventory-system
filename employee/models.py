@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator
 from gedung.models import Gedung
 
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name="user_profile", on_delete=models.CASCADE)
     nama = models.CharField(max_length=100)
     role = models.CharField(max_length=10, choices=[('0', 'MANAGER'), ('1', 'STAFF'), ('2', 'ADMIN')])
     email = models.CharField(max_length=100)

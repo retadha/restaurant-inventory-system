@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'crispy_forms',
+    'bootstrap5',
+    'django_bootstrap_icons',
     'home',
     'login',
     'employee',
