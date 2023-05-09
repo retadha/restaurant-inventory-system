@@ -54,6 +54,7 @@
       src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"
     ></script>
     <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/base/style.css' %}" />
     <link rel="stylesheet" href="{% static 'js/base/script.js' %}" />
     <title>{{title}} | Noorumi System</title>
     {% block style %}{% endblock style %}
@@ -138,13 +139,13 @@
                   /></svg
               >
                 </a>
-                <ul class="dropdown-menu dropdown-menu-dark" style="right: 0; left: auto;" >
+                <ul class="dropdown-menu dropdown-menu" style="right: 0; left: auto;" >
                   <li class="dropdown-header">
-                    <h6>{{request.user.user_profile.nama}}</h6>
+                    <h6>{{request.user.employee.nama}}</h6>
                     <span>
-                      {% if request.user.user_profile.role == '0' %} Manager
-                      {% elif request.user.user_profile.role == '1' %} Staff
-                      {% elif request.user.user_profile.role == '2' %} Admin
+                      {% if request.user.employee.role == '0' %} Manager
+                      {% elif request.user.employee.role == '1' %} Staff
+                      {% else %} Admin
                       {% endif%}
                     </span>
                   </li>

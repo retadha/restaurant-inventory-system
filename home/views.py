@@ -14,9 +14,11 @@ def index(request):
 @login_required
 def profile_view(request):
     profile = Employee.objects.get(user=request.user)
+    gedung = Gedung.objects.all()
     context = {
         'title': "View Profile",
-        'profile': profile
+        'profile': profile,
+        'gedung': gedung,
     }
     template = 'home/profile.html'  
     return render(request, template, context)
@@ -44,4 +46,6 @@ def edit_profile(request):
         'employee': employee,
         'gedung': gedung,
     }
-    return render(request, 'home/edit_profile.html', context)
+    return render(request, 'profile.html', context)
+
+
