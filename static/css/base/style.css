@@ -349,13 +349,12 @@
   
   .nav-tabs-bordered .nav-link:hover,
   .nav-tabs-bordered .nav-link:focus {
-    color: #673d3d;
+    color: #673d54;
   }
   
-  .nav-tabs-bordered .nav-link.active {
-    background-color: #fff;
-    color: #673d3d;
-    border-bottom: 2px solid #673d3d;
+  .navbar-collapse .nav-item > .nav-link.active {
+    background-color: #e9d7a8;
+    border-bottom: 2px solid #5a4b10;
   }
   
   /*--------------------------------------------------------------

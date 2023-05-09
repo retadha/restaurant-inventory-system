@@ -60,7 +60,7 @@
     {% block style %}{% endblock style %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg" style="background-color: #CFA098;">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
           <img
@@ -84,38 +84,38 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link {% if request.path == '/'%} active{% endif %}" href="/">Home</a>
             </li>
             {% if role == '0' or role == '1' %}
             <li class="nav-item">
-              <a class="nav-link" href="/inventory/">Inventory</a>
+              <a class="nav-link {% if "/inventory/" in request.path %} active{% endif %}" href="/inventory/">Inventory</a>
             </li>
               <li class="nav-item">
-                <a class="nav-link" href="/request/">Request List</a>
+                <a class="nav-link {% if "/request/" in request.path %} active{% endif %}" href="/request/">Request List</a>
               </li>
               {% if role == '0' %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Riwayat</a>
+                <a class="nav-link {% if "/riwayat/" in request.path %} active{% endif %}" href="/riwayat/">Riwayat</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/laporan/">Laporan</a>
+                <a class="nav-link {% if "/laporan/" in request.path %} active{% endif %}" href="/laporan/">Laporan</a>
               </li>
               {% endif %}
               {% if gedung == '0' %}
               <li class="nav-item">
-                <a class="nav-link" href="/supplier/">Supplier</a>
+                <a class="nav-link {% if "/supplier/" in request.path %} active{% endif %}" href="/supplier/">Supplier</a>
               </li>
               {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="/resep/">Resep</a>
+                <a class="nav-link {% if "/resep/" in request.path %} active{% endif %}" href="/resep/">Resep</a>
               </li>
               {% endif %}
             {% elif role == '2' %}
             <li class="nav-item">
-              <a class="nav-link" href="/employee/">Daftar Karyawan</a>
+              <a class="nav-link {% if "/employee/" in request.path %} active{% endif %}" href="/employee/">Daftar Karyawan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/gedung/">Gedung</a>
+              <a class="nav-link {% if "/gedung/" in request.path %} active{% endif %}" href="/gedung/">Gedung</a>
             </li>
             {% else %} {% endif %}
           </ul>
@@ -139,7 +139,7 @@
                   /></svg
               >
                 </a>
-                <ul class="dropdown-menu dropdown-menu" style="right: 0; left: auto;" >
+                <ul class="dropdown-menu dropdown-menu-dark" style="right: 0; left: auto;" >
                   <li class="dropdown-header">
                     <h6>{{request.user.employee.nama}}</h6>
                     <span>
