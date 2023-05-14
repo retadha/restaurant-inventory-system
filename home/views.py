@@ -36,7 +36,7 @@ def edit_profile(request):
             messages.success(request, f'Data diri berhasil diperbarui')
             return redirect('profile')
         except:
-            messages.error(request, f'Error')
+            messages.error(request, f'Data diri gagal diperbarui')
             return redirect('profile')
     
     employee = Employee.objects.get(user=request.user)

@@ -12,7 +12,7 @@ from django.db.models import Sum
 def pembelian(request):
     statGedung = request.user.employee.id_gedung.status
     gedung = request.user.employee.id_gedung
-    status = '2'
+
     if (not is_manager(request) or statGedung !='0'):
         return render(request, 'error/403.html')
     inventory = Inventory.objects.all().filter(id_gedung__exact=gedung)
@@ -57,7 +57,7 @@ def completed_orders(self, queryset=None):
     return count
 
 def quantity_TBR(self, queryset=None):
-    obj = Request.objects.filter(status__exact="1").values_list('id_request')
+    obj = Request.objects.filter(status__exact="2").values_list('id_request')
     jumlah = 0
     for i in obj:
         stok = Inventory_Line.objects.filter(id_request__exact=i).aggregate(Sum('qty'))['qty__sum']
