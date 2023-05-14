@@ -164,10 +164,25 @@
               <span>Quantity in hand — {{ totalStok }}</span>
             </div>
             <div class="d-flex align-items-center">
-              <span>Quantity to be received — {{jml}}</span>
+              <span>Quantity to be received — {{ quantityTBR }} </span>
             </div>
             
         </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Purchase Summary </h5>
+              <div class="d-flex align-items-center">
+                <span>Submitted orders — {{ submit }}</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span>Processed orders — {{ process }}</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span>Completed orders — {{ complete }}</span>
+              </div>
+              
+          </div>
 
           
       </div><!-- End Recent Activity -->
