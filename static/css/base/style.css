@@ -277,6 +277,18 @@
     outline: 0;
     box-shadow: none;
   }
+
+  .btn-submit {
+    /* color: #012970; */
+    background-color: #906d6d;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+  }
+  
+  .btn-submit:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
   
   /* Accordion */
   .accordion-item {
@@ -367,12 +379,14 @@
   @media (min-width: 1200px) {
     .logo {
       width: 280px;
+      height: 1280px;
+
     }
   }
   
-  .logo img {
-    max-height: 26px;
-    margin-right: 6px;
+  .logo img2 {
+    max-height: 280px;
+    height: 1280px;
   }
   
   .logo span {
