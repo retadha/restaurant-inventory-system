@@ -22,6 +22,7 @@ def pembelian(request):
     process = processed_orders(self=request)
     complete = completed_orders(self=request)
     quantityTBR = quantity_TBR(request)
+    total = total_purchase(self=request)
     
     totalStok = inventory.aggregate(Sum('stok')).get('stok__sum')
     context = {
@@ -32,6 +33,7 @@ def pembelian(request):
         'process': process,
         'complete' : complete,
         'quantityTBR' : quantityTBR,
+        'total' : total,
     }
     template = 'laporan/pembelian.html'  
     return render(request, template, context)
@@ -67,3 +69,17 @@ def quantity_TBR(self, queryset=None):
         jumlah = 0
             
     return jumlah
+
+def total_purchase(self, queryset=None):
+    obj = Request.objects.filter(status='2') | Request.objects.filter(status='3')
+    total = 0
+    for i in obj:
+        query = Inventory_Line.objects.filter(id_request__exact=i)
+        
+        for a in query:
+            price = a.qty * a.harga
+            total+= price
+            
+        if total == None:
+            total= 0
+    return total
