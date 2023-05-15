@@ -37,7 +37,7 @@ class Request(models.Model):
 class Inventory_Line(models.Model):
     id_line = models.AutoField(primary_key=True)
     qty = models.IntegerField()
-    harga = models.DecimalField(max_digits=20, decimal_places=3, null=False, blank=False)
+    harga = models.DecimalField(max_digits=20, decimal_places=0, null=False, blank=False)
 
     id_inventory_default = models.ForeignKey(InventoryDefault, on_delete=models.CASCADE)
     id_request = models.ForeignKey(Request, on_delete=models.CASCADE)
