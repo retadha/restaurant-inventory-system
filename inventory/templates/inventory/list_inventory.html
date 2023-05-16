@@ -12,16 +12,22 @@
         Export dari POS
       </button>
     </a>
+    {% if gedung == '0' %}
     <a href="/inventory_default/">
       <button class="btn btn-primary">Inventory Default</button>
     </a>
-    <a href="#">
+    {% endif %}
+    <!-- <a href="#">
       <button class="btn btn-primary">+ Inventory</button>
-    </a>
+    </a> -->
   </div>
 </div>
 
-<form action="/inventory/update_pos" method="post" enctype="multipart/form-data">
+<form
+  action="/inventory/update_pos"
+  method="post"
+  enctype="multipart/form-data"
+>
   {% csrf_token %}
   <div
     class="modal fade"
@@ -104,8 +110,200 @@
       <td>Rp{{ item.default.harga|stringformat:"d"|intcomma }}</td>
       <td>
         <a href="#" class="btn btn-primary">Details</a>
-        <a href="#" class="btn btn-primary">Update</a>
-        <a href="#" class="btn btn-danger">Delete</a>
+        <div
+          class="btn btn-warning"
+          data-bs-toggle="modal"
+          data-bs-target="#update{{item.id_inventory}}"
+          style="color: inherit; text-decoration: none"
+        >
+          Update
+        </div>
+        <!-- <a href="#" class="btn btn-danger">Delete</a> -->
+
+        <!--Modal Update-->
+        <div
+          class="modal fade"
+          id="update{{item.id_inventory}}"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Update {{item.default.nama}}
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="text-center">
+                  <div
+                    class="btn btn-warning"
+                    data-bs-toggle="modal"
+                    data-bs-target="#stok{{item.id_inventory}}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    Change Stok
+                  </div>
+                </div>
+                <br />
+                <div class="text-center">
+                  <div
+                    class="btn btn-warning"
+                    data-bs-toggle="modal"
+                    data-bs-target="#threshold{{item.id_inventory}}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    Change Threshold
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-outline-dark"
+                  data-bs-dismiss="modal"
+                >
+                  Kembali
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Modal Stok-->
+        <div
+          class="modal fade"
+          id="stok{{item.id_inventory}}"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Update Stok {{item.default.nama}}
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form
+                id="1"
+                action="update_stok/{{item.id_inventory}}"
+                method="POST"
+              >
+                <div class="modal-body">
+                  {% csrf_token %}
+                  <p>Stok Baru</p>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="stok"
+                    value="{{item.stok}}"
+                    pattern="[0-9]+"
+                    required
+                  />
+                  <br />
+                </div>
+                <div class="modal-footer">
+                  <div
+                    class="btn btn-outline-dark"
+                    data-bs-toggle="modal"
+                    data-bs-target="#update{{item.id_inventory}}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    Kembali
+                  </div>
+                  <button
+                    class="btn"
+                    type="submit"
+                    style="background: #987554; color: white"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!--Modal Threshold-->
+        <div
+          class="modal fade"
+          id="threshold{{item.id_inventory}}"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Update Threshold {{item.default.nama}}
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form
+                id="2"
+                action="update_threshold/{{item.id_inventory}}"
+                method="POST"
+              >
+                <div class="modal-body">
+                  {% csrf_token %}
+                  <p>Threshold Baru</p>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="threshold"
+                    value="{{item.threshold}}"
+                    pattern="[0-9]+"
+                    required
+                  />
+                  <br />
+                </div>
+                <div class="modal-footer">
+                  <div
+                    class="btn btn-outline-dark"
+                    data-bs-toggle="modal"
+                    data-bs-target="#update{{item.id_inventory}}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    Kembali
+                  </div>
+                  <button
+                    class="btn"
+                    type="submit"
+                    style="background: #987554; color: white"
+                  >
+                    Upload
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Threshold Preview -->
+
       </td>
     </tr>
     {% endfor %}

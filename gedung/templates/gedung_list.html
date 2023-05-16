@@ -1,0 +1,305 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<div class="d-flex justify-content-between py-2">
+  <h2>List Gedung</h2>
+  <a href="#">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+      + Gedung
+    </button>
+  </a>
+
+  <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form action="/gedung/create/" method="post">
+          {% csrf_token %}
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">
+              Tambah Gedung
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex flex-column gap-4">
+            <div class="d-flex flex-column gap-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="id_nama"
+                  name="nama"
+                  placeholder="Masukkan nama lengkap"
+                  required
+                />
+                <label for="nama">Nama Gedung</label>
+              </div>
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="id_alamat"
+                  name="alamat"
+                  placeholder=" "
+                  required
+                />
+                <label for="alamat">Alamat</label>
+              </div>
+              <div class="d-flex gap-3">
+                <div class="form-floating w-100">
+                  <select class="form-select" id="id_status" name="status" required>
+                    <option value="0">
+                      Gudang Pusat
+                    </option>
+                    <option value="1">
+                      Restoran
+                    </option>
+                  </select>
+                  <label for="status">Status Gedung</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Kembali
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% for message in messages %} {% if message.tags == 'alert-success' %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %} {% if message.tags == 'alert-error' %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %} {% endfor %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nama</th>
+      <th>Status</th>
+      <th>Alamat</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in gedung %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ item.nama }}</td>
+      <td>
+        {% if item.status == '0' %}
+        Gudang Pusat
+        {% elif item.status == '1' %}
+        Restoran
+        {% endif %}
+      </td>
+      <td>{{ item.alamat }}</td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#detailModal_{{item.id_gedung}}">
+          Details
+        </button>
+        <div
+          class="modal fade"
+          id="detailModal_{{item.id_gedung}}"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Gedung {{ item.nama }}
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Kembali
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#updateModal_{{item.id_gedung}}">
+          Update
+        </button>
+        <div
+          class="modal fade"
+          id="updateModal_{{item.id_gedung}}"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <form action="/gedung/update/{{ item.id_gedung }}/" method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Update Gedung {{ item.nama }}
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body d-flex flex-column gap-4">
+                  <div class="d-flex flex-column gap-3">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="id_nama"
+                        name="nama"
+                        placeholder="Masukkan nama lengkap"
+                        value="{{ item.nama }}"
+                        required
+                      />
+                      <label for="nama">Nama Gedung</label>
+                    </div>
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="id_alamat"
+                        name="alamat"
+                        placeholder=" "
+                        value="{{ item.alamat }}"
+                        required
+                      />
+                      <label for="alamat">Alamat</label>
+                    </div>
+                    <div class="d-flex gap-3">
+                      <div class="form-floating w-100">
+                        <select class="form-select" id="id_status" name="status" required>
+                          <option value="0" {% if item.status == '0' %} selected {% endif %}>
+                            Gudang Pusat
+                          </option>
+                          <option value="1" {% if item.status == '1' %} selected {% endif %}>
+                            Restoran
+                          </option>
+                        </select>
+                        <label for="status">Status Gedung</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Kembali
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Update
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-outline-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#deleteModal_{{item.id_gedung}}"
+        >
+          Delete
+        </button>
+        <div
+          class="modal fade"
+          id="deleteModal_{{item.id_gedung}}"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Konfirmasi Hapus
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">Yakin hapus {{item.nama}}?</div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Batal
+                </button>
+                <a href="/gedung/delete/{{ item.id_gedung }}">
+                  <button type="button" class="btn btn-danger">Hapus</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3">No employees found.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  let table = new DataTable(".table", {
+    // options
+  });
+</script>
+{% endblock %}

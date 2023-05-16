@@ -26,9 +26,8 @@ def update_stok(request, id):
         inventori.stok = request.POST['stok']
         inventori.save()
         messages.success(
-            request, f'Stok untuk inventori {inventori.nama} berhasil diperbarui.')
-        # Ganti redirect nya ke list inventori ketika sudah ada
-        return redirect("/inventori/")
+            request, f'Stok untuk inventori {inventori.default.nama} berhasil diperbarui.')
+        return redirect("/inventory/")
     return render(request, 'list_inventori.html', {'inventori': inventori})
 
 
@@ -39,8 +38,7 @@ def update_threshold(request, id):
         inventori.save()
         messages.success(
             request, f'Ambang batas stok untuk inventori {inventori.nama} berhasil diperbarui.')
-        # Ganti redirect nya ke list inventori ketika sudah ada
-        return redirect("/inventori/")
+        return redirect("/inventory/")
     return render(request, 'list_inventori.html', {'inventori': inventori})
 
 
@@ -63,7 +61,8 @@ def update_pos(request):
             })
         # print(data)
         for i in data:
-            inventory = Inventory.objects.filter(id_gedung__exact=gedung).filter(default__nama__exact=i['product'])
+            inventory = Inventory.objects.filter(id_gedung__exact=gedung).filter(
+                default__nama__exact=i['product'])
             if (len(inventory) != 0):
                 inventory = inventory[0]
                 # print(inventory)
