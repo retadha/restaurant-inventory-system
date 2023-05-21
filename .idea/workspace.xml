@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f00c2582-9e90-47e3-8692-5b9ec0c85cb7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/d10.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Django_Lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyWhatKit_DB.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/templates/create_employee.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/templates/employee_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/templates/employee_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/templates/update_employee.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/templates/create_gedung.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/templates/gedung_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/templates/update_gedung.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gedung/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/home/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/home/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/home/templates/home/edit_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/home/templates/home/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/migrations/0002_auto_20230424_1107.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/migrations/0003_auto_20230424_1109.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/migrations/0004_auto_20230424_1111.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/templates/inventory/list_inventory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/templates/create_inventory_default.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/templates/list_inventory_default.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory_default/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/templates/login/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/resep/download.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/resep/download_1.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/resep/download_1_om543gZ.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propensi/processor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propensi/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0002_alter_request_status.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0003_alter_request_received.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0004_alter_request_created.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0005_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0006_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0007_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0008_auto_20230418_1336.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0009_auto_20230418_1451.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0010_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0011_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0012_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0013_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0014_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0015_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0016_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0017_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0018_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0019_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0020_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0021_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0022_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0023_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0024_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0025_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/0026_alter_request_token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/templates/request/create_request.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/templates/request/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/templates/request/list_to_process.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/templates/request/update_request.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/templates/create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/templates/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/templates/update.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/templates/view.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resep/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/auth/login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/base/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/auth/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/base/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo/NOORUMI.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo/confirm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo/detail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo/modify.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo/received.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo/remove.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/templates/list_supplier.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/templates/list_supplier_datatables.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/supplier/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/error/400.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/error/403.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/error/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/error/500.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/messages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/__pycache__/__init__.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/__init__.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/__pycache__/admin.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/admin.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/__pycache__/apps.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/apps.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/__pycache__/models.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/models.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/__pycache__/urls.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/urls.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/__pycache__/views.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/views.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/migrations/__pycache__/__init__.cpython-39.pyc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/.gitlab-ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/__init__.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/__init__.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/wsgi.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/wsgi.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/employee/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Q5OkPUGaW5UxLMf747oaTRhLyc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.google.cloudcode.ide_session_index": "20230521_0001",
+    "last_opened_file_path": "C:/Users/Retad/OneDrive/Desktop/Propensi/d10",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="d10" type="Python.DjangoServer" factoryName="Django server">
+      <module name="d10" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f00c2582-9e90-47e3-8692-5b9ec0c85cb7" name="Changes" comment="" />
+      <created>1684640118013</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684640118013</updated>
+      <workItem from="1684640119407" duration="262000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

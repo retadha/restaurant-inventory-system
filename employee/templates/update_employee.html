@@ -1,0 +1,126 @@
+{% extends 'base.html' %} {% load static %} 
+
+{% block body %}
+
+{% for message in messages %}
+  {% if message.tags == 'alert-success' %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %} {% if message.tags == 'alert-error' %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %} 
+{% endfor %}
+
+<div class="p-2 d-flex flex-column align-items-center">
+  <h1 class="py-4">Update Employee</h1>
+  <form method="post" class="d-flex flex-column gap-4 w-50">
+    {% csrf_token %}
+    <div class="d-flex flex-column gap-3">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          placeholder=" "
+          required
+          value="{{ employee.user.username }}"
+        />
+        <label for="username">Username</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="nama"
+          name="nama"
+          placeholder=" "
+          required
+          value="{{ employee.nama }}"
+        />
+        <label for="nama">Nama</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder=" "
+          required
+          value="{{ employee.email }}"
+        />
+        <label for="email">Email</label>
+      </div>
+      <div class="d-flex gap-3">
+        <div class="form-floating w-100">
+          <select class="form-select" id="role" name="role" required>
+            <option value="0" {% if employee.role == '0' %} selected {% endif %} >
+              Manager
+            </option>
+            <option value="1" {% if employee.role == '1' %} selected {% endif %}>
+              Staff
+            </option>
+            <option value="2" {% if employee.role == '2' %} selected {% endif %}>
+              Admin
+            </option>
+          </select>
+          <label for="role">Role</label>
+        </div>
+        <div class="form-floating w-100">
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            placeholder=" "
+            pattern="[0-9]{4}[0-9]{4}[0-9]{4}"
+            value="{{ employee.nohp }}"
+          />
+          <label for="phone">No HP</label>
+        </div>
+      </div>
+      <div class="form-floating">
+        <select class="form-select" id="gedung" name="gedung" required>
+          {% for gd in gedung %}
+            <option value="{{ gd.id_gedung }}" {% if gd.id_gedung == employee.id_gedung.id_gedung %} selected {% endif %}>
+              {{ gd.nama }}
+            </option>
+          {% endfor %}
+        </select>
+        <label for="gedung">Gedung</label>
+      </div>
+      <div class="d-flex flex-column gap-3 pt-3">
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Keep blank to unchanged it"
+          />
+          <label for="password">Password (Keep blank to unchanged it)</label>
+        </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="confirmPwd"
+            name="confirmPwd"
+            placeholder="Keep blank to unchanged it"
+          />
+          <label for="confirmPwd"
+            >Confirm Password</label
+          >
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,320 @@
+{% extends 'base.html' %} {% load humanize %} {% load static %} {% block body %}
+<div class="d-flex justify-content-between py-2">
+  <h2>List Inventory</h2>
+  <div class="d-flex gap-2">
+    <a href="#">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Export dari POS
+      </button>
+    </a>
+    {% if gedung == '0' %}
+    <a href="/inventory_default/">
+      <button class="btn btn-primary">Inventory Default</button>
+    </a>
+    {% endif %}
+    <!-- <a href="#">
+      <button class="btn btn-primary">+ Inventory</button>
+    </a> -->
+  </div>
+</div>
+
+<form
+  action="/inventory/update_pos"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %}
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Export dari POS
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-column gap-2">
+            <input type="file" name="pos_file" id="pos_file" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% for message in messages %} {% if message.tags == 'alert-success' %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %} {% if message.tags == 'alert-error' %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %} {% endfor %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nama</th>
+      <th>Stok</th>
+      <th>Threshold</th>
+      <th>Harga</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in inventory %}
+    <tr>
+      <td>{{ item.default.nama }}</td>
+      <td>{{ item.stok }}</td>
+      <td>{{ item.threshold }}</td>
+      <td>Rp{{ item.default.harga|stringformat:"d"|intcomma }}</td>
+      <td>
+        <a href="#" class="btn btn-primary">Details</a>
+        <div
+          class="btn btn-warning"
+          data-bs-toggle="modal"
+          data-bs-target="#update{{item.id_inventory}}"
+          style="color: inherit; text-decoration: none"
+        >
+          Update
+        </div>
+        <!-- <a href="#" class="btn btn-danger">Delete</a> -->
+
+        <!--Modal Update-->
+        <div
+          class="modal fade"
+          id="update{{item.id_inventory}}"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Update {{item.default.nama}}
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="text-center">
+                  <div
+                    class="btn btn-warning"
+                    data-bs-toggle="modal"
+                    data-bs-target="#stok{{item.id_inventory}}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    Change Stok
+                  </div>
+                </div>
+                <br />
+                <div class="text-center">
+                  <div
+                    class="btn btn-warning"
+                    data-bs-toggle="modal"
+                    data-bs-target="#threshold{{item.id_inventory}}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    Change Threshold
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-outline-dark"
+                  data-bs-dismiss="modal"
+                >
+                  Kembali
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Modal Stok-->
+        <div
+          class="modal fade"
+          id="stok{{item.id_inventory}}"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Update Stok {{item.default.nama}}
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form
+                id="1"
+                action="update_stok/{{item.id_inventory}}"
+                method="POST"
+              >
+                <div class="modal-body">
+                  {% csrf_token %}
+                  <p>Stok Baru</p>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="stok"
+                    value="{{item.stok}}"
+                    pattern="[0-9]+"
+                    required
+                  />
+                  <br />
+                </div>
+                <div class="modal-footer">
+                  <div
+                    class="btn btn-outline-dark"
+                    data-bs-toggle="modal"
+                    data-bs-target="#update{{item.id_inventory}}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    Kembali
+                  </div>
+                  <button
+                    class="btn"
+                    type="submit"
+                    style="background: #987554; color: white"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!--Modal Threshold-->
+        <div
+          class="modal fade"
+          id="threshold{{item.id_inventory}}"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Update Threshold {{item.default.nama}}
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form
+                id="2"
+                action="update_threshold/{{item.id_inventory}}"
+                method="POST"
+              >
+                <div class="modal-body">
+                  {% csrf_token %}
+                  <p>Threshold Baru</p>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="threshold"
+                    value="{{item.threshold}}"
+                    pattern="[0-9]+"
+                    required
+                  />
+                  <br />
+                </div>
+                <div class="modal-footer">
+                  <div
+                    class="btn btn-outline-dark"
+                    data-bs-toggle="modal"
+                    data-bs-target="#update{{item.id_inventory}}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    Kembali
+                  </div>
+                  <button
+                    class="btn"
+                    type="submit"
+                    style="background: #987554; color: white"
+                  >
+                    Upload
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Threshold Preview -->
+
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  let table = new DataTable(".table", {
+    language: {
+      emptyTable: "No inventory found.",
+    },
+  });
+</script>
+{% endblock %}

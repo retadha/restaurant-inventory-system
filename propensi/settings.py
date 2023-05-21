@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import mimetypes
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ PRODUCTION = os.environ.get('DATABASE_HOST') != None
 SECRET_KEY = 'django-insecure-z8u&_f#ujoyklxi+343pq*^k0tkxgvsb5g440&tu(pc87$f#dm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,7 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'crispy_forms',
     'home',
+    'login',
+    'employee',
+    'gedung',
+    'supplier',
+    'resep',
+    'inventory_default',
+    'inventory',
+    'request'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +68,7 @@ ROOT_URLCONF = 'propensi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [(os.path.join(BASE_DIR, 'templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'propensi.processor.role_processor',
             ],
         },
     },
@@ -78,14 +90,10 @@ WSGI_APPLICATION = 'propensi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'y98!-H!.?K7AiU!r',
-        'HOST': 'db.dxrndptogyolzmdcgbye.supabase.co',
-        'PORT': '5432',
-    }
 
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -136,3 +144,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 mimetypes.add_type("text/css", ".css", True)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#crispy_forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-info',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }

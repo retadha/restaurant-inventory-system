@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% load humanize %} {% load static %} {% block body %}
+<div class="d-flex justify-content-between py-2">
+  <h2>List Inventory</h2>
+  <div class="d-flex gap-2">
+    <a href="/inventory/">
+      <button class="btn btn-primary">Inventory</button>
+    </a>
+    <a href="/inventory_default/create/">
+      <button class="btn btn-primary">+ Inventory Default</button>
+    </a>
+  </div>
+</div>
+
+{% for message in messages %} {% if message.tags == 'alert-success' %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %} {% if message.tags == 'alert-error' %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %} {% endfor %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nama</th>
+      <th>Satuan</th>
+      <th>Harga</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in inventory %}
+    <tr>
+      <td>{{ item.nama }}</td>
+      <td>{{ item.satuan }}</td>
+      <td>Rp{{ item.harga|stringformat:"d"|intcomma }}</td>
+      <td>
+        <a href="#" class="btn btn-primary">Details</a>
+        <a href="#" class="btn btn-primary">Update</a>
+        <a
+          href="#"
+          class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal_{{item.id_inventory_default}}"
+        >
+          Delete
+        </a>
+        <div
+  class="modal fade"
+  id="deleteModal_{{item.id_inventory_default}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Yakin Hapus Inventori {{ item.nama }}?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <a
+          href="/inventory_default/delete/{{ item.id_inventory_default }}"
+          class=""
+        >
+          <button type="button" class="btn btn-danger">Delete</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  let table = new DataTable(".table", {
+    language: {
+      emptyTable: "No inventory found.",
+    },
+  });
+</script>
+{% endblock %}
