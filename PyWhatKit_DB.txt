@@ -243,3 +243,13 @@ Time: 23:46
 Phone Number: +6287882154944
 Message: Inventory Request Baru Request Inventory DULPL ================================= Gedung : Gudang Pusat PIC : staff.gudang1 Dibuat : 2023-05-01 23:46 Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
 --------------------
+Date: 21/5/2023
+Time: 10:57
+Phone Number: +6287882154944
+Message: Inventory Request Baru Request Inventory E5BE4 ================================= Gedung : Resto 1 PIC : staff.resto1 Dibuat : 2023-05-21 10:57 Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 21/5/2023
+Time: 10:57
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory E5BE4 ================================= Gedung : Resto 1 PIC : staff.resto1 Dibuat : 2023-05-21 10:57 Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------

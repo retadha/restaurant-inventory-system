@@ -6,21 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="f00c2582-9e90-47e3-8692-5b9ec0c85cb7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/__init__.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/__init__.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/admin.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/admin.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/apps.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/apps.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/models.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/models.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/urls.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/urls.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/__pycache__/views.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/home/__pycache__/views.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/__init__.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/__init__.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PyWhatKit_DB.txt" beforeDir="false" afterPath="$PROJECT_DIR$/PyWhatKit_DB.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/settings.cpython-39.pyc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/urls.cpython-39.pyc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propensi/__pycache__/wsgi.cpython-39.pyc" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/__pycache__/wsgi.cpython-39.pyc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propensi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/propensi/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,6 +39,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "com.google.cloudcode.ide_session_index": "20230521_0001",
@@ -81,7 +85,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684640118013</updated>
-      <workItem from="1684640119407" duration="902000" />
+      <workItem from="1684640119407" duration="7804000" />
     </task>
     <servers />
   </component>

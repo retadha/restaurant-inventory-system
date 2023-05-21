@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'resep',
     'inventory_default',
     'inventory',
-    'request'
+    'request',
+    'riwayat'
 ]
 
 MIDDLEWARE = [
