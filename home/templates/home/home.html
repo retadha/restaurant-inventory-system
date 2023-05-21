@@ -1,12 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-</head>
-<body>
-  
-</body>
-</html>
+{% extends 'base.html' %} {% load static %} {% block body %}
+<div class="d-flex flex-column gap-4">
+  <h1 class="">Welcome, {{ username }}</h1>
+  <div class="container text-center">
+    <div class="row">
+      {% if role == '0' or role == '1' %}
+      <div class="col">
+        <a href="/inventory/">
+          <button class="btn btn-primary">
+            <div class="d-flex flex-col">
+              <p class="m-0">Inventory</p>
+            </div>
+          </button>
+        </a>
+      </div>
+      <div class="col">
+        <a href="/request/">
+          <button class="btn btn-primary">
+            <div class="d-flex flex-col">
+              <p class="m-0">Request</p>
+            </div>
+          </button>
+        </a>
+      </div>
+      {% if role == '0' %}
+      <div class="col">
+        <a href="#">
+          <button class="btn btn-primary">
+            <div class="d-flex flex-col">
+              <p class="m-0">Riwayat</p>
+            </div>
+          </button>
+        </a>
+      </div>
+      <div class="col">
+        <a href="#">
+          <button class="btn btn-primary">
+            <div class="d-flex flex-col">
+              <p class="m-0">Laporan</p>
+            </div>
+          </button>
+        </a>
+      </div>
+      {% endif %}
+      {% if gedung == '0' %}
+      <div class="col">
+        <a href="/supplier/">
+          <button class="btn btn-primary">
+            <div class="d-flex flex-col">
+              <p class="m-0">Supplier</p>
+            </div>
+          </button>
+        </a>
+      </div>
+      {% elif gedung == '1' %}
+      <div class="col">
+        <a href="/resep/">
+          <button class="btn btn-primary">
+            <div class="d-flex flex-col">
+              <p class="m-0">Resep</p>
+            </div>
+          </button>
+        </a>
+      </div>
+      {% endif %}
+      {% elif role == '2' %}
+      <div class="col">
+        <a href="/employee/">
+          <button class="btn btn-primary">
+            <div class="d-flex flex-col">
+              <p class="m-0">Karyawan</p>
+            </div>
+          </button>
+        </a>
+      </div>
+      <div class="col">
+        <a href="/gedung/">
+          <button class="btn btn-primary">
+            <div class="d-flex flex-col">
+              <p class="m-0">Gedung</p>
+            </div>
+          </button>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock body %}

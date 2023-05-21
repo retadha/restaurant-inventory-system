@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block body %}
+{% for message in messages %} {% if message.tags == 'alert-success' %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %} {% if message.tags == 'alert-error' %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %} {% endfor %}
+
+  <div class="Container">
+    <h2>Tambah User</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      
+      <div class="form-group">
+        <label for="id_nama">Nama Lengkap</label>
+        <input type="text" class="form-control" id="id_nama" name="nama" placeholder="Masukkan nama lengkap" required>
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="id_username" name="username" placeholder="Masukkan username" required>
+      </div>
+      <div class="form-group">
+        <label for="password1">Password</label>
+        <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Masukkan password" required>
+      </div>
+      <div class="form-group">
+        <label for="id_password2">Password Confirmation</label>
+        <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Masukkan password kembali" required>
+      </div>
+      <div class="form-group">
+        <label for="id_role">User Role</label>
+        <select class="form-select" id="id_role" name="role" required>
+          <option value="" disabled selected>Pilih role user</option>
+          <option value="0" {% if form.role  == '0' %} selected {% endif %} >
+            Manager
+          </option>
+          <option value="1" {% if form.role  == '1' %} selected {% endif %}>
+            Staff
+          </option>
+          <option value="2" {% if form.role == '2' %} selected {% endif %}>
+            Admin
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="id_id_gedung">Cabang</label>
+        <select class="form-select" id="id_id_gedung" name="id_gedung" required>
+          <option value="" disabled selected>Pilih cabang</option>
+          {% for gd in gedung %}
+            <option value="{{ gd.id_gedung }}" {% if gd.id_gedung == form.id_gedung  %} selected {% endif %}>
+              {{ gd.nama }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="id_nohp">No Telp</label>
+        <input type="text" class="form-control" id="id_nohp" name="nohp" placeholder="Masukkan nomor telpon" required>
+      </div>
+      <div class="form-group">
+        <label for="id_email">Email address</label>
+        <input type="email" class="form-control" id="id_email" name="email" placeholder="Masukkan email" required>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
+
+  </div>
+  
+{% endblock %}

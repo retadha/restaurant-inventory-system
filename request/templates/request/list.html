@@ -1,0 +1,515 @@
+{% extends "base.html" %}
+{% load static%}
+{% block style %}
+
+{% endblock %}
+{% block body %}
+    <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+        {% include "messages.html" %}
+        <div class="card m-4 p-4 shadow p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-end">
+
+                    {% if is_restoran == True %}
+                        <h1 class="text-center">Request menuju Gudang Pusat</h1>
+                    {% else %}
+                        <h1 class="text-center">Request menuju Supplier</h1>
+                    {% endif %}
+
+                    <!--Modal Create-->
+                    <div class="d-flex gap-1">
+                        {% if is_restoran == False %}
+                        <div class="btn" style="color: inherit; text-decoration: none">
+                            <a class="btn" href="/request/to_process" style="background: #987554; color: white" role="button">Request dari Restaurant</a>
+                        </div>
+                        {% endif %}
+                        <div class="btn" style="color: inherit; text-decoration: none">
+                            <a class="btn" href="{% url 'request:create' %}" style="background: #987554; color: white" role="button">Buat Request</a>
+                        </div>
+                    </div>
+                        <div class="modal fade" id="createRequest" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Buat Request</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form id="1" action="{% url 'request:create' %}" method="POST">
+                                        <div class="modal-body">
+                                                {% csrf_token %}
+                                                <p>PIC:</p>
+                                                <input class="form-control" type="text" name="pic" required value="{{ pic }}" disabled >
+                                                <br>
+                                                {% if gedung.status == '1' %}
+                                                <p>PIC Gedung Pusat:</p>
+                                                
+                                                {% else %}
+                                                <p>Supplier:</p>
+                                                <select  class="form-select" name="supplier" id="supplier" required>
+                                                    {% for supplier in suppliers %}
+                                                    <option value="{{ supplier.id_supplier }}">{{ supplier.nama }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <br>
+                                                {% endif %}
+                                                <p>Barang:</p>
+                                                <div id="inventory-form">
+                                                    <div id="item-form" class="row item-form">
+                                                        <div class="col-md-3">
+                                                          <select class="form-select" name="item" id="item" required>
+                                                            {% for item in inventoryDefault %}
+                                                            <option value="{{ item.id_inventory_default }}">{{ item.nama }}</option>
+                                                            {% endfor %}
+                                                          </select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <input class="form-control item-price" type="number" name="item-price" placeholder="Harga" required>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <input class="form-control item-quantity" type="number" name="item-quantity" placeholder="Kuantitas" required>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <button type="button" class="btn btn-outline-danger remove-item">Remove</button>
+                                                        </div>
+                                                        <br><br>
+                                                      </div>
+                                                      
+                                                </div>
+                                                  
+                                                <button type="button" class="btn btn-outline-primary add-item">Add Item</button>
+                                                <br>
+        
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Batal</button>
+                                            <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <br>
+                <br>
+                <table class="table">
+
+                  <thead>
+                    <tr>
+                      <th class="text-center" scope="col">#</th>
+                      <th class="text-center" scope="col">Token</th>
+                      <th class="text-center" scope="col">Dikirim</th>
+                      <th class="text-center" scope="col">Diterima</th>
+                      <th class="text-center" scope="col">PIC Request</th>
+
+                      {% if is_restoran == False %}
+                        <th class="text-center" scope="col">Supplier</th>
+                      {% endif %}
+
+                      <th class="text-center" scope="col">Status</th>
+                      <th class="text-center" scope="col">Detail</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {% for request in requests %}
+                        <tr>
+                          <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                          <td class="text-center" >{{ request.token }}</td>
+{#                          <td class="text-center" >{{ request.approved }}</td>#}
+
+                          {% if request.get_status_display == 'WAITING FOR APPROVAL' %}
+                              <td class="text-center" >-</td>
+                          {% else %}
+                              <td class="text-center" >{{ request.approved }}</td>
+                          {% endif %}
+
+                          {% if request.get_status_display != 'COMPLETED' %}
+                              <td class="text-center" >-</td>
+                          {% else %}
+                              <td class="text-center" >{{ request.received }}</td>
+                          {% endif %}
+
+                          <td class="text-center" >{{ request.pic.nama }}</td>
+
+                          {% if is_restoran == False %}
+                            <td class="text-center" >{{ request.id_supplier.pic }}</td>
+                          {% endif %}
+
+                          <td class="text-center" >
+                              {{ request.get_status_display }}
+                          </td>
+
+{#                        #A Tombol lihat detail#}
+                          <td class="d-flex justify-content-center gap-5">
+                              <div class="btn" data-bs-toggle="modal" data-bs-target="#detail{{request.id_request}}" style="color: inherit; text-decoration: none">
+                                <img src="{% static 'logo/detail.png'  %}" alt="" width="18" height="18">
+                              </div>
+                          </td>
+                        </tr>
+
+
+{#                        #A Modal lihat detail#}
+                        <div class="modal fade" id="detail{{request.id_request}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Detail Request</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>PIC: {{request.pic.nama}}</p>
+                                            {% if is_restoran == False %}
+                                                <p>Supplier : {{ request.id_supplier.nama }}</p>
+                                                <p>Supplier : {{ request.id_supplier.pic }}</p>
+                                            {% endif %}
+                                            <p>Dibuat : {{ request.approved }}</p>
+                                            {% if request.received == None %}
+                                            <p>Diterima: -</p>
+                                            {% else %}
+                                            <p>Diterima: {{ request.received }}</p>
+                                            {% endif %}
+
+                                            <p>Status : {{ request.get_status_display }}</p>
+                                            <p>Detail</p>
+                                            <ol>
+                                                {% for inventory in request.get_lines %}
+                                                    <li>{{ inventory.id_inventory_default.nama }} @Rp{{ inventory.harga }} x {{ inventory.qty }} {{ inventory.id_inventory_default.satuan }}</li>
+                                                {% endfor %}
+                                            </ol>
+                                            <p>Total Harga: {{ request.total_price }}</p>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Kembali</button>
+
+{#                                            #A1 Tombol batalkan buat request#}
+                                            {% if request.get_status_display == 'WAITING FOR APPROVAL' %}
+                                                <button
+                                                type="button"
+                                                class="btn btn-outline-danger"
+{#                                                data-bs-dismiss="modal"#}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#cancel{{request.id_request}}"
+                                                >
+                                                    Batalkan
+                                                </button>
+
+{#                                                A2 Tombol update request#}
+                                                <a
+                                                id="updatee"
+                                                type="button"
+                                                href="{% url 'request:update' request.id_request %}"
+                                                class="btn btn-success"
+                                                >
+                                                    Update
+                                                </a>
+
+{#                                                #A3 Tombol kirim request#}
+                                                <a
+                                                type="button"
+                                                href="#"
+                                                class="btn btn-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#confirm{{request.id_request}}"
+                                                >
+                                                    Kirim
+                                                </a>
+                                            {% endif %}
+
+{#                                            #A4 Tombol terima request#}
+                                            {% if request.get_status_display == 'SUBMITTING' and is_restoran == False %}
+                                                <a
+                                                type="button"
+                                                href="#"
+                                                class="btn btn-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#process{{request.id_request}}"
+                                                >
+                                                    DIPROSES SUPPLIER
+                                                </a>
+                                            {% endif %}
+
+{#                                            #A5 Tombol terima request#}
+                                            {% if request.get_status_display == 'PROCESSING' %}
+                                                <a
+                                                type="button"
+                                                href="#"
+                                                class="btn btn-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#receive{{request.id_request}}"
+                                                >
+                                                    Terima
+                                                </a>
+                                            {% endif %}
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+{#                            #A1 Modal konfirmasi batalkan request#}
+                            {% if request.get_status_display == "WAITING FOR APPROVAL" %}
+
+                                <div class="modal fade" id="cancel{{request.id_request}}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pembatalan Request</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                Apakah Anda yakin ingin membatalkan request ini?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-dark"
+    {#                                                data-bs-dismiss="modal"#}
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#detail{{request.id_request}}"
+                                                >
+                                                    Kembali
+                                                </button>
+                                                <a class="btn btn-outline-danger" href="{% url 'request:delete' request.id_request %}" role="button">Batalkan</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endif %}
+
+
+                            {% if request.get_status_display == "WAITING FOR APPROVAL" %}
+
+{#                            A2 Modal konfirmasi untuk update request    #}
+                            <div class="modal fade" id="update{{request.id_request}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Update Request</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="2" action="{% url 'request:update' id_request=request.id_request %}" method="POST">
+                                                <div class="modal-body">
+                                                    {% csrf_token %}
+                                                    <p>PIC:</p>
+                                                    <input class="form-control" type="text" name="pic" required value="{{request.pic.nama }}" disabled>
+                                                    <br>
+                                                    <p>Supplier:</p>
+                                                    <select class="form-select" name="supplier" id="supplier" required>
+                                                        {% for supplier in suppliers %}
+                                                          {% if supplier == request.id_supplier %}
+                                                            <option value="{{ supplier.id_supplier }}" selected>{{ supplier.nama }}</option>
+                                                          {% else %}
+                                                            <option value="{{ supplier.id_supplier }}">{{ supplier.nama }}</option>
+                                                          {% endif %}
+                                                        {% endfor %}
+                                                    </select>  
+                                                    <br>
+                                                    <p>Barang:</p>
+                                                    {% for inv_line in inventory_lines %}
+                                                        {% if inv_line.id_request == request%}
+                                                        <div id="inventory-form2-{{request.id_request}}">
+                                                            <div id="item-form2" class="row item-form2">
+                                                                <div class="col-md-3">
+                                                                <select class="form-select" name="item" id="item" required>
+                                                                    {% for item in inventoryDefault %}
+                                                                    {% if item == inv_line.id_inventory_default %}
+                                                                        <option value="{{ item.id_inventory_default }}" selected>{{ item.nama }}</option>
+                                                                    {% else %}
+                                                                        <option value="{{ item.id_inventory_default }}">{{ item.nama }}</option>
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                </select>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                <input class="form-control item-price" type="number" name="item-price" placeholder="Harga" required value="{{inv_line.harga}}">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                <input class="form-control item-quantity" type="number" name="item-quantity" placeholder="Kuantitas" required value="{{inv_line.qty}}">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <button type="button" class="btn btn-outline-danger remove-item2">Remove</button>
+                                                                </div>
+                                                                <br><br>
+                                                            </div>  
+                                                        </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                      
+                                                    <button type="button" class="btn btn-outline-primary add-item2">Add Item</button>
+                                                    <br>
+                                                    <br>
+                                
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Kembali</button>
+                                                    <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+{#                            A3 Modal konfirmasi untuk kirim request    #}
+                            <div class="modal fade" id="confirm{{request.id_request}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pengiriman Request</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin ingin mengirim request ini?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button
+                                                type="button"
+                                                class="btn btn-outline-dark"
+{#                                                data-bs-dismiss="modal"#}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#detail{{request.id_request}}"
+                                            >
+                                                Kembali
+                                            </button>
+                                            <a class="btn btn-primary" href="{% url 'request:confirm' request.id_request %}" role="button">Kirim</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endif %}
+{#                          A4 Modal konfirmasi diproses supplier#}
+                            {% if request.get_status_display == 'SUBMITTING' and is_restoran == False %}
+                            <div class="modal fade" id="process{{request.id_request}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Diproses Supplier</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin supplier bisa memproses request ini?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button
+                                                type="button"
+                                                class="btn btn-outline-dark"
+{#                                                data-bs-dismiss="modal"#}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#detail{{request.id_request}}"
+                                            >
+                                                Kembali
+                                            </button>
+                                            <a class="btn btn-primary" href="{% url 'request:supplier_process' request.id_request %}" role="button">Diproses supplier</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+{#                            A5 Modal konfirmasi penerimaan request#}
+                            {% if request.get_status_display == 'PROCESSING' %}
+                            <div class="modal fade" id="receive{{request.id_request}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Penerimaan Request</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin telah menerima request ini?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button
+                                                type="button"
+                                                class="btn btn-outline-dark"
+{#                                                data-bs-dismiss="modal"#}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#detail{{request.id_request}}"
+                                            >
+                                                Kembali
+                                            </button>
+                                            <a class="btn btn-primary" href="{% url 'request:receive' request.id_request %}" role="button">Terima</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+
+                    {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+      let table = new DataTable(".table", {
+          // options
+      });
+
+      $(document).ready(function() {
+        // Add item form
+        $(".add-item").click(function() {
+            var newItemForm = $(".item-form").first().clone();
+            newItemForm.find(".item-name").val("");
+            newItemForm.find(".item-price").val("");
+            newItemForm.find(".item-quantity").val("");
+            newItemForm.appendTo("#inventory-form");
+            updateRemoveButtonState();
+        });
+
+        // Remove item form
+        $("#inventory-form").on("click", ".remove-item", function() {
+            $(this).closest(".item-form").remove();
+            updateRemoveButtonState();
+        });
+
+        // Disable remove button if only one item form exists
+        function updateRemoveButtonState() {
+            var itemForms = $(".item-form");
+            if (itemForms.length == 1) {
+                itemForms.find(".remove-item").prop("disabled", true);
+            } else {
+                itemForms.find(".remove-item").prop("disabled", false);
+            }
+        }
+        
+        // Initialize remove button state
+        updateRemoveButtonState();
+
+        // Add item form
+        $(".add-item2").click(function() {
+                var newItemForm = $(".item-form2").first().clone();
+                newItemForm.find(".item-name").val("");
+                newItemForm.find(".item-price").val("");
+                newItemForm.find(".item-quantity").val("");
+                newItemForm.appendTo("#inventory-form2");
+                updateRemoveButtonState();
+        });
+
+        // Remove item form
+        $("#inventory-form2").on("click", ".remove-item2", function() {
+            $(this).closest(".item-form2").remove();
+            updateRemoveButtonState2();
+        });
+
+        // Disable remove button if only one item form exists
+        function updateRemoveButtonState2() {
+            var itemForms = $(".item-form2");
+            if (itemForms.length == 1) {
+                itemForms.find(".remove-item2").prop("disabled", true);
+            } else {
+                itemForms.find(".remove-item2").prop("disabled", false);
+            }
+        }
+
+    });
+    </script>
+{% endblock %}

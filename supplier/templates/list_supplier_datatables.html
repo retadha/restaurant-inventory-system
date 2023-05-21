@@ -1,0 +1,170 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block body %}
+<div class="container">
+    {% include "messages.html" %}
+    <div class="card">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <div class="d-flex justify-content-between py-2">
+                    <h4>List Supplier</h4>
+                    <a class="btn" style="background: #987554; color: white" role="button" data-bs-toggle="modal" data-bs-target="#createSupplier">Tambah Supplier</a>
+                </div>
+
+                <!--Modal Create-->
+                <div class="modal fade" id="createSupplier" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 style="text-align: center;">Tambah Supplier</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form id="1" action="{% url 'create_supplier' %}" method="POST">
+                                <div class="modal-body">
+                                        {% csrf_token %}
+                                        <p>Nama Supplier</p>
+                                        <input class="form-control" type="text" name="nama" required>
+                                        <br>
+                                        <p>Alamat</p>
+                                        <input class="form-control" type="text" name="alamat" required>
+                                        <br>
+                                        <p>PIC</p>
+                                        <input class="form-control" type="text" name="pic" required>
+                                        <br>
+                                        <p>No Telp</p>
+                                        <input class="form-control" type="text" name="nohp" pattern="[0-9]+" required>
+                                        <br>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Batal</button>
+                                    <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Table for Datatables-->
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Nama</th>
+                        <th>PIC</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for supplier in suppliers %}
+                      <tr>
+                        <td>{{ supplier.nama }}</td>
+                        <td>{{ supplier.pic }}</td>
+                        <td>
+                            <div class="btn" data-bs-toggle="modal" data-bs-target="#detail{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">
+                                <img src="{% static 'logo/detail.png'  %}" alt="" width="18" height="18">Detail
+                            </div>
+                            <div class="btn" data-bs-toggle="modal" data-bs-target="#modify{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">
+                                <img src="{% static 'logo/modify.png'  %}" alt="" width="18" height="18">Modify
+                            </div>
+                            <div class="btn" data-bs-toggle="modal" data-bs-target="#confirmDelete{{supplier.id_supplier}}" style="color: inherit; text-decoration: none">
+                                <img src="{% static 'logo/remove.png'  %}" alt="" width="18" height="18">Remove
+                            </div> 
+                
+                            <!--Modal Detail-->
+                            <div class="modal fade" id="detail{{supplier.id_supplier}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Detail Supplier</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Nama: {{supplier.nama}}</p>
+                                            <p>Alamat: {{supplier.alamat}}</p>
+                                            <p>PIC: {{supplier.pic}}</p>
+                                            <p>No Handphone: {{supplier.nohp}}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Kembali</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!--Modal Modify-->   
+                            <div class="modal fade" id="modify{{supplier.id_supplier}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Supplier</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="2" action="/supplier/update_supplier/{{supplier.id_supplier}}" method="POST">
+                                            <div class="modal-body">
+                                                {% csrf_token %}
+                                                <p>Nama Supplier</p>
+                                                <input class="form-control" type="text" name="nama" value="{{supplier.nama}}" required>
+                                                <br>
+                                                <p>Alamat</p>
+                                                <input class="form-control" type="text" name="alamat" value="{{supplier.alamat}}" required>
+                                                <br>
+                                                <p>PIC</p>
+                                                <input class="form-control" type="text" name="pic" value="{{supplier.pic}}" required>
+                                                <br>
+                                                <p>No Telp</p>
+                                                <input class="form-control" type="text" name="nohp" value="{{supplier.nohp}}"  pattern="[0-9]+" required>
+                                                <br>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Kembali</button>
+                                                <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Hapus Supplier -->
+                            <div class="modal fade" id="confirmDelete{{supplier.id_supplier}}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Penghapusan Supplier</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin ingin menghapus supplier {{supplier.nama}}? 
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Batal</button>
+                                            <a class="btn btn-danger" href="/supplier/delete_supplier/{{supplier.id_supplier}}" role="button">Hapus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>   
+</div>
+
+<script>
+  let table = new DataTable(".table", {
+    // options
+  });
+</script>
+{% endblock %}

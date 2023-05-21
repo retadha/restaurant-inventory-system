@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <h2>{{ employee.nama }}</h2>
+  <ul>
+    <li><strong>Role:</strong> 
+      {% if employee.role == '0' %} 
+      Manager
+      {% elif employee.role == '1' %}
+      Staff
+      {% elif employee.role == '2' %}
+      Admin
+      {% endif%}
+    </li>
+    <li><strong>Gedung:</strong> {{ employee.id_gedung }}</li>
+    <li><strong>Email:</strong> {{ employee.email }}</li>
+    <li><strong>No HP:</strong> {{ employee.nohp }}</li>
+  </ul>
+{% endblock %}
