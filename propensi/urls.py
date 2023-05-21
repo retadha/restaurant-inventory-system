@@ -13,5 +13,6 @@ urlpatterns = [
     path("inventory/", include('inventory.urls')),
     path("inventory_default/", include('inventory_default.urls')),
     path("request/", include('request.urls')),
-    path('gedung/', include('gedung.urls'))
+    path('gedung/', include('gedung.urls')),
+    path('riwayat/', include('riwayat.urls'))
 ]
