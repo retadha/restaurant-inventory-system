@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f00c2582-9e90-47e3-8692-5b9ec0c85cb7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/riwayat/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/riwayat/templates/home_riwayat.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/riwayat/templates/list_riwayat_penjualan.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/riwayat/templates/riwayat/pembelian.html" beforeDir="false" afterPath="$PROJECT_DIR$/riwayat/templates/riwayat/pembelian.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/riwayat/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/riwayat/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/riwayat/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/riwayat/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/riwayat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/riwayat/views.py" afterDir="false" />
     </list>
@@ -83,7 +86,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684640118013</updated>
-      <workItem from="1684640119407" duration="9346000" />
+      <workItem from="1684640119407" duration="9973000" />
     </task>
     <servers />
   </component>
