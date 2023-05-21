@@ -237,7 +237,7 @@ def create(request):
         'suppliers': suppliers,
         'employees': employees,
         'inventory_lines': inventory_lines,
-        # 'gedung': gedung,
+        'gedung': gedung,
         # 'manager_gedung_pusat': manager_gedung_pusat
     }
 
