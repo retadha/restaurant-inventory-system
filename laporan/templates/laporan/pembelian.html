@@ -11,24 +11,7 @@
     <!-- Left side columns -->
     <div class="col-lg-8">
       <div class="row">
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card sales-card">
-            <div class="card-body">
-              <h5 class="card-title">Top Purchase <span>| Items</span></h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  {% bs_icon 'cart' size='1.5em' color='#725B57' %}
-                </div>
-                <div class="ps-3">
-                  <h6>145</h6>
-                  <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         <div class="col-xxl-4 col-md-6">
           <div class="card info-card sales-card">
@@ -43,6 +26,38 @@
                   <h6>{{total}}</h6>
                   {% comment %} <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> {% endcomment %}
 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Top Item </h5>
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  {% bs_icon 'cart' size='1.5em' color='#725B57' %}
+                </div>
+                <div class="ps-3">
+                  <h6>{{item}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Top Supplier </h5>
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  {% bs_icon 'shop-window' size='1.5em' color='#725B57' %}
+                </div>
+                <div class="ps-3">
+                  <h6>{{sup}}</h6>
                 </div>
               </div>
             </div>

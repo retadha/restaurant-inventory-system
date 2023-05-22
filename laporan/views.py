@@ -1,12 +1,13 @@
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from request.models import Request, Inventory_Line
-from inventory.models import Inventory
-from propensi.utils import is_manager
 from django.contrib.auth.decorators import login_required
+from propensi.utils import is_manager
 from django.db.models import Sum
-
-
+from django.db.models import Count
+from inventory_default.models import InventoryDefault
+from inventory.models import Inventory
+from supplier.models import Supplier
+from request.models import Request, Inventory_Line
 
 @login_required(login_url='/login/')
 def pembelian(request):
@@ -23,6 +24,8 @@ def pembelian(request):
     complete = completed_orders(self=request)
     quantityTBR = quantity_TBR(request)
     total = total_purchase(self=request)
+    sup = top_supplier(self=request)
+    item = top_item(self=request)
     
     totalStok = inventory.aggregate(Sum('stok')).get('stok__sum')
     context = {
@@ -34,6 +37,8 @@ def pembelian(request):
         'complete' : complete,
         'quantityTBR' : quantityTBR,
         'total' : total,
+        'sup' : sup,
+        'item' : item,
     }
     template = 'laporan/pembelian.html'  
     return render(request, template, context)
@@ -83,3 +88,15 @@ def total_purchase(self, queryset=None):
         if total == None:
             total= 0
     return total
+
+def top_item(self, queryset=None):
+    query = Request.objects.filter(status='2') | Request.objects.filter(status='3')
+    for i in query:
+        obj = Inventory_Line.objects.filter(id_request__exact=i).annotate(inv=Count('id_inventory_default')).order_by('-inv')[0].inv
+        nama = InventoryDefault.objects.get(id_inventory_default=obj)
+        return nama
+
+def top_supplier(self, queryset=None):
+    obj = Request.objects.annotate(sup=Count('id_supplier')).order_by('-sup')[0].sup
+    nama = Supplier.objects.get(id_supplier=obj)
+    return nama
