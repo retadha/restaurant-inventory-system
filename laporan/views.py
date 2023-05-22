@@ -1,9 +1,11 @@
+from decimal import Decimal
+import simplejson as json
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from propensi.utils import is_manager
-from django.db.models import Sum
-from django.db.models import Count
+from django.db.models import Sum, Count
+from django.db.models.functions import TruncMonth, ExtractMonth
 from inventory_default.models import InventoryDefault
 from inventory.models import Inventory
 from supplier.models import Supplier
@@ -26,6 +28,8 @@ def pembelian(request):
     total = total_purchase(self=request)
     sup = top_supplier(self=request)
     item = top_item(self=request)
+    month = per_month(self=request)
+
     
     totalStok = inventory.aggregate(Sum('stok')).get('stok__sum')
     context = {
@@ -39,6 +43,7 @@ def pembelian(request):
         'total' : total,
         'sup' : sup,
         'item' : item,
+        'month' : month,
     }
     template = 'laporan/pembelian.html'  
     return render(request, template, context)
@@ -100,3 +105,29 @@ def top_supplier(self, queryset=None):
     obj = Request.objects.annotate(sup=Count('id_supplier')).order_by('-sup')[0].sup
     nama = Supplier.objects.get(id_supplier=obj)
     return nama
+
+def per_month(self, queryset=None):
+    arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    obj = Request.objects.annotate(month=ExtractMonth('approved')).values('month').annotate(c=Count('id_request')).values('month', 'c')
+    
+    for i in range(0,12):
+        for a in obj:
+            if a['month'] == i:
+                # arr[i-1] = a['c']
+                obj2 = Request.objects.filter(approved__month=i)
+                total = 0
+                for x in obj2:
+                    query = Inventory_Line.objects.filter(id_request__exact=x)
+                    
+                    for y in query:
+                        price = y.qty * y.harga
+                        total+= price
+                        
+                    if total == None:
+                        total= 0
+                arr[i-1] = total
+            else:
+                pass 
+    arrResult = json.dumps(arr)
+    
+    return arrResult
