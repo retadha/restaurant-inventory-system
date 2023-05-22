@@ -8,9 +8,48 @@
         <div class="card-body">
             <div class="justify-content-center">
               <div class="text-center">
-                <h4>List Riwayat Penjualan</h4>
+                <h4>Riwayat Penjualan</h4>
               </div>
                 <div class="d-flex justify-content-between py-2">
+
+                  <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    Export dari POS
+                  </button>
+                  <!--Export POS-->
+                  <form action="/riwayat/list_riwayat_penjualan/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="modal fade" id="exampleModal" tabindex="-1" 
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                              Export dari POS
+                            </h1>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="d-flex flex-column gap-2">
+                              <input type="file" name="pos_file" id="pos_file" required />
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                              Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">Export</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+
                 </div>
 
                 <!--Table for Datatables-->
@@ -18,18 +57,16 @@
                     <thead>
                       <tr>
                         <th>Product</th>
-                        <th>Total</th>
                         <th>Price</th>
-                        <th>Notes</th>
+                        <th>Total</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% for riwayat in riwayat_penjualan %}
                       <tr>
                         <td>{{ riwayat.product }}</td>
-                        <td>{{ riwayat.total }}</td>
                         <td>{{ riwayat.price }}</td>
-                        <td>{{ riwayat.notes }}</td>
+                        <td>{{ riwayat.total }}</td>
                       </tr>
                       {% endfor %}
                     </tbody>
