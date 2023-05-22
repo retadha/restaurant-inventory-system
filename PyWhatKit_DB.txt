@@ -253,3 +253,18 @@ Time: 10:57
 Phone Number: +6287882154944
 Message: Request Ditolak Request Inventory E5BE4 ================================= Gedung : Resto 1 PIC : staff.resto1 Dibuat : 2023-05-21 10:57 Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
 --------------------
+Date: 22/5/2023
+Time: 21:18
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory VT6G9 ================================= Gedung : Gudang Pusat PIC : manajer.gudang Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 22/5/2023
+Time: 21:18
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory VT6G9 ================================= Gedung : Gudang Pusat PIC : manajer.gudang Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 22/5/2023
+Time: 21:19
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory LUDX4 ================================= Gedung : Gudang Pusat PIC : manajer.gudang Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
