@@ -1,4 +1,6 @@
 {% load static %}
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,6 +29,10 @@
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
       crossorigin="anonymous"
     ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ\ 6OW/JmZQ5stwEULTy"
+  crossorigin="anonymous">
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
       integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -48,19 +54,25 @@
       src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"
     ></script>
     <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/base/style.css' %}" />
     <link rel="stylesheet" href="{% static 'js/base/script.js' %}" />
+
+    <script src='{% static "/echarts/echarts.min.js" %}'></script>
+    <script src='{% static "/apexcharts/apexcharts.min.js" %}'></script>
+
+    
     <title>{{title}} | Noorumi System</title>
     {% block style %}{% endblock style %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg" style="background-color: #CFA098;">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
           <img
             src='{% static "/logo/NOORUMI.png" %}'
             alt="Restaurant"
             width="90"
-            height="30"
+            height="45"
           />
         </a>
         <button
@@ -77,48 +89,46 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link {% if request.path == '/'%} active{% endif %}" href="/">Home</a>
             </li>
             {% if role == '0' or role == '1' %}
             <li class="nav-item">
-              <a class="nav-link" href="/inventory/">Inventory</a>
+              <a class="nav-link {% if "/inventory/" in request.path %} active{% endif %}" href="/inventory/">Inventory</a>
             </li>
               <li class="nav-item">
-                <a class="nav-link" href="/request/">Request List</a>
+                <a class="nav-link {% if "/request/" in request.path %} active{% endif %}" href="/request/">Request List</a>
               </li>
               {% if role == '0' %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Riwayat</a>
+                <a class="nav-link {% if "/riwayat/" in request.path %} active{% endif %}" href="/riwayat/">Riwayat</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Laporan</a>
+                <a class="nav-link {% if "/laporan/" in request.path %} active{% endif %}" href="/laporan/">Laporan</a>
               </li>
               {% endif %}
               {% if gedung == '0' %}
               <li class="nav-item">
-                <a class="nav-link" href="/supplier/">Supplier</a>
+                <a class="nav-link {% if "/supplier/" in request.path %} active{% endif %}" href="/supplier/">Supplier</a>
               </li>
               {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="/resep/">Resep</a>
+                <a class="nav-link {% if "/resep/" in request.path %} active{% endif %}" href="/resep/">Resep</a>
               </li>
               {% endif %}
             {% elif role == '2' %}
             <li class="nav-item">
-              <a class="nav-link" href="/employee/">Daftar Karyawan</a>
+              <a class="nav-link {% if "/employee/" in request.path %} active{% endif %}" href="/employee/">Daftar Karyawan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/gedung/">Gedung</a>
+              <a class="nav-link {% if "/gedung/" in request.path %} active{% endif %}" href="/gedung/">Gedung</a>
             </li>
             {% else %} {% endif %}
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item navbar-text">{% now "l, d F Y H:i" %}</li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout/">Logout</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/profile">
+            <!-- <li class="nav-item navbar-text">{% now "l, d F Y H:i" %}</li> -->
+              <div class="dropdown">
+                <a class="nav-link"
+                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
@@ -132,8 +142,25 @@
                     fill-rule="evenodd"
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
                   /></svg
-              ></a>
-            </li>
+              >
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" style="right: 0; left: auto;" >
+                  <li class="dropdown-header">
+                    <h6>{{request.user.employee.nama}}</h6>
+                    <span>
+                      {% if request.user.employee.role == '0' %} Manager
+                      {% elif request.user.employee.role == '1' %} Staff
+                      {% else %} Admin
+                      {% endif%}
+                    </span>
+                  </li>
+                  </span></li>
+
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'profile' %}">{% bs_icon 'person' %} View Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'logout' %}">{% bs_icon 'box-arrow-right' %} Log Out</a></li>
+                </ul>
+              </div>
           </ul>
         </div>
       </div>

@@ -21,7 +21,7 @@ cursor: pointer;
 .drop-down__name {
   font-size: 9px;
   text-transform: uppercase;
-  color: #fff;
+  color: #9D6A5F;
   font-weight: 800;
   letter-spacing: 2px;
 }
@@ -46,7 +46,7 @@ cursor: pointer;
   position: absolute;
   width: 100%;
   left: 0;
-  background-color: #fff;
+  background-color: #9D6A5F;
   border-radius: 4px;
 box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.2);
    transition: all 0.3s;
@@ -71,7 +71,7 @@ background-color: transparent;
 border-right: 8px solid transparent;
 position: absolute;
 border-left: 8px solid transparent;
-border-bottom: 8px solid #fff;
+border-bottom: 8px solid #012970;
 border-top: 8px solid transparent;
 top: -15px;
 right: 18px;
@@ -88,10 +88,10 @@ background-color: transparent;
   padding: 13px 0;
   text-align: left;
   font-weight: 500;
-  color: #909dc2;
+  color: #9D6A5F;
   cursor: pointer;
   position: relative;
-  border-bottom: 1px solid #e0e2e9;
+  border-bottom: 1px solid #9D6A5F;
 }
 
 .drop-down__item-icon {
@@ -99,7 +99,7 @@ background-color: transparent;
   height: 15px;
   position: absolute;
   right: 0px;
-  fill: #8995b6;
+  fill: #9D6A5F;
 
 }
 

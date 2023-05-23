@@ -3,7 +3,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from request.models import Request, Inventory_Line
 from employee.models import Employee
-from propensi.utils import is_restoran
+from propensi.utils import is_restoran, send_to_whatsapp
 from gedung.models import Gedung
 from supplier.models import Supplier
 from inventory_default.models import InventoryDefault
@@ -13,7 +13,6 @@ from django.contrib import messages
 import string
 import random
 
-# Daftar request yang ingin dikirim
 @login_required(login_url='/login/')
 def list(request):
     employee = Employee.objects.get(user=request.user)
@@ -39,6 +38,8 @@ def list(request):
         # 'gedung': gedung,
         # 'manager_gedung_pusat': manager_gedung_pusat
     }
+    
+    # send_to_whatsapp("+6281298381730", "TEST TEST TEST")
 
     return render(request, 'request/list.html', context)
 
@@ -92,12 +93,12 @@ def confirm(request, id_request):
     if inv_request.id_gedung.get_status_display() == "RESTORAN":
         gudang = Gedung.objects.get(id_gedung=inv_request.id_gedung.id_gedung)
         manajer_gudang = Employee.objects.get(role='0', id_gedung=gudang)
-        pywhatkit.sendwhatmsg_instantly(manajer_gudang.nohp, request_detail(
+        send_to_whatsapp(manajer_gudang.nohp, request_detail(
             inv_request, "Inventory Request Baru"))
     # Kalau request dari Gudang Pusat, kirim WA ke Supplier
-    # pywhatkit.sendwhatmsg_instantly(wa_supplier, "Cek")
+    # send_to_whatsapp(wa_supplier, "Cek")
     if inv_request.id_gedung.get_status_display() == "GUDANG PUSAT":
-        pywhatkit.sendwhatmsg_instantly(inv_request.id_supplier.nohp, request_detail(
+        send_to_whatsapp(inv_request.id_supplier.nohp, request_detail(
             inv_request, "Inventory Request Baru"))
 
     messages.success(request, f'Request {inv_request.token} telah dikirim')
@@ -132,7 +133,8 @@ def process(request, id_request):
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
 
-    gedung = Gedung.objects.get(id_gedung=inv_request.id_gedung.id_gedung)  # Gudang Pusat
+    gedung = Gedung.objects.get(
+        id_gedung=inv_request.id_gedung.id_gedung)  # Gudang Pusat
     list_inv_gudang = gedung.inventory_set.all()
 
     for line in inv_request.get_lines:
@@ -141,7 +143,7 @@ def process(request, id_request):
         inv_gudang.save()
 
     # Whatsapp
-    pywhatkit.sendwhatmsg_instantly(inv_request.pic.nohp, request_detail(
+    send_to_whatsapp(inv_request.pic.nohp, request_detail(
         inv_request, "Request sedang diproses oleh Gudang Pusat"))
 
     messages.success(request, f'Request {inv_request.token} telah diproses')
@@ -160,7 +162,7 @@ def supplier_process(request, id_request):
         raise Http404("Objek tidak ditemukan")
 
     # kalau mau pake pywhatkit
-    # pywhatkit.sendwhatmsg_instantly(wa_supplier, "Cek")
+    # send_to_whatsapp(wa_supplier, "Cek")
 
     messages.success(
         request, f'Request {inv_request.token} sedang diproses oleh supplier')
@@ -200,7 +202,7 @@ def delete(request, id_request):
 
         employee = Employee.objects.get(user=request.user)
         if employee.id_gedung.get_status_display() == "GUDANG PUSAT":
-            pywhatkit.sendwhatmsg_instantly(
+            send_to_whatsapp(
                 inv_request.pic.nohp, request_detail(inv_request, "Request Ditolak"))
             messages.success(
                 request, f'Request {inv_request.token} telah ditolak')
@@ -248,7 +250,8 @@ def create(request):
         inv_request = Request.objects.create(
             pic=employee,
             id_gedung=id_gedung,
-            token=''.join(random.choices(string.ascii_uppercase + string.digits, k=5)),
+            token=''.join(random.choices(
+                string.ascii_uppercase + string.digits, k=5)),
         )
 
         if id_gedung.status == '0':
@@ -281,7 +284,7 @@ def create(request):
 
         # phone_number = "+6282170402949"
         # message = "test"
-        # pywhatkit.sendwhatmsg_instantly(phone_number, message, 30, tab_close=True)
+        # send_to_whatsapp(phone_number, message, 30, tab_close=True)
         return redirect("request:list")
 
     return render(request, 'request/create_request.html', context)
