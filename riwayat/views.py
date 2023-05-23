@@ -8,10 +8,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 class POS_Penjualan:
-    def __init__(self, product, total, price):
+    def __init__(self, product, total, price, date):
         self.product = product
         self.total = total
         self.price = price
+        self.date = date
 
 @login_required(login_url='/login/')
 def pembelian(request):
@@ -63,7 +64,8 @@ def list_riwayat_penjualan(request):
         file = request.FILES['pos_file'].read().decode("utf-8").split("\n")
         for i in range(1, len(file)-1):          
             line = file[i].split(",")
-            penjualan = POS_Penjualan(line[1],line[2],line[3])
+            print(line)
+            penjualan = POS_Penjualan(line[2],line[3],line[4],line[1])
             riwayat_penjualan.append(penjualan)
     
     response = {'riwayat_penjualan':riwayat_penjualan}
