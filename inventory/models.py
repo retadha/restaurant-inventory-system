@@ -14,16 +14,6 @@ class Inventory(models.Model):
     id_gedung = models.ForeignKey(Gedung, on_delete=models.CASCADE)
     default = models.ForeignKey(InventoryDefault, on_delete=models.CASCADE)
 
-    # class Meta:
-    #     constraints = [
-    #         UniqueConstraint(
-    #             Lower('id_gedung'),
-    #             Lower('id_inventory_default').desc(),
-    #             name='inventory_gedung_unique',
-    #             violation_error_message='Inventory sudah terdaftar dalam sistem',
-    #         ),
-    #     ]
-
     def __str__(self):
         return (self.default.nama + " - " + self.id_gedung.nama)
     

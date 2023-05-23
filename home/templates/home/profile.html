@@ -2,32 +2,161 @@
 {% load static %}
 
 {% block body %}
-<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
-  <div class="card m-4 p-4 shadow p-3 mb-5 bg-white rounded">
-    <h1 class="text-center">User Profile</h1>
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
+{% for message in messages %}
+  {% if message.tags == 'alert-success' %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+  {% if message.tags == 'alert-danger' %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %} 
+{% endfor %}
 
-        <div class="content-section">
+<div class="container">
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
 
-              <div class="media-body">
-                Nama : <p class="text-secondary">{{ profile.nama }}</p>
-                Username : <p class="text-secondary">{{ profile.user }}</p>
-                Role : <p class="text-secondary">
-                  {% if profile.role == '0' %} Manager
-                  {% elif profile.role == '1' %} Staff
-                  {% elif profile.role == '2' %} Admin
-                  {% endif%}
-                </p>
-                
-                Cabang : <p class="text-secondary">{{ profile.id_gedung }}</p>
-                No Telp : <p class="text-secondary">{{ profile.nohp }}</p>
-                Email : <p class="text-secondary">{{ profile.email }}</p>
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+              <img src="/static/logo/profile.png" alt="Profile" >
+              <h2>{{profile.nama}}</h2>
+              <h3>
+                {% if request.user.user_profile.role == '0' %} Manager
+                {% elif request.user.user_profile.role == '1' %} Staff
+                {% elif request.user.user_profile.role == '2' %} Admin
+                {% endif%}
+              </h3>
+              <div class="social-links mt-2">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
               </div>
             </div>
           </div>
-          <div class="text-center">
-          <a class="btn" style="background: #987554; color: white; " href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
-          </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <h5 class="card-title">Profile Details</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Nama</div>
+                    <div class="col-lg-9 col-md-8">{{profile.nama}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Username</div>
+                    <div class="col-lg-9 col-md-8">{{user.username}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Email</div>
+                    <div class="col-lg-9 col-md-8">{{profile.email}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">No Telepon</div>
+                    <div class="col-lg-9 col-md-8">{{profile.nohp}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Role</div>
+                    <div class="col-lg-9 col-md-8">
+                      {% if request.user.employee.role == '0' %} Manager
+                      {% elif request.user.employee.role == '1' %} Staff
+                      {% elif request.user.employee.role == '2' %} Admin
+                      {% endif%}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Cabang</div>
+                    <div class="col-lg-9 col-md-8">
+                      {% for gd in gedung %}
+                      {% if gd.id_gedung == profile.id_gedung.id_gedung %} {{ gd.nama }} {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                </div>
+
+      <div class="text-center" data-bs-toggle="modal" data-bs-target="#modify{{profile}}">
+          <a class="btn" style="background: #987554; color: white; ">Edit Profile</a>
+      </div>
+
+      <!--Modal Modify-->   
+      <div class="modal fade" id="modify{{profile}}" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="/edit_profile/" method="POST">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        <div class="d-flex flex-column gap-3">
+                          <div class="form-floating">
+                            <input type="text" style="background-color:#e19c8d; color:white" class="form-control" id="nama" name="nama" placeholder=" " value="{{ profile.nama }}" disabled/>
+                            <label for="nama">Nama</label>
+                          </div>
+                          <div class="form-floating">
+                            <input type="text" style="background-color:#e19c8d; color:white" class="form-control" id="username" name="username" placeholder=" " value="{{ profile.user.username }}" disabled/>
+                            <label for="username">Username</label>
+                          </div>
+                          <div class="form-floating">
+                            <input type="text" style="background-color:#e19c8d; color:white" class="form-control" placeholder=" " 
+                            {% if profile.role == '0' %} value="Manager" {% endif %}
+                            {% if profile.role == '1' %} value="Staff" {% endif %}
+                            {% if profile.role == '2' %} value="Admin"{% endif %}
+                            disabled/>
+                            <label for="role">Role</label>
+                          </div>
+                          <div class="form-floating">
+                            <input type="text" id="gedung" name="gedung" style="background-color:#e19c8d; color:white" class="form-control" placeholder=" "
+                              {% for gd in gedung %}
+                              {% if gd.id_gedung == profile.id_gedung.id_gedung %} value="{{ gd.nama }}" {% endif %}
+                              {% endfor %}
+                              disabled>
+                            <label for="gedung">Cabang</label>
+                          </div>
+                          <div class="form-floating">
+                            <input type="tel" class="form-control" id="nohp" name="nohp" placeholder=" " pattern="[0-9]{4}[0-9]{4}[0-9]{4}" value="{{ profile.nohp }}" />
+                              <label for="nohp">No Telp</label>
+                          </div>
+                          <div class="form-floating">
+                            <input type="email" class="form-control" id="email" name="email" placeholder=" " required value="{{ profile.email }}"/>
+                            <label for="email">Email</label>
+                          </div>
+                          
+                        </div>
+                    <div class="modal-footer text-center">
+                      <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
   </div>
 {% endblock body %}

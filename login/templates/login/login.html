@@ -1,76 +1,99 @@
-{% load static %}
+{% extends 'stylelogin.html' %} {% load humanize %} 
+{% load static %} 
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
 
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+  <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'css/auth/login.css' %}" />
-    <title>Login | Noorumi</title>
-  </head>
-  <body class="d-flex flex-column align-items-center">
-    <h1 class="text-center m-3">Login</h1>
+</head>
 
-    <form method="post" class="m-5 d-flex flex-column gap-2 text-center w-50">
-      {% csrf_token %}
-      <div class="">
-        <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            name="username"
-            placeholder="Username"
-            required
-          />
-          <label for="username">Username</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
-          <label for="password">Password</label>
-        </div>
+<body>
 
-        <div class="d-flex justify-content-center">
-          {% for message in messages %}
-            {% if message.tags == 'alert-success' %}
-              <div role="alert" class="my-2">{{ message }}</div>
-            {% endif %} 
-            {% if message.tags == 'alert-danger' %}
-            <div class="alert alert-danger alert-dismissible fade show my-2" role="alert">
-              {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <main>
+    <div
+     class="bg-image d-flex justify-content-center align-items-center"
+     style="
+            background-image: url('{% static "/logo/background.jpg" %}');
+            height: 100vh;
+            "
+     >
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">       
+                  {% comment %} <img  class="logo d-flex align-items-center w-auto" src='{% static "/logo/NOORUMI.png" %}' alt="Restaurant" style="height:150px;" />  {% endcomment %}
+              <div class="card mb-3">
+
+                <div class="card-body">
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Login to NOORUMI</h5>
+                    <p class="text-center small">Enter your username & password to login</p>
+                  </div>
+
+                  <form method="post" class="row g-3 needs-validation">
+                    {% csrf_token %}
+                    
+
+                    <div class="col-12">
+                      <label for="yourUsername" class="form-label">Username</label>
+                      <div class="input-group has-validation">
+                        <input type="text" name="username" class="form-control" id="username" required>
+                        <div class="invalid-feedback">Please enter your username.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="password" required>
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12 text-center">
+                      <div class="form-check" style="padding: 0px;">
+                        <input type="checkbox" name="showPwd" id="pwd">
+                        <label for="pwd" class="">Show Password</label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn-secondary w-100" type="submit">Login</button>
+                    </div>
+                  
+                  </form>
+
+                </div>
+              </div>
+
             </div>
-            {% endif %} 
-        {% endfor %}
+          </div>
         </div>
 
-        <div
-          class="d-flex gap-2 justify-content-center align-self-center p-3"
-        >
-          <input type="checkbox" name="showPwd" id="pwd" />
-          <label for="pwd" class="">Show Password</label>
-        </div>
-      </div>
-      <div class="">
-        <button type="submit" class="btn btn-primary px-4">Login</button>
-      </div>
-    </form>
+      </section>
 
-    <script
+    </div>
+  </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
       crossorigin="anonymous"
@@ -87,5 +110,8 @@
     ></script>
 
     <script src="{% static 'js/auth/login.js' %}"></script>
-  </body>
+
+</body>
+
 </html>
+{% endblock %}

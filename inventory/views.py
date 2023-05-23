@@ -49,15 +49,16 @@ def update_pos(request):
     if (request.method == 'POST'):
         file = request.FILES['pos_file'].read().decode("utf-8").split("\n")
         data = []
-        for i in range(1, len(file)-1):
+        for i in range(1, len(file)):
             line = file[i].split(",")
             print(line)
             data.append({
                 "id": line[0],
-                'product': line[1],
-                "total": int(line[2]),
-                "price": int(line[3]),
-                'notes': line[4],
+                'date':line[1],
+                'product': line[2],
+                "total": int(line[3]),
+                "price": int(line[4]),
+                'notes': line[5],
             })
         # print(data)
         for i in data:
