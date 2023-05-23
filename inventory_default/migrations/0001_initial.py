@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id_inventory_default', models.AutoField(primary_key=True, serialize=False)),
                 ('nama', models.CharField(error_messages={'unique': 'This name has already been registered.'}, max_length=50, unique=True)),
                 ('satuan', models.CharField(max_length=20)),
-                ('harga', models.DecimalField(decimal_places=3, max_digits=20)),
+                ('harga', models.DecimalField(decimal_places=0, max_digits=20)),
             ],
         ),
     ]

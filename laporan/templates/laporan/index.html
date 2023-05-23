@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load humanize %} 
+{% load static %} 
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
+
+{% block body %}
+
+<div class="d-flex flex-column gap-3">
+  <h1 class="text-center">Laporan</h1>
+  <div class="d-flex justify-content-around gap-2">
+    <a href="/laporan/penjualan/" class="">
+      <button type="button" class="btn btn-primary">
+        Penjualan
+      </button>
+    </a>
+    <a href="/laporan/pembelian/" class="">
+      <button type="button" class="btn btn-primary">
+        Pembelian
+      </button>
+    </a>
+  </div>
+</div>
+
+{% endblock %}

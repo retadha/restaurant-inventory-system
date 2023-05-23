@@ -2,9 +2,6 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
-from django.contrib.auth.models import User
-
-from .forms import UserUpdateForm
 from employee.models import Employee
 from gedung.models import Gedung
 
@@ -16,8 +13,11 @@ def index(request):
 @login_required
 def profile_view(request):
     profile = Employee.objects.get(user=request.user)
+    gedung = Gedung.objects.all()
     context = {
-        'profile': profile
+        'title': "View Profile",
+        'profile': profile,
+        'gedung': gedung,
     }
     template = 'home/profile.html'  
     return render(request, template, context)
@@ -25,27 +25,26 @@ def profile_view(request):
 @login_required(login_url='/login/')
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            for field_name, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f'{error}')
-    else:
-        form = UserUpdateForm()
-
+        email = request.POST['email']
+        nohp = request.POST['nohp']
+        try:
+            employee = Employee.objects.get(user=request.user)
+            employee.email = email
+            employee.nohp = nohp
+            employee.save()
+            messages.success(request, f'Data diri berhasil diperbarui')
+            return redirect('profile')
+        except:
+            messages.error(request, f'Data diri gagal diperbarui')
+            return redirect('profile')
+    
     employee = Employee.objects.get(user=request.user)
     gedung = Gedung.objects.all()
-
     context = {
-        'title': "Edit",
-        'form': form,
+        'title': "Edit Profile",
         'employee': employee,
         'gedung': gedung,
     }
-    return render(request, 'home/edit_profile.html', context)
-
+    return render(request, 'profile.html', context)
 
 
