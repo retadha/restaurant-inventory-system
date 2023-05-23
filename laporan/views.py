@@ -207,7 +207,7 @@ def penjualan(request):
             monthCount[int(date.strftime("%m")) - 1] += i['price']
             total += i['total']
             price += i['price']
-        print(itemCount)
+        # print(itemCount)
         for i in itemCount:
             # print(itemCount[i]['count'])
             if (itemCount[i]['count'] > max_product):
