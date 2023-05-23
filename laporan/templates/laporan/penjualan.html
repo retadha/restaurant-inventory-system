@@ -9,6 +9,65 @@
   <div class="row">
     <h1 class="text-center pb-4">{{ title }}</h1>
 
+    <div class="pb-4 d-flex justify-content-end">
+      <a href="#">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Import dari POS
+        </button>
+      </a>
+    </div>
+
+    <form
+    action="/laporan/penjualan/"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Import dari POS
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex flex-column gap-2">
+              <input type="file" name="pos_file" id="pos_file" required />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Import</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
     <!-- Left side columns -->
     <div class="col-lg-8">
       <div class="row">
@@ -16,14 +75,14 @@
         <div class="col-xxl-4 col-md-6">
           <div class="card info-card revenue-card">
             <div class="card-body">
-              <h5 class="card-title">Total Expense <span>| Rupiah</span></h5>
+              <h5 class="card-title">Total Revenue <span>| Rupiah</span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   {% bs_icon 'cash' size='1.3em' %}
                 </div>
                 <div class="ps-3">
-                  <h6>{{total}}</h6>
+                  <h6>{{ price|intcomma|default:"0" }}</h6>
                   {% comment %} <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> {% endcomment %}
 
                 </div>
@@ -41,30 +100,12 @@
                   {% bs_icon 'cart' size='1.3em' %}
                 </div>
                 <div class="ps-3">
-                  <h6>{{item}}</h6>
+                  <h6>{{ product }}</h6>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card customers-card">
-            <div class="card-body">
-              <h5 class="card-title">Top Supplier </h5>
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  {% bs_icon 'shop-window' size='1.3em'%}
-                </div>
-                <div class="ps-3">
-                  <h6>{{sup}}</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
+        </div>        
       
         <!-- Reports -->
         <div class="col-12">
@@ -73,7 +114,7 @@
               <h5 class="card-title">Reports <span>/ Grafik</span></h5>
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title">Pembelian per bulan</h5>
+                    <h5 class="card-title">Penjualan per bulan</h5>
                     <div id="lineChart"></div>
 
               <script>
@@ -125,20 +166,14 @@
         <div class="card-body">
           <h5 class="card-title">Inventory Summary </h5>
             <div class="d-flex align-items-center">
-              <span>Quantity in hand — {{ totalStok }}</span>
+              <span>Quantity Sold — {{ total }}</span>
             </div>
-            <div class="d-flex align-items-center">
-              <span>Quantity to be received — {{ quantityTBR }} </span>
-            </div>
-            
         </div>
-
-   
       </div><!-- End Recent Activity -->
 
-      <div class="card">
+      <div class="card d-none">
         <div class="card-body pb-0">
-          <h5 class="card-title">Purchase Summary <span>| Pie Chart</span></h5>
+          <h5 class="card-title">Sale Summary <span>| Pie Chart</span></h5>
 
           <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 
@@ -183,14 +218,6 @@
                       value: {{ complete }},
                       name: 'Completed orders'
                     },
-                    {% comment %} {
-                      value: 0,
-                      name: 'Data 4'
-                    },
-                    {
-                      value: 0,
-                      name: 'Data 5'
-                    } {% endcomment %}
                   ]
                 }]
               });
