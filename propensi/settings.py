@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'inventory_default',
     'inventory',
     'request',
-    'laporan'
+    'laporan',
+    'riwayat'
 ]
 
 MIDDLEWARE = [
@@ -93,6 +94,7 @@ WSGI_APPLICATION = 'propensi.wsgi.application'
 
 DATABASES = {
     'default': {
+
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
