@@ -8,7 +8,7 @@ from gedung.models import Gedung
 from supplier.models import Supplier
 from inventory_default.models import InventoryDefault
 import datetime
-import pywhatkit
+# import pywhatkit
 from django.contrib import messages
 import string
 import random

@@ -51,7 +51,7 @@ def update_pos(request):
         data = []
         for i in range(1, len(file)):
             line = file[i].split(",")
-            print(line)
+            # print(line)
             data.append({
                 "id": line[0],
                 'date':line[1],
@@ -68,5 +68,9 @@ def update_pos(request):
                 inventory = inventory[0]
                 # print(inventory)
                 inventory.stok = inventory.stok - i['total']
+                if (inventory.threshold > inventory.stok):
+                    # print("warning")
+                    messages.warning(request, 
+                                     f'Stok inventory {inventory.default.nama} sudah di bawah ambang batas.')
                 inventory.save()
     return redirect("/inventory/")
