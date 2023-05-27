@@ -32,9 +32,12 @@
                                 <a href="{% url 'resep:view' resep.id_resep %}" style="color: inherit; text-decoration: none">
                                     <img src="{% static 'logo/detail.png'  %}" alt="" width="18" height="18">
                                 </a>
+                              </div>
+                              <div class="d-flex justify-content-start align-items-center gap-2">
                                 <a href="{% url 'resep:update' resep.id_resep %}" style="color: inherit; text-decoration: none">
                                     <img src="{% static 'logo/modify.png'  %}" alt="" width="18" height="18">
                                 </a>
+                              </div>
                               <div class="btn" data-bs-toggle="modal" data-bs-target="#confirmDelete{{resep.id_resep}}" style="color: inherit; text-decoration: none">
                                 <img src="{% static 'logo/remove.png'  %}" alt="" width="18" height="18">
                               </div>
