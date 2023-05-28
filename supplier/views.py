@@ -15,7 +15,7 @@ def create_supplier(request):
         supplier.nohp = request.POST["nohp"]
         supplier.save()
         messages.success(request, f'Supplier {supplier.nama} berhasil ditambahkan.')
-        return redirect("/supplier/list_supplier")
+        return redirect("/supplier")
     return render(request, 'list_supplier_datatables.html')
 
 def list_supplier(request):
@@ -37,7 +37,7 @@ def update_supplier(request,id):
         supplier.nohp = request.POST["nohp"]
         supplier.save()
         messages.success(request, f'Supplier {supplier.nama} berhasil diubah.')
-        return redirect("/supplier/list_supplier")
+        return redirect("/supplier/")
     return render(request, 'list_supplier_datatables.html', {'supplier':supplier})
 
 def get_supplier(request,id):

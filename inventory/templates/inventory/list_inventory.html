@@ -12,10 +12,10 @@
         Export dari POS
       </button>
     </a>
-    {% if gedung == '0' %}
     <a href="/inventory_default/">
       <button class="btn btn-primary">Inventory Default</button>
     </a>
+    {% if gedung == '0' %}
     {% endif %}
     <!-- <a href="#">
       <button class="btn btn-primary">+ Inventory</button>
@@ -89,7 +89,19 @@
     aria-label="Close"
   ></button>
 </div>
-{% endif %} {% endfor %}
+{% endif %}
+{% if message.tags == 'alert-warning' %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endif %}
+{% endfor %}
 
 <table class="table">
   <thead>
