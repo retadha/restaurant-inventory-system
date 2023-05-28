@@ -60,10 +60,10 @@ def is_restoran(request):
 
 def send_to_whatsapp(phone, msg):
     ccphone = "+62" + phone[1:]
+    driver = webdriver.Chrome(service=Service(
+        ChromeDriverManager().install()))
     try:
         url = f"https://wa.me/{ccphone}?text={quote(msg)}&type=phone_number&app_absent=0"
-        driver = webdriver.Chrome(service=Service(
-            ChromeDriverManager().install()))
         driver.get(url)
         time.sleep(10)
     except:
