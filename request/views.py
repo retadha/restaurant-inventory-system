@@ -24,9 +24,7 @@ def list(request):
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
+
 
     context = {
         "requests": requests,
@@ -36,8 +34,7 @@ def list(request):
         'suppliers': suppliers,
         'employees': employees,
         'inventory_lines': inventory_lines,
-        # 'gedung': gedung,
-        # 'manager_gedung_pusat': manager_gedung_pusat
+
     }
     
 
@@ -111,8 +108,7 @@ def confirm(request, id_request):
 @login_required(login_url='/login/')
 def to_process(request):
     requests = Request.objects.all()
-    # requests = Request.objects.all().filter(id_gedung__status__exact="1").filter(status__exact="1")
-    # print(requests)
+
     restauran_req = [req for req in requests if req.id_gedung.get_status_display(
     ) == "RESTORAN" and req.get_status_display() == "SUBMITTING"]
 
@@ -166,8 +162,7 @@ def supplier_process(request, id_request):
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
 
-    # kalau mau pake pywhatkit
-    # send_to_whatsapp(wa_supplier, "Cek")
+
 
     messages.success(
         request, f'Request {inv_request.token} sedang diproses oleh supplier')
@@ -233,9 +228,7 @@ def create(request):
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
+
 
     context = {
         "is_restoran": is_restoran(request),
@@ -245,7 +238,7 @@ def create(request):
         'employees': employees,
         'inventory_lines': inventory_lines,
         'gedung': gedung,
-        # 'manager_gedung_pusat': manager_gedung_pusat
+
     }
 
     if (request.method == 'POST'):
@@ -303,9 +296,7 @@ def update(request, id_request):
     suppliers = Supplier.objects.all()
     inventory_lines = Inventory_Line.objects.filter(id_request=inv_request)
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
+
 
     context = {
         "inv_request": inv_request,
@@ -314,7 +305,7 @@ def update(request, id_request):
         'suppliers': suppliers,
         'gedung': gedung,
         'inventory_lines': inventory_lines,
-        # 'manager_gedung_pusat': manager_gedung_pusat
+
     }
 
     if (request.method == 'POST'):
