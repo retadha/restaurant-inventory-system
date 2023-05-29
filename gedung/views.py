@@ -47,7 +47,7 @@ def create_gedung(request):
                     id_gedung = new_gedung,
                 )
             
-            messages.success(request, f'Gedung {nama} berhasil ditambahkan')
+            messages.success(request, f'Data Gedung {nama} berhasil ditambahkan')
         except:
             messages.error(request, f'Error')
 

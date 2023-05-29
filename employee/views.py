@@ -103,6 +103,7 @@ def update_employee(request, employee_id):
             return redirect('employee_list')
         except:
             messages.error(request, f'Error')
+            return redirect('employee_list')
 
     employee = Employee.objects.get(id=employee_id)
     gedung = Gedung.objects.all()
@@ -111,7 +112,7 @@ def update_employee(request, employee_id):
         'employee': employee,
         'gedung': gedung,
     }
-    return render(request, 'update_employee.html', context,)
+    return render(request, 'employee_list.html', context,)
 
 
 @login_required(login_url='/login/')

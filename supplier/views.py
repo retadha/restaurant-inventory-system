@@ -36,7 +36,7 @@ def update_supplier(request,id):
         supplier.pic = request.POST["pic"]
         supplier.nohp = request.POST["nohp"]
         supplier.save()
-        messages.success(request, f'Supplier {supplier.nama} berhasil diubah.')
+        messages.success(request, f'Data Supplier {supplier.nama} berhasil diubah.')
         return redirect("/supplier/")
     return render(request, 'list_supplier_datatables.html', {'supplier':supplier})
 
