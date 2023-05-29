@@ -12,9 +12,11 @@
         Export dari POS
       </button>
     </a>
+    {% if request.user.employee.role == '0' and request.user.employee.id_gedung == '0' %}
     <a href="/inventory_default/">
       <button class="btn btn-primary">Inventory Default</button>
     </a>
+    {% endif %}
     {% if gedung == '0' %}
     {% endif %}
     <!-- <a href="#">
@@ -121,14 +123,14 @@
       <td>{{ item.threshold }}</td>
       <td>Rp{{ item.default.harga|stringformat:"d"|intcomma }}</td>
       <td>
-        <a href="#" class="btn btn-primary">Details</a>
+        <a href="#" class="btn btn-info"><i class="bi bi-info-circle"></i></a>
         <div
           class="btn btn-warning"
           data-bs-toggle="modal"
           data-bs-target="#update{{item.id_inventory}}"
           style="color: inherit; text-decoration: none"
-        >
-          Update
+        ><i class="bi bi-pencil"></i>
+          
         </div>
         <!-- <a href="#" class="btn btn-danger">Delete</a> -->
 

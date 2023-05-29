@@ -13,7 +13,7 @@
     <div class="col-lg-8">
       <div class="row">
 
-        <div class="col-xxl-4 col-md-6">
+        <div class="col-xxl-4 col-md-4">
           <div class="card info-card revenue-card">
             <div class="card-body">
               <h5 class="card-title">Total Expense <span>| Rupiah</span></h5>
@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <div class="col-xxl-4 col-md-6">
+        <div class="col-xxl-4 col-md-4">
           <div class="card info-card sales-card">
             <div class="card-body">
               <h5 class="card-title">Top Item </h5>
@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <div class="col-xxl-4 col-md-6">
+        <div class="col-xxl-4 col-md-4">
           <div class="card info-card customers-card">
             <div class="card-body">
               <h5 class="card-title">Top Supplier </h5>
@@ -73,41 +73,60 @@
               <h5 class="card-title">Reports <span>/ Grafik</span></h5>
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title">Pengeluaran per bulan</h5>
-                    <div id="lineChart"></div>
+                    <h5 class="card-title">Pembelian per bulan</h5>
+                    <!-- Line Chart -->
+                  <div id="reportsChart"></div>
 
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#lineChart"), {
-                    series: [{
-                      name: "Total (Rupiah)",
-                      data: {{month}}
-                    }],
-                    chart: {
-                      height: 350,
-                      type: 'line',
-                      zoom: {
-                        enabled: false
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'straight'
-                    },
-                    grid: {
-                      row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.5
-                      },
-                    },
-                    xaxis: {
-                      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    }
-                  }).render();
-                });
-              </script>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'Total Biaya',
+                          data: {{month}},
+                        }, {
+                          name: 'Items',
+                          data: {{items}},
+                        }],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 4
+                        },
+                        xaxis: {
+                          type: 'MONTH',
+                          categories: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+                        },
+                        tooltip: {
+                          x: {
+                            format: 'dd/MM/yy HH:mm'
+                          },
+                        }
+                      }).render();
+                    });
+                  </script>
+                  <!-- End Line Chart -->
             </div>
           </div>
         </div>
@@ -176,12 +195,12 @@
                       name: 'Submitted orders'
                     },
                     {
-                      value: {{ process }},
-                      name: 'Processed orders'
-                    },
-                    {
                       value: {{ complete }},
                       name: 'Completed orders'
+                    },
+                    {
+                      value: {{ process }},
+                      name: 'Processed orders'
                     },
                     {% comment %} {
                       value: 0,

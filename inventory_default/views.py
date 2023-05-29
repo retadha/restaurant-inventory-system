@@ -9,7 +9,9 @@ from propensi.utils import is_restoran, is_manager, is_staff
 
 @login_required(login_url='/login/')
 def list_inventory_default(request):
-    if (not is_manager(request) and not is_staff(request)):
+    statGedung = request.user.employee.id_gedung.status
+
+    if (not is_manager(request) or statGedung != '0'):
         return render(request, 'error/403.html')
     inventory_def = InventoryDefault.objects.all()
     data = {

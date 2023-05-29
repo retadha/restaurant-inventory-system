@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from propensi.utils import is_manager, is_restoran
 from django.db.models import Sum, Count
-from django.db.models.functions import TruncMonth, ExtractMonth
+from django.db.models.functions import ExtractMonth, ExtractYear
 from inventory_default.models import InventoryDefault
 from inventory.models import Inventory
 from supplier.models import Supplier
@@ -42,7 +42,10 @@ def pembelian(request):
     total = total_purchase(self=request)
     sup = top_supplier(self=request)
     item = top_item(self=request)
-    month = per_month(self=request)
+    month = per_month_expense(self=request)
+    items = per_month_items(self=request)
+    
+    print(month)
 
     totalStok = inventory.aggregate(Sum('stok')).get('stok__sum')
     context = {
@@ -57,6 +60,7 @@ def pembelian(request):
         'sup': sup,
         'item': item,
         'month': month,
+        'items': items,
     }
     template = 'laporan/pembelian.html'
     return render(request, template, context)
@@ -133,8 +137,9 @@ def top_supplier(self, queryset=None):
     return nama
 
 
-def per_month(self, queryset=None):
+def per_month_expense(self, queryset=None):
     arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ob1 = Request.objects.annotate(year=ExtractYear('approved')).values('year').values('year')
     obj = Request.objects.annotate(month=ExtractMonth('approved')).values(
         'month').annotate(c=Count('id_request')).values('month', 'c')
 
@@ -150,6 +155,32 @@ def per_month(self, queryset=None):
                     for y in query:
                         price = y.qty * y.harga
                         total += price
+
+                    if total == None:
+                        total = 0
+                arr[i-1] = total
+            else:
+                pass
+    arrResult = json.dumps(arr)
+
+    return arrResult
+
+
+def per_month_items(self, queryset=None):
+    arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    obj = Request.objects.annotate(month=ExtractMonth('approved')).values(
+        'month').annotate(c=Count('id_request')).values('month', 'c')
+
+    for i in range(0, 12):
+        for a in obj:
+            if a['month'] == i:
+                obj2 = Request.objects.filter(approved__month=i)
+                total = 0
+                for x in obj2:
+                    query = Inventory_Line.objects.filter(id_request__exact=x)
+                    for y in query:
+                        items = y.qty 
+                        total += items
 
                     if total == None:
                         total = 0
