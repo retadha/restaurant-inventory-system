@@ -1,12 +1,12 @@
 {% extends 'base.html' %} {% load humanize %} {% load static %} {% block body %}
 <div class="d-flex justify-content-between py-2">
-  <h2>List Inventory</h2>
+  <h2>List Inventory Default</h2>
   <div class="d-flex gap-2">
     <a href="/inventory/">
-      <button class="btn btn-primary">Inventory</button>
+      <button class="btn" style="background: #987554; color: white">Inventory</button>
     </a>
     <a href="/inventory_default/create/">
-      <button class="btn btn-primary">+ Inventory Default</button>
+      <button class="btn" style="background: #987554; color: white"><i class="bi bi-plus-lg"></i> Inventory Default</button>
     </a>
   </div>
 </div>
@@ -39,7 +39,7 @@
       <th>Nama</th>
       <th>Satuan</th>
       <th>Harga</th>
-      <th>Action</th>
+      <th class="justify-content-center text-center">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -48,14 +48,12 @@
       <td>{{ item.nama }}</td>
       <td>{{ item.satuan }}</td>
       <td>Rp{{ item.harga|stringformat:"d"|intcomma }}</td>
-      <td>
-        <a href="#" class="btn btn-primary">Details</a>
-        <a href="#" class="btn btn-primary">Update</a>
+      <td class="d-flex justify-content-center gap-1">
+        <a href="#" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
         <a
           href="#"
           class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal_{{item.id_inventory_default}}"
-        >
-          Delete
+        ><i class="bi bi-trash"></i>
         </a>
         <div
   class="modal fade"
