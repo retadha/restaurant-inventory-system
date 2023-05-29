@@ -36,8 +36,27 @@ def create_inventory_default(request):
             return redirect('inventory_default:list_inventory_default')
 
     add = InventoryDefaultForm()
-    return render(request, 'create_inventory_default.html', {'form': add})
+    return render(request, 'list_inventory_default.html', {'form': add})
 
+@login_required(login_url='/login/')
+def update(request, id_inventory_default):
+    if request.method == 'POST':
+        nama = request.POST['nama']
+        satuan = request.POST['satuan']
+        harga = request.POST['harga']
+        try:
+            inv_default= InventoryDefault.objects.get(pk=id_inventory_default)
+            inv_default.nama = nama
+            inv_default.satuan = satuan
+            inv_default.harga = harga
+            inv_default.save()
+            messages.success(request, f'Data default {nama} berhasil diperbarui')
+            return redirect('inventory_default:list_inventory_default')
+        except:
+            messages.error(request, f'Data inventory default gagal diperbarui')
+            return redirect('inventory_default:list_inventory_default')
+
+    return redirect('/inventory_default/')
 
 @login_required(login_url='/login/')
 def delete(request, id_inventory_default):

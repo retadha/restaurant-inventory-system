@@ -5,9 +5,51 @@
     <a href="/inventory/">
       <button class="btn" style="background: #987554; color: white">Inventory</button>
     </a>
-    <a href="/inventory_default/create/">
-      <button class="btn" style="background: #987554; color: white"><i class="bi bi-plus-lg"></i> Inventory Default</button>
+    <a href="#">
+      <button class="btn" style="background: #987554; color: white" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-plus-lg"></i> Inventory Default</button>
     </a>
+
+    <!--Modal untuk add inventory default-->
+
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form action="{% url 'inventory_default:create_inventory_default' %}" method="post">
+            {% csrf_token %}
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">
+                Tambah Inventory Default
+              </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column gap-4">
+              <div class="d-flex flex-column gap-3">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama inventory" required
+                  /><label for="nama">Nama Inventory</label>
+                </div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="satuan" name="satuan" placeholder="Masukkan satuan inventory" required
+                  /><label for="satuan">Satuan (contoh: kg, ekor)</label>
+                </div>
+                <div class="form-floating">
+                  <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan nominal harga" required
+                  /><label for="harga">Harga</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Kembali
+              </button>
+              <button type="submit" class="btn" style="background: #987554; color: white" >
+                Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -21,21 +63,19 @@
     aria-label="Close"
   ></button>
 </div>
-{% endif %} {% if message.tags == 'alert-error' %}
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  {{ message }}
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="alert"
-    aria-label="Close"
-  ></button>
-</div>
-{% endif %} {% endfor %}
+{% endif %}
+{% if message.tags == 'alert-danger' %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+{% endfor %}
 
 <table class="table">
   <thead>
     <tr>
+      <th>#</th>
       <th>Nama</th>
       <th>Satuan</th>
       <th>Harga</th>
@@ -45,48 +85,78 @@
   <tbody>
     {% for item in inventory %}
     <tr>
+      <td>{{ forloop.counter }}</td>
       <td>{{ item.nama }}</td>
       <td>{{ item.satuan }}</td>
       <td>Rp{{ item.harga|stringformat:"d"|intcomma }}</td>
       <td class="d-flex justify-content-center gap-1">
-        <a href="#" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-        <a
-          href="#"
-          class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal_{{item.id_inventory_default}}"
-        ><i class="bi bi-trash"></i>
-        </a>
-        <div
-  class="modal fade"
-  id="deleteModal_{{item.id_inventory_default}}"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">Apakah Anda yakin ingin menghapus Inventori {{ item.nama }}?</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <a
-          href="/inventory_default/delete/{{ item.id_inventory_default }}"
-          class=""
-        >
-          <button type="button" class="btn btn-danger">Delete</button>
-        </a>
-      </div>
-    </div>
-  </div>
+        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal_{{item.id_inventory_default}}"><i class="bi bi-pencil"></i></a>
+        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal_{{item.id_inventory_default}}"><i class="bi bi-trash"></i></a>
+        
+        <!--Modal untuk update-->
+       
+        <div class="modal fade" id="updateModal_{{item.id_inventory_default}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <form action="/inventory_default/update/{{ item.id_inventory_default }}/" method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Update Inventory Default {{ item.nama }}
+                  </h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex flex-column gap-4">
+                  <div class="d-flex flex-column gap-3">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama inventory" value="{{ item.nama }}" required
+                      /><label for="nama">Nama Inventory</label>
+                    </div>
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="satuan" name="satuan" placeholder="Masukkan satuan inventory" value="{{ item.satuan }}" required
+                      /><label for="satuan">Satuan (contoh: kg, ekor)</label>                    
+                    </div>
+                    <div class="form-floating">
+                      <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan nominal harga" value="{{ item.harga }}" required
+                      /><label for="harga">Harga</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Kembali
+                  </button>
+                  <button type="submit" class="btn" style="background: #987554;color: white" data-bs-dismiss="modal">
+                    Update
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <!--Modal untuk delete-->
+        <div class="modal fade" id="deleteModal_{{item.id_inventory_default}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">Apakah Anda yakin ingin menghapus Inventori {{ item.nama }}?</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close</button>
+                <a href="/inventory_default/delete/{{ item.id_inventory_default }}" class="">
+                  <button type="button" class="btn btn-danger">Delete</button>
+                </a>
+              </div>
+            </div>
+          </div>
 </div>
       </td>
     </tr>

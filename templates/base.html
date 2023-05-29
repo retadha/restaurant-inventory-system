@@ -149,8 +149,10 @@
                   <li class="dropdown-header">
                     <h6>{{request.user.employee.nama}}</h6>
                     <span>
-                      {% if request.user.employee.role == '0' %} Manager
-                      {% elif request.user.employee.role == '1' %} Staff
+                      {% if request.user.employee.role == '0' and request.user.employee.id_gedung.status == '0' %} Manager Gudang
+                      {% elif request.user.employee.role == '0' %} Manager Restoran
+                      {% elif request.user.employee.role == '1' and request.user.employee.id_gedung.status == '0' %} Staff Gudang
+                      {% elif request.user.employee.role == '1' %} Staff Restoran
                       {% else %} Admin
                       {% endif%}
                     </span>
