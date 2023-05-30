@@ -13,10 +13,10 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-    <link
-      href="https://fonts.googleapis.com/css?family=Inter"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=The Girl Next Door' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <script>
       $(document).ready(function () {
         $("#dropDown").click(function () {
@@ -53,17 +53,19 @@
       charset="utf8"
       src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"
     ></script>
-    <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/base/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'js/base/script.js' %}" />
-    <link rel="stylesheet" href="{% static 'bootstrap-icons/bootstrap-icons.css' %}" />
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base/base.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base/style.css' %}" />
+    <link rel="stylesheet" type="text/js" href="{% static 'js/base/script.js' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-icons/bootstrap-icons.css' %}" />
 
     <script src='{% static "/echarts/echarts.min.js" %}'></script>
     <script src='{% static "/apexcharts/apexcharts.min.js" %}'></script>
-
     
     <title>{{title}} | Noorumi System</title>
-    {% block style %}{% endblock style %}
+
+    {% block style %}
+    {% endblock style %}
   </head>
   <body>
     <nav class="navbar navbar-expand-lg" style="background-color: #CFA098;">
