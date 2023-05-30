@@ -15,8 +15,12 @@ def create(request):
         if add.is_valid():
             namaResep = add.cleaned_data.get('nama')
             add.save()
-        messages.success(request, f'Resep {namaResep} berhasil dibuat.')
-        return redirect("resep:list")
+            messages.success(request, f'Resep {namaResep} berhasil dibuat.')
+            return redirect("resep:list")
+        else:
+            messages.error(
+                request, f'Input gagal. Resep {add.instance.nama} sudah terdaftar.')
+            return redirect("resep:list")
     add = ResepForm()
     return render(request, 'create.html', {'form':add})
 

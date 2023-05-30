@@ -37,7 +37,7 @@ def update_threshold(request, id):
         inventori.threshold = request.POST['threshold']
         inventori.save()
         messages.success(
-            request, f'Ambang batas stok untuk inventori {inventori.nama} berhasil diperbarui.')
+            request, f'Ambang batas stok untuk inventori {inventori.default.nama} berhasil diperbarui.')
         return redirect("/inventory/")
     return render(request, 'list_inventori.html', {'inventori': inventori})
 
