@@ -343,7 +343,7 @@ def update(request, id_request):
         messages.success(
             request, f'Request {inv_request.token} berhasil diperbarui')
         employee = Employee.objects.get(user=request.user)
-        if employee.id_gedung.get_status_display() == "GUDANG PUSAT":
+        if employee.id_gedung.get_status_display() == "GUDANG PUSAT" and inv_request.pic.id_gedung.get_status_display() == "RESTORAN":
             return redirect("request:to_process")
 
         return redirect("request:list")
