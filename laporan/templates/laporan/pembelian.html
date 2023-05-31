@@ -16,14 +16,14 @@
         <div class="col-xxl-4 col-md-4">
           <div class="card info-card revenue-card">
             <div class="card-body">
-              <h5 class="card-title">Total Expense <span>| Rupiah</span></h5>
+              <h5 class="card-title">Total Expense</h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   {% bs_icon 'cash' size='1.3em' %}
                 </div>
                 <div class="ps-3">
-                  <h6>{{total}}</h6>
+                  <h6>Rp{{ total|stringformat:"d"|intcomma }}</h6>
                   {% comment %} <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> {% endcomment %}
 
                 </div>
