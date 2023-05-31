@@ -44,8 +44,6 @@ def pembelian(request):
     item = top_item(self=request)
     month = per_month_purchase(self=request)
     items = per_month_items(self=request)
-    
-    print(items)
 
     totalStok = inventory.aggregate(Sum('stok')).get('stok__sum')
     context = {

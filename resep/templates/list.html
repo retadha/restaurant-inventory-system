@@ -14,53 +14,48 @@
                       <button class="btn" style="background: #987554; color: white" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-plus-lg"></i> Resep</button>
                     </a>
 
-    <!--Modal untuk add inventory default-->
+                    <!--Modal untuk add inventory default-->
+                  <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <form action="{% url 'resep:create' %}" method="post">
+                          {% csrf_token %}
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">
+                              Tambah Resep 
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-3">
+                              <div class="form-floating">
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama resep" required
+                                /><label for="nama">Nama Menu</label>
+                              </div>
+                              <div class="form-floating">
+                                <textarea name="bahan" class="form-control" id="bahan" name="bahan" placeholder="Masukkan bahan resep" required
+                                /></textarea><label for="bahan">Bahan - Bahan</label>
+                              </div>
+                              <div class="form-floating">
+                                <textarea name="cara_memasak" class="form-control" id="cara_memasak" name="cara_memasak" placeholder="Masukkan cara memasak menu" required
+                                /></textarea><label for="cara_memasak">Cara Memasak</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                              Kembali
+                            </button>
+                            <button type="submit" class="btn" style="background: #987554; color: white" >
+                              Simpan
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
 
-    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <form action="{% url 'resep:create' %}" method="post">
-            {% csrf_token %}
-            <div class="modal-header">
-              <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">
-                Tambah Resep 
-              </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex flex-column gap-4">
-              <div class="d-flex flex-column gap-3">
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama resep" required
-                  /><label for="nama">Nama Menu</label>
-                </div>
-                <div class="form-floating">
-                  <textarea name="bahan" class="form-control" id="bahan" name="bahan" placeholder="Masukkan bahan resep" required
-                  /></textarea><label for="bahan">Bahan - Bahan</label>
-                </div>
-                <div class="form-floating">
-                  <textarea name="cara_memasak" class="form-control" id="cara_memasak" name="cara_memasak" placeholder="Masukkan cara memasak menu" required
-                  /></textarea><label for="cara_memasak">Cara Memasak</label>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                Kembali
-              </button>
-              <button type="submit" class="btn" style="background: #987554; color: white" >
-                Simpan
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
-
-
-
-                </div>
+                  </div>
                 <br>
                 <br>
                 <table class="table">
@@ -78,51 +73,10 @@
                           <td class="text-center" >{{ resep.nama }}</td>
                           <td class="d-flex justify-content-center gap-1">
                             <a href="{% url 'resep:view' resep.id_resep %}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>
-                            <a href="#" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#updateModal_{{resep.id_resep}}"><i class="bi bi-pencil"></i></a>
+                            <a href="{% url 'resep:update' resep.id_resep %}" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
                             <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDelete{{resep.id_resep}}"><i class="bi bi-trash"></i></a>       
                           </td>
                         </tr>
-
-                        <!--Modal untuk update-->
-                        <div class="modal fade" id="updateModal_{{resep.id_resep}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">   
-                              <form action="/resep/update/{{ resep.id_resep }}/" method="post">
-                                {% csrf_token %}
-                                <div class="modal-header">
-                                  <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                    Update Resep {{ resep.nama }}
-                                  </h1>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body d-flex flex-column gap-4">
-                                  <div class="d-flex flex-column gap-3">
-                                    <div class="form-floating">
-                                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama resep" value="{{ resep.nama }}"required
-                                      /><label for="nama">Nama Menu</label>
-                                    </div>
-                                    <div class="form-floating">
-                                      <textarea name="bahan" class="form-control" id="bahan" name="bahan" placeholder="Masukkan bahan resep" value="{{ bahan }}"required
-                                      /></textarea><label for="bahan">Bahan - Bahan</label>
-                                    </div>
-                                    <div class="form-floating">
-                                      <textarea name="cara_memasak" class="form-control" id="cara_memasak" name="cara_memasak" placeholder="Masukkan cara memasak menu" value="{{ cara_memasak }}" required
-                                      /></textarea><label for="cara_memasak">Cara Memasak</label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    Kembali
-                                  </button>
-                                  <button type="submit" class="btn" style="background: #987554;color: white" data-bs-dismiss="modal">
-                                    Update
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
                         <div class="modal fade" id="confirmDelete{{resep.id_resep}}" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -151,3 +105,11 @@
       });
     </script>
 {% endblock %}
+
+
+
+
+
+
+
+
