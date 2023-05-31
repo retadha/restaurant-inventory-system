@@ -99,7 +99,7 @@
                   <thead>
                     <tr>
                       <th class="text-center" scope="col">#</th>
-                      <th class="text-center" scope="col">Token</th>
+                      <th class="text-center" scope="col">ID Pemesanan</th>
                       <th class="text-center" scope="col">Dikirim</th>
                       <th class="text-center" scope="col">Diterima</th>
                       <th class="text-center" scope="col">PIC Request</th>
@@ -220,6 +220,14 @@
 
 {#                                            #A4 Tombol terima request#}
                                             {% if request.get_status_display == 'SUBMITTING' and is_restoran == False %}
+                                                <a
+                                                id="updatee"
+                                                type="button"
+                                                href="{% url 'request:update' request.id_request %}"
+                                                class="btn btn-success"
+                                                >
+                                                    Update
+                                                </a>
                                                 <a
                                                 type="button"
                                                 href="#"

@@ -1,3 +1,4 @@
+import pywhatkit
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
@@ -23,9 +24,7 @@ def list(request):
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
+
 
     context = {
         "requests": requests,
@@ -35,11 +34,10 @@ def list(request):
         'suppliers': suppliers,
         'employees': employees,
         'inventory_lines': inventory_lines,
-        # 'gedung': gedung,
-        # 'manager_gedung_pusat': manager_gedung_pusat
+
     }
     
-    # send_to_whatsapp("+6281298381730", "TEST TEST TEST")
+
 
     return render(request, 'request/list.html', context)
 
@@ -86,7 +84,7 @@ def confirm(request, id_request):
         inv_request.save()
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
-    # wa_supplier = inv_request.id_supplier.nohp
+
 
     # INTEGRASI WHATSAPP
     # Kalau request dari Resto, kirim WA ke Gudang Pusat
@@ -110,8 +108,7 @@ def confirm(request, id_request):
 @login_required(login_url='/login/')
 def to_process(request):
     requests = Request.objects.all()
-    # requests = Request.objects.all().filter(id_gedung__status__exact="1").filter(status__exact="1")
-    # print(requests)
+
     restauran_req = [req for req in requests if req.id_gedung.get_status_display(
     ) == "RESTORAN" and req.get_status_display() == "SUBMITTING"]
 
@@ -128,26 +125,30 @@ def to_process(request):
 def process(request, id_request):
     try:
         inv_request = Request.objects.get(pk=id_request)
-        inv_request.status = "2"  # PROCESSING
-        inv_request.save()
+        gedung = Gedung.objects.get(id_gedung=inv_request.id_gedung.id_gedung)  # Gudang Pusat
+        list_inv_gudang = gedung.inventory_set.all()
+
+        for line in inv_request.get_lines:
+            inv_gudang = list_inv_gudang.get(default=line.id_inventory_default)
+            inv_gudang.stok -= line.qty
+            if inv_gudang.stok < 0:
+                messages.error(request, f'Inventori gudang tidak mencukupi untuk menangani request {inv_request.token}')
+                return redirect("request:to_process")
+            inv_gudang.save()
+
+        # Whatsapp
+        pywhatkit.sendwhatmsg_instantly(inv_request.pic.nohp, request_detail(
+            inv_request, "Request sedang diproses oleh Gudang Pusat"))
+
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
 
-    gedung = Gedung.objects.get(
-        id_gedung=inv_request.id_gedung.id_gedung)  # Gudang Pusat
-    list_inv_gudang = gedung.inventory_set.all()
-
-    for line in inv_request.get_lines:
-        inv_gudang = list_inv_gudang.get(default=line.id_inventory_default)
-        inv_gudang.stok -= line.qty
-        inv_gudang.save()
-
-    # Whatsapp
-    send_to_whatsapp(inv_request.pic.nohp, request_detail(
-        inv_request, "Request sedang diproses oleh Gudang Pusat"))
+    inv_request.status = "2"  # PROCESSING
+    inv_request.save()
 
     messages.success(request, f'Request {inv_request.token} telah diproses')
     return redirect("request:to_process")
+
 
 # Gudang melakukan konfirmasi bahwa supplier bisa memproses request gudang
 
@@ -161,8 +162,7 @@ def supplier_process(request, id_request):
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
 
-    # kalau mau pake pywhatkit
-    # send_to_whatsapp(wa_supplier, "Cek")
+
 
     messages.success(
         request, f'Request {inv_request.token} sedang diproses oleh supplier')
@@ -201,7 +201,7 @@ def delete(request, id_request):
         print()
 
         employee = Employee.objects.get(user=request.user)
-        if employee.id_gedung.get_status_display() == "GUDANG PUSAT":
+        if employee.id_gedung.get_status_display() == "GUDANG PUSAT" and inv_request.id_supplier == None:
             send_to_whatsapp(
                 inv_request.pic.nohp, request_detail(inv_request, "Request Ditolak"))
             messages.success(
@@ -228,9 +228,7 @@ def create(request):
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
+
 
     context = {
         "is_restoran": is_restoran(request),
@@ -240,7 +238,7 @@ def create(request):
         'employees': employees,
         'inventory_lines': inventory_lines,
         'gedung': gedung,
-        # 'manager_gedung_pusat': manager_gedung_pusat
+
     }
 
     if (request.method == 'POST'):
@@ -282,9 +280,7 @@ def create(request):
         messages.success(
             request, f'Request {inv_request.token} berhasil ditambahkan')
 
-        # phone_number = "+6282170402949"
-        # message = "test"
-        # send_to_whatsapp(phone_number, message, 30, tab_close=True)
+
         return redirect("request:list")
 
     return render(request, 'request/create_request.html', context)
@@ -300,9 +296,7 @@ def update(request, id_request):
     suppliers = Supplier.objects.all()
     inventory_lines = Inventory_Line.objects.filter(id_request=inv_request)
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
+
 
     context = {
         "inv_request": inv_request,
@@ -311,7 +305,7 @@ def update(request, id_request):
         'suppliers': suppliers,
         'gedung': gedung,
         'inventory_lines': inventory_lines,
-        # 'manager_gedung_pusat': manager_gedung_pusat
+
     }
 
     if (request.method == 'POST'):
@@ -349,7 +343,7 @@ def update(request, id_request):
         messages.success(
             request, f'Request {inv_request.token} berhasil diperbarui')
         employee = Employee.objects.get(user=request.user)
-        if employee.id_gedung.get_status_display() == "GUDANG PUSAT":
+        if employee.id_gedung.get_status_display() == "GUDANG PUSAT" and inv_request.pic.id_gedung.get_status_display() == "RESTORAN":
             return redirect("request:to_process")
 
         return redirect("request:list")
