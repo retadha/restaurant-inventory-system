@@ -20,7 +20,10 @@ def list_inventory(request):
     return render(request, 'inventory/list_inventory.html', data)
 
 
+@login_required(login_url='/login/')
 def update_stok(request, id):
+    if (not is_manager(request) and not is_staff(request)):
+        return render(request, 'error/403.html')
     inventori = Inventory.objects.get(id_inventory=id)
     if (request.POST):
         inventori.stok = request.POST['stok']
@@ -31,13 +34,16 @@ def update_stok(request, id):
     return render(request, 'list_inventori.html', {'inventori': inventori})
 
 
+@login_required(login_url='/login/')
 def update_threshold(request, id):
+    if (not is_manager(request) and not is_staff(request)):
+        return render(request, 'error/403.html')
     inventori = Inventory.objects.get(id_inventory=id)
     if (request.POST):
         inventori.threshold = request.POST['threshold']
         inventori.save()
         messages.success(
-            request, f'Ambang batas stok untuk inventori {inventori.nama} berhasil diperbarui.')
+            request, f'Ambang batas stok untuk inventori {inventori.default.nama} berhasil diperbarui.')
         return redirect("/inventory/")
     return render(request, 'list_inventori.html', {'inventori': inventori})
 

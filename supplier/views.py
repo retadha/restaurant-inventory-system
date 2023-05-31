@@ -15,7 +15,7 @@ def create_supplier(request):
         supplier.nohp = request.POST["nohp"]
         supplier.save()
         messages.success(request, f'Supplier {supplier.nama} berhasil ditambahkan.')
-        return redirect("/supplier")
+        return redirect("/supplier/")
     return render(request, 'list_supplier_datatables.html')
 
 def list_supplier(request):
@@ -51,7 +51,7 @@ def delete_supplier(request,id):
         return render(request, 'error/403.html')
     supplier = Supplier.objects.get(id_supplier=id)
     supplier.delete()
-    return redirect("/supplier/list_supplier")
+    return redirect("/supplier/")
 
 def auth_gedung_pusat(request):
     if (is_manager(request) | is_staff(request)):
