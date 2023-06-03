@@ -3,15 +3,16 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from request.models import Request, Inventory_Line
 from employee.models import Employee
-from propensi.utils import is_restoran, send_to_whatsapp
+from propensi.utils import is_restoran
 from gedung.models import Gedung
 from supplier.models import Supplier
 from inventory_default.models import InventoryDefault
 import datetime
-# import pywhatkit
 from django.contrib import messages
 import string
 import random
+from urllib.parse import quote
+
 
 @login_required(login_url='/login/')
 def list(request):
@@ -28,6 +29,7 @@ def list(request):
     #     role='0', id_gedung=gedung_pusat).nama
 
     context = {
+        "title": "Daftar Request",
         "requests": requests,
         "is_restoran": is_restoran(request),
         "pic": employee.nama,
@@ -38,8 +40,6 @@ def list(request):
         # 'gedung': gedung,
         # 'manager_gedung_pusat': manager_gedung_pusat
     }
-    
-    # send_to_whatsapp("+6281298381730", "TEST TEST TEST")
 
     return render(request, 'request/list.html', context)
 
@@ -86,36 +86,38 @@ def confirm(request, id_request):
         inv_request.save()
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
-    # wa_supplier = inv_request.id_supplier.nohp
 
     # INTEGRASI WHATSAPP
     # Kalau request dari Resto, kirim WA ke Gudang Pusat
+    no_hp = ""
+    msg = ""
     if inv_request.id_gedung.get_status_display() == "RESTORAN":
         gudang = Gedung.objects.get(id_gedung=inv_request.id_gedung.id_gedung)
         manajer_gudang = Employee.objects.get(role='0', id_gedung=gudang)
-        send_to_whatsapp(manajer_gudang.nohp, request_detail(
-            inv_request, "Inventory Request Baru"))
+        no_hp = manajer_gudang.nohp
+        msg = request_detail(inv_request, "Inventory Request Baru")
+
     # Kalau request dari Gudang Pusat, kirim WA ke Supplier
-    # send_to_whatsapp(wa_supplier, "Cek")
     if inv_request.id_gedung.get_status_display() == "GUDANG PUSAT":
-        send_to_whatsapp(inv_request.id_supplier.nohp, request_detail(
-            inv_request, "Inventory Request Baru"))
+        no_hp = inv_request.id_supplier.nohp
+        msg = request_detail(inv_request, "Inventory Request Baru")
+
+    request.session['send_wa'] = True
+    request.session['phone'] = "62" + no_hp[1:]
+    request.session['msg'] = quote(msg)
 
     messages.success(request, f'Request {inv_request.token} telah dikirim')
     return redirect("request:list")
 
 # Daftar request restoran yang diterima oleh gudang
-
-
 @login_required(login_url='/login/')
 def to_process(request):
     requests = Request.objects.all()
-    # requests = Request.objects.all().filter(id_gedung__status__exact="1").filter(status__exact="1")
-    # print(requests)
     restauran_req = [req for req in requests if req.id_gedung.get_status_display(
     ) == "RESTORAN" and req.get_status_display() == "SUBMITTING"]
 
     context = {
+        "title": "Daftar Request dari Restoran",
         "requests": restauran_req,
     }
 
@@ -143,15 +145,14 @@ def process(request, id_request):
         inv_gudang.save()
 
     # Whatsapp
-    send_to_whatsapp(inv_request.pic.nohp, request_detail(
-        inv_request, "Request sedang diproses oleh Gudang Pusat"))
-
+    request.session['send_wa'] = True
+    request.session['phone'] = "62" + inv_request.pic.nohp[1:]
+    request.session['msg'] = quote(request_detail(inv_request, "Request sedang diproses oleh Gudang Pusat"))
+    
     messages.success(request, f'Request {inv_request.token} telah diproses')
     return redirect("request:to_process")
 
 # Gudang melakukan konfirmasi bahwa supplier bisa memproses request gudang
-
-
 @login_required(login_url='/login/')
 def supplier_process(request, id_request):
     try:
@@ -161,16 +162,11 @@ def supplier_process(request, id_request):
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
 
-    # kalau mau pake pywhatkit
-    # send_to_whatsapp(wa_supplier, "Cek")
-
     messages.success(
         request, f'Request {inv_request.token} sedang diproses oleh supplier')
     return redirect("request:list")
 
 # Konfirmasi bahwa inventory yang direquest sudah sampai
-
-
 @login_required(login_url='/login/')
 def receive(request, id_request):
     try:
@@ -202,8 +198,9 @@ def delete(request, id_request):
 
         employee = Employee.objects.get(user=request.user)
         if employee.id_gedung.get_status_display() == "GUDANG PUSAT":
-            send_to_whatsapp(
-                inv_request.pic.nohp, request_detail(inv_request, "Request Ditolak"))
+            request.session['send_wa'] = True
+            request.session['phone'] = "62" + inv_request.pic.nohp[1:]
+            request.session['msg'] = request_detail(inv_request, "Request Ditolak")
             messages.success(
                 request, f'Request {inv_request.token} telah ditolak')
             inv_request.delete()
@@ -233,6 +230,7 @@ def create(request):
     #     role='0', id_gedung=gedung_pusat).nama
 
     context = {
+        "title": "Buat Request",
         "is_restoran": is_restoran(request),
         "pic": employee.nama,
         "inventoryDefault": inventoryDefault,
@@ -282,9 +280,6 @@ def create(request):
         messages.success(
             request, f'Request {inv_request.token} berhasil ditambahkan')
 
-        # phone_number = "+6282170402949"
-        # message = "test"
-        # send_to_whatsapp(phone_number, message, 30, tab_close=True)
         return redirect("request:list")
 
     return render(request, 'request/create_request.html', context)

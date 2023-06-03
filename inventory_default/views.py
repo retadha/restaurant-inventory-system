@@ -13,7 +13,7 @@ def list_inventory_default(request):
         return render(request, 'error/403.html')
     inventory_def = InventoryDefault.objects.all()
     data = {
-        'title': "List Inventory Default",
+        'title': "Daftar Inventory Default",
         "inventory": inventory_def,
     }
     return render(request, 'list_inventory_default.html', data)
@@ -34,7 +34,11 @@ def create_inventory_default(request):
             return redirect('inventory_default:list_inventory_default')
 
     add = InventoryDefaultForm()
-    return render(request, 'create_inventory_default.html', {'form': add})
+    context = {
+        'title': "Buat Inventory Baru",
+        'form': add
+    }
+    return render(request, 'create_inventory_default.html', context)
 
 
 @login_required(login_url='/login/')

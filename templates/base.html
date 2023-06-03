@@ -95,29 +95,38 @@
             <li class="nav-item">
               <a class="nav-link {% if "/inventory/" in request.path %} active{% endif %}" href="/inventory/">Inventory</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link {% if "/request/" in request.path %} active{% endif %}" href="/request/">Request</a>
+            </li>
+            {% if role == '0' %}
+              {% if gedung == "0"  %}
               <li class="nav-item">
-                <a class="nav-link {% if "/request/" in request.path %} active{% endif %}" href="/request/">Request List</a>
+                <a class="nav-link {% if "/riwayat/" in request.path %} active{% endif %}" href="/riwayat/pembelian">Riwayat Pembelian</a>
               </li>
-              {% if role == '0' %}
               <li class="nav-item">
-                <a class="nav-link {% if "/riwayat/" in request.path %} active{% endif %}" href="/riwayat/">Riwayat</a>
+                <a class="nav-link {% if "/laporan/" in request.path %} active{% endif %}" href="/laporan/pembelian">Laporan Pembelian</a>
+              </li>
+              {% elif gedung == "1" %}
+              <li class="nav-item">
+                <a class="nav-link {% if "/riwayat/" in request.path %} active{% endif %}" href="/riwayat/penjualan">Riwayat Penjualan</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if "/laporan/" in request.path %} active{% endif %}" href="/laporan/">Laporan</a>
+                <a class="nav-link {% if "/laporan/" in request.path %} active{% endif %}" href="/laporan/penjualan">Laporan Penjualan</a>
               </li>
               {% endif %}
-              {% if gedung == '0' %}
-              <li class="nav-item">
-                <a class="nav-link {% if "/supplier/" in request.path %} active{% endif %}" href="/supplier/">Supplier</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                <a class="nav-link {% if "/resep/" in request.path %} active{% endif %}" href="/resep/">Resep</a>
-              </li>
-              {% endif %}
+            {% endif %}
+            {% if gedung == '0' %}
+            <li class="nav-item">
+              <a class="nav-link {% if "/supplier/" in request.path %} active{% endif %}" href="/supplier/">Supplier</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link {% if "/resep/" in request.path %} active{% endif %}" href="/resep/">Resep</a>
+            </li>
+            {% endif %}
             {% elif role == '2' %}
             <li class="nav-item">
-              <a class="nav-link {% if "/employee/" in request.path %} active{% endif %}" href="/employee/">Daftar Karyawan</a>
+              <a class="nav-link {% if "/employee/" in request.path %} active{% endif %}" href="/employee/">Karyawan</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {% if "/gedung/" in request.path %} active{% endif %}" href="/gedung/">Gedung</a>

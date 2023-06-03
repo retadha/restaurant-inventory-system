@@ -8,16 +8,20 @@
 <div class="d-flex flex-column gap-3">
   <h1 class="text-center">Laporan</h1>
   <div class="d-flex justify-content-around gap-2">
+    {% if gedung == "1"  %}
     <a href="/laporan/penjualan/" class="">
       <button type="button" class="btn btn-primary">
         Penjualan
       </button>
     </a>
+    {% endif %}
+    {% if gedung == "0"  %}
     <a href="/laporan/pembelian/" class="">
       <button type="button" class="btn btn-primary">
         Pembelian
       </button>
     </a>
+    {% endif %}
   </div>
 </div>
 

@@ -17,7 +17,7 @@ def login_page(request):
             return redirect('/')
         else:
             messages.error(request, 'Username atau Password salah')
-    return render(request, 'login/login.html')
+    return render(request, 'login/login.html', {'title':"Login"})
 
 
 @login_required(login_url='/login/')

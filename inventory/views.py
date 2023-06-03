@@ -14,7 +14,7 @@ def list_inventory(request):
     gedung = request.user.employee.id_gedung
     inventory = Inventory.objects.all().filter(id_gedung__exact=gedung)
     data = {
-        'title': "Inventory",
+        'title': "Daftar Inventory",
         'inventory': inventory,
     }
     return render(request, 'inventory/list_inventory.html', data)

@@ -6,6 +6,7 @@ from .models import Resep
 from django.contrib.auth.decorators import login_required
 from propensi.utils import is_restoran
 
+
 @login_required(login_url='/login/')
 def create(request):
     if (is_restoran(request) == False):
@@ -18,7 +19,12 @@ def create(request):
         messages.success(request, f'Resep {namaResep} berhasil dibuat.')
         return redirect("resep:list")
     add = ResepForm()
-    return render(request, 'create.html', {'form':add})
+    context = {
+        'title': "Buat Resep",
+        'form': add
+    }
+    return render(request, 'create.html', context)
+
 
 @login_required(login_url='/login/')
 def list(request):
@@ -26,9 +32,11 @@ def list(request):
         return render(request, 'error/403.html')
     daftar_resep = Resep.objects.all()
     context = {
-        "daftar_resep" : daftar_resep
+        'title': "Daftar Resep",
+        "daftar_resep": daftar_resep
     }
     return render(request, 'list.html', context)
+
 
 @login_required(login_url='/login/')
 def view(request, id_resep):
@@ -36,12 +44,14 @@ def view(request, id_resep):
         return render(request, 'error/403.html')
     resep = Resep.objects.get(pk=id_resep)
     context = {
-        "id_resep" : resep.id_resep,
-        "nama" : resep.nama,
-        "bahan" : resep.bahan,
-        "cara_memasak" : resep.cara_memasak
+        'title': "Resep " + resep.nama,
+        "id_resep": resep.id_resep,
+        "nama": resep.nama,
+        "bahan": resep.bahan,
+        "cara_memasak": resep.cara_memasak
     }
     return render(request, 'view.html', context)
+
 
 @login_required(login_url='/login/')
 def update(request, id_resep):
@@ -62,13 +72,15 @@ def update(request, id_resep):
         return HttpResponseRedirect('/resep/')
 
     context = {
-        'id_resep' : resep.id_resep,
-        'nama' : resep.nama,
-        'bahan' : resep.bahan,
-        'cara_memasak' : resep.cara_memasak
+        'title': "Update Resep" + resep.nama,
+        'id_resep': resep.id_resep,
+        'nama': resep.nama,
+        'bahan': resep.bahan,
+        'cara_memasak': resep.cara_memasak
 
     }
     return render(request, "update.html", context)
+
 
 @login_required(login_url='/login/')
 def delete(request, id_resep):

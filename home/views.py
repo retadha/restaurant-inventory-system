@@ -15,7 +15,7 @@ def profile_view(request):
     profile = Employee.objects.get(user=request.user)
     gedung = Gedung.objects.all()
     context = {
-        'title': "View Profile",
+        'title': "Profil " + profile.user.username,
         'profile': profile,
         'gedung': gedung,
     }
