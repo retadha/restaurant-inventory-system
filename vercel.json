@@ -14,6 +14,13 @@
             "config": {
                 "distDir": "staticfiles_build"
             }
+        },
+        {
+            "src": "deployment.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "staticfiles_build"
+            }
         }
     ],
     "routes": [

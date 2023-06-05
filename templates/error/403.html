@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bootstrap5 %}
 
 {% block body %}
-<div class="">
-  <h1 class="text-center">Error: Not Authorized</h1>
+<body style="background-color:#CFA098;">
+
+<div class="text-wrapper">
+  <div class="title" data-content="404">
+      403 - ACCESS DENIED
+  </div>
+
+  <div class="subtitle">
+      Oops, You don't have permission to view this page.
+  </div>
+
+  <div class="buttons2">
+      <a class="button" href="/">Go to homepage</a>
+  </div>
 </div>
+
 {% endblock body %}

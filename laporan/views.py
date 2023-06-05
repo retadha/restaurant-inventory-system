@@ -29,6 +29,8 @@ def index(request):
 def pembelian(request):
     statGedung = request.user.employee.id_gedung.status
     gedung = request.user.employee.id_gedung
+    last = Request.objects.latest('approved').approved
+    tahun = datetime.date.today().year
 
     if (not is_manager(request) or statGedung != '0'):
         return render(request, 'error/403.html')
@@ -42,8 +44,10 @@ def pembelian(request):
     total = total_purchase(self=request)
     sup = top_supplier(self=request)
     item = top_item(self=request)
-    month = per_month(self=request)
+    month = per_month_purchase(self=request)
+    items = per_month_items(self=request)
 
+    
     totalStok = inventory.aggregate(Sum('stok')).get('stok__sum')
     context = {
         'title': "Laporan Pembelian " + gedung.nama,
@@ -57,10 +61,12 @@ def pembelian(request):
         'sup': sup,
         'item': item,
         'month': month,
+        'items' : items,
+        'last' : last,
+        'tahun' : tahun,
     }
     template = 'laporan/pembelian.html'
     return render(request, template, context)
-
 
 def waited_orders(self, queryset=None):
     obj = Request.objects.filter(status__exact="0")
@@ -89,9 +95,10 @@ def completed_orders(self, queryset=None):
 def quantity_TBR(self, queryset=None):
     obj = Request.objects.filter(status__exact="2").values_list('id_request')
     jumlah = 0
+    
+    # <!--Menghitung total quantity berdasarkan request yang berstatus processing-->
     for i in obj:
-        stok = Inventory_Line.objects.filter(
-            id_request__exact=i).aggregate(Sum('qty'))['qty__sum']
+        stok = Inventory_Line.objects.filter(id_request__exact=i).aggregate(Sum('qty'))['qty__sum']
         jumlah += stok
 
     if jumlah == None:
@@ -104,6 +111,8 @@ def total_purchase(self, queryset=None):
     obj = Request.objects.filter(
         status='2') | Request.objects.filter(status='3')
     total = 0
+    
+    # <!--Menghitung total harga berdasarkan request yang berstatus processing & completed-->
     for i in obj:
         query = Inventory_Line.objects.filter(id_request__exact=i)
 
@@ -117,32 +126,59 @@ def total_purchase(self, queryset=None):
 
 
 def top_item(self, queryset=None):
-    query = Request.objects.filter(
-        status='2') | Request.objects.filter(status='3')
+    query = Request.objects.filter(status='2') | Request.objects.filter(status='3')
+    
+    qty_dict = dict()
     for i in query:
-        obj = Inventory_Line.objects.filter(id_request__exact=i).annotate(
-            inv=Count('id_inventory_default')).order_by('-inv')[0].inv
-        nama = InventoryDefault.objects.get(id_inventory_default=obj)
-        return nama
+        obj = Inventory_Line.objects.filter(id_request__exact=i)
+        
+        for a in obj:
+            nama = a.id_inventory_default.nama
+            qt = a.qty
+            
+            # <!--Mapping untuk setiap nama inventory dan jumlahnya-->
+            if nama in qty_dict.keys():
+                qty_dict[nama] = qty_dict[nama] + qt
+            else:
+                qty_dict.update({nama: qt})
+                
+                
+    max_value = max(qty_dict.values())
+    item = [k for k,v in qty_dict.items() if v == max_value]
+          
+    return ", ".join(item) 
 
 
 def top_supplier(self, queryset=None):
-    obj = Request.objects.annotate(
-        sup=Count('id_supplier')).order_by('-sup')[0].sup
-    nama = Supplier.objects.get(id_supplier=obj)
-    return nama
+    query = Request.objects.filter(status='2') | Request.objects.filter(status='3')
+    
+    qty_dict = dict()
+    for i in query:
+        namaSupplier = i.id_supplier.nama
+        
+        if namaSupplier in qty_dict.keys():
+                qty_dict[namaSupplier] = qty_dict[namaSupplier] + 1
+        else:
+            qty_dict.update({namaSupplier: 1})
+        
+    max_value = max(qty_dict.values())
+    item = [k for k,v in qty_dict.items() if v == max_value]
+          
+    return ", ".join(item)
 
 
-def per_month(self, queryset=None):
+def per_month_purchase(self, queryset=None):
     arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    obj = Request.objects.annotate(month=ExtractMonth('approved')).values(
+    
+    tahun = datetime.date.today().year
+    
+    obj = Request.objects.filter(approved__year = tahun).annotate(month=ExtractMonth('approved')).values(
         'month').annotate(c=Count('id_request')).values('month', 'c')
 
     for i in range(0, 12):
         for a in obj:
             if a['month'] == i:
-                # arr[i-1] = a['c']
-                obj2 = Request.objects.filter(approved__month=i)
+                obj2 = Request.objects.filter(approved__year = tahun, approved__month=i)
                 total = 0
                 for x in obj2:
                     query = Inventory_Line.objects.filter(id_request__exact=x)
@@ -150,6 +186,35 @@ def per_month(self, queryset=None):
                     for y in query:
                         price = y.qty * y.harga
                         total += price
+
+                    if total == None:
+                        total = 0
+                arr[i-1] = total
+            else:
+                pass
+    arrResult = json.dumps(arr)
+
+    return arrResult
+
+def per_month_items(self, queryset=None):
+    arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    
+    tahun = datetime.date.today().year
+    
+    obj = Request.objects.filter(approved__year = tahun).annotate(month=ExtractMonth('approved')).values(
+        'month').annotate(c=Count('id_request')).values('month', 'c')
+
+    for i in range(0, 12):
+        for a in obj:
+            if a['month'] == i:
+                obj2 = Request.objects.filter(approved__year = tahun, approved__month=i)
+                total = 0
+                for x in obj2:
+                    query = Inventory_Line.objects.filter(id_request__exact=x)
+
+                    for y in query:
+                        jumlah = y.qty 
+                        total += jumlah
 
                     if total == None:
                         total = 0

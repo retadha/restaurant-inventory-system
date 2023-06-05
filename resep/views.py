@@ -6,7 +6,6 @@ from .models import Resep
 from django.contrib.auth.decorators import login_required
 from propensi.utils import is_restoran
 
-
 @login_required(login_url='/login/')
 def create(request):
     if (is_restoran(request) == False):
@@ -16,15 +15,14 @@ def create(request):
         if add.is_valid():
             namaResep = add.cleaned_data.get('nama')
             add.save()
-        messages.success(request, f'Resep {namaResep} berhasil dibuat.')
-        return redirect("resep:list")
+            messages.success(request, f'Resep {namaResep} berhasil dibuat.')
+            return redirect("resep:list")
+        else:
+            messages.error(
+                request, f'Input gagal. Resep {add.instance.nama} sudah terdaftar.')
+            return redirect("resep:list")
     add = ResepForm()
-    context = {
-        'title': "Buat Resep",
-        'form': add
-    }
-    return render(request, 'create.html', context)
-
+    return render(request, 'create.html', {'form':add})
 
 @login_required(login_url='/login/')
 def list(request):
@@ -32,11 +30,9 @@ def list(request):
         return render(request, 'error/403.html')
     daftar_resep = Resep.objects.all()
     context = {
-        'title': "Daftar Resep",
-        "daftar_resep": daftar_resep
+        "daftar_resep" : daftar_resep
     }
     return render(request, 'list.html', context)
-
 
 @login_required(login_url='/login/')
 def view(request, id_resep):
@@ -44,14 +40,12 @@ def view(request, id_resep):
         return render(request, 'error/403.html')
     resep = Resep.objects.get(pk=id_resep)
     context = {
-        'title': "Resep " + resep.nama,
-        "id_resep": resep.id_resep,
-        "nama": resep.nama,
-        "bahan": resep.bahan,
-        "cara_memasak": resep.cara_memasak
+        "id_resep" : resep.id_resep,
+        "nama" : resep.nama,
+        "bahan" : resep.bahan,
+        "cara_memasak" : resep.cara_memasak
     }
     return render(request, 'view.html', context)
-
 
 @login_required(login_url='/login/')
 def update(request, id_resep):
@@ -72,15 +66,13 @@ def update(request, id_resep):
         return HttpResponseRedirect('/resep/')
 
     context = {
-        'title': "Update Resep" + resep.nama,
-        'id_resep': resep.id_resep,
-        'nama': resep.nama,
-        'bahan': resep.bahan,
-        'cara_memasak': resep.cara_memasak
+        'id_resep' : resep.id_resep,
+        'nama' : resep.nama,
+        'bahan' : resep.bahan,
+        'cara_memasak' : resep.cara_memasak
 
     }
     return render(request, "update.html", context)
-
 
 @login_required(login_url='/login/')
 def delete(request, id_resep):

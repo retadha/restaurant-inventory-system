@@ -24,12 +24,7 @@ def list(request):
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
-
     context = {
-        "title": "Daftar Request",
         "requests": requests,
         "is_restoran": is_restoran(request),
         "pic": employee.nama,
@@ -37,10 +32,8 @@ def list(request):
         'suppliers': suppliers,
         'employees': employees,
         'inventory_lines': inventory_lines,
-        # 'gedung': gedung,
-        # 'manager_gedung_pusat': manager_gedung_pusat
     }
-
+    
     return render(request, 'request/list.html', context)
 
 
@@ -130,29 +123,34 @@ def to_process(request):
 def process(request, id_request):
     try:
         inv_request = Request.objects.get(pk=id_request)
-        inv_request.status = "2"  # PROCESSING
-        inv_request.save()
+        gedung = Gedung.objects.get(id_gedung=inv_request.id_gedung.id_gedung)  # Gudang Pusat
+        list_inv_gudang = gedung.inventory_set.all()
+
+        for line in inv_request.get_lines:
+            inv_gudang = list_inv_gudang.get(default=line.id_inventory_default)
+            inv_gudang.stok -= line.qty
+            if inv_gudang.stok < 0:
+                messages.error(request, f'Inventori gudang tidak mencukupi untuk menangani request {inv_request.token}')
+                return redirect("request:to_process")
+            inv_gudang.save()
+
+        request.session['send_wa'] = True
+        request.session['phone'] = "62" + inv_request.pic.nohp[1:]
+        request.session['msg'] = quote(request_detail(inv_request, "Request sedang diproses oleh Gudang Pusat"))
+
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
 
-    gedung = Gedung.objects.get(
-        id_gedung=inv_request.id_gedung.id_gedung)  # Gudang Pusat
-    list_inv_gudang = gedung.inventory_set.all()
+    inv_request.status = "2"  # PROCESSING
+    inv_request.save()
 
-    for line in inv_request.get_lines:
-        inv_gudang = list_inv_gudang.get(default=line.id_inventory_default)
-        inv_gudang.stok -= line.qty
-        inv_gudang.save()
-
-    # Whatsapp
-    request.session['send_wa'] = True
-    request.session['phone'] = "62" + inv_request.pic.nohp[1:]
-    request.session['msg'] = quote(request_detail(inv_request, "Request sedang diproses oleh Gudang Pusat"))
-    
     messages.success(request, f'Request {inv_request.token} telah diproses')
     return redirect("request:to_process")
 
+
 # Gudang melakukan konfirmasi bahwa supplier bisa memproses request gudang
+
+
 @login_required(login_url='/login/')
 def supplier_process(request, id_request):
     try:
@@ -161,6 +159,8 @@ def supplier_process(request, id_request):
         inv_request.save()
     except Request.DoesNotExist:
         raise Http404("Objek tidak ditemukan")
+
+
 
     messages.success(
         request, f'Request {inv_request.token} sedang diproses oleh supplier')
@@ -225,12 +225,9 @@ def create(request):
     employees = Employee.objects.all()
     inventory_lines = Inventory_Line.objects.all()
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
+
 
     context = {
-        "title": "Buat Request",
         "is_restoran": is_restoran(request),
         "pic": employee.nama,
         "inventoryDefault": inventoryDefault,
@@ -238,7 +235,6 @@ def create(request):
         'employees': employees,
         'inventory_lines': inventory_lines,
         'gedung': gedung,
-        # 'manager_gedung_pusat': manager_gedung_pusat
     }
 
     if (request.method == 'POST'):
@@ -295,10 +291,6 @@ def update(request, id_request):
     suppliers = Supplier.objects.all()
     inventory_lines = Inventory_Line.objects.filter(id_request=inv_request)
 
-    # gedung_pusat = Gedung.objects.get(status='0')
-    # manager_gedung_pusat = Employee.objects.get(
-    #     role='0', id_gedung=gedung_pusat).nama
-
     context = {
         "inv_request": inv_request,
         "is_restoran": is_restoran(request),
@@ -306,7 +298,6 @@ def update(request, id_request):
         'suppliers': suppliers,
         'gedung': gedung,
         'inventory_lines': inventory_lines,
-        # 'manager_gedung_pusat': manager_gedung_pusat
     }
 
     if (request.method == 'POST'):
@@ -344,7 +335,7 @@ def update(request, id_request):
         messages.success(
             request, f'Request {inv_request.token} berhasil diperbarui')
         employee = Employee.objects.get(user=request.user)
-        if employee.id_gedung.get_status_display() == "GUDANG PUSAT":
+        if employee.id_gedung.get_status_display() == "GUDANG PUSAT" and inv_request.pic.id_gedung.get_status_display() == "RESTORAN":
             return redirect("request:to_process")
 
         return redirect("request:list")

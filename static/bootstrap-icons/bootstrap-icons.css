@@ -1,0 +1,43 @@
+@font-face {
+  font-display: block;
+  font-family: "bootstrap-icons";
+  src: url("./fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf") format("woff2"),
+url("./fonts/bootstrap-icons.woff?8d200481aa7f02a2d63a331fc782cfaf") format("woff");
+}
+
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+  display: inline-block;
+  font-family: bootstrap-icons !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bi-cart::before { content: "\f242"; }
+.bi-list::before { content: "\f479"; }
+.bi-plus-lg::before { content: "\f64d"; }
+.bi-box-seam::before { content: "\f1c7"; }
+.bi-box-seam-fill::before { content: "\f7d3"; }
+.bi-send-exclamation::before { content: "\f6b8"; }
+.bi-ui-checks::before { content: "\f5f9"; }
+.bi-graph-up-arrow::before { content: "\f673"; }
+.bi-briefcase-fill::before { content: "\f1cb"; }
+.bi-filter-square-fill::before { content: "\f3c8"; }
+.bi-people-fill::before { content: "\f4cf"; }
+.bi-building::before { content: "\f1dd"; }
+.bi-file-earmark-plus::before { content: "\f37d"; }
+.bi-info-circle::before { content: "\f431"; }
+.bi-pencil::before { content: "\f4cb"; }
+.bi-trash::before { content: "\f5de"; }
+.bi-person-circle::before { content: "\f4d7"; }
+.bi-pencil-square::before { content: "\f4ca"; }
+.bi-arrow-counterclockwise::before { content: "\f117"; }
+.bi-file-bar-graph-fill::before { content: "\f349"; }
+.bi-cart-check-fill::before { content: "\f239"; }

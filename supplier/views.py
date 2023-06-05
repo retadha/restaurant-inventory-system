@@ -25,7 +25,6 @@ def create_supplier(request):
 
 
 def list_supplier(request):
-    # print(auth_gedung_pusat(request))
     if (auth_gedung_pusat(request) == False):
         return render(request, 'error/403.html')
     suppliers = Supplier.objects.all()

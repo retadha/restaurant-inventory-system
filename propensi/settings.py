@@ -94,12 +94,8 @@ WSGI_APPLICATION = 'propensi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'y98!-H!.?K7AiU!r',
-        'HOST': 'db.dxrndptogyolzmdcgbye.supabase.co',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

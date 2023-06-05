@@ -1,89 +1,41 @@
 {% extends 'base.html' %} {% load static %} {% block body %}
 <div class="d-flex flex-column gap-4">
-  <h1 class="">Welcome, {{ username }}</h1>
-  <div class="container text-center">
-    <div class="row">
-      {% if role == '0' or role == '1' %}
-      <div class="col">
-        <a href="/inventory/">
-          <button class="btn btn-primary">
-            <div class="d-flex flex-col">
-              <p class="m-0">Inventory</p>
-            </div>
-          </button>
-        </a>
-      </div>
-      <div class="col">
-        <a href="/request/">
-          <button class="btn btn-primary">
-            <div class="d-flex flex-col">
-              <p class="m-0">Request</p>
-            </div>
-          </button>
-        </a>
-      </div>
-      {% if role == '0' %}
-      <div class="col">
-        <a href="#">
-          <button class="btn btn-primary">
-            <div class="d-flex flex-col">
-              <p class="m-0">Riwayat</p>
-            </div>
-          </button>
-        </a>
-      </div>
-      <div class="col">
-        <a href="#">
-          <button class="btn btn-primary">
-            <div class="d-flex flex-col">
-              <p class="m-0">Laporan</p>
-            </div>
-          </button>
-        </a>
-      </div>
-      {% endif %}
-      {% if gedung == '0' %}
-      <div class="col">
-        <a href="/supplier/">
-          <button class="btn btn-primary">
-            <div class="d-flex flex-col">
-              <p class="m-0">Supplier</p>
-            </div>
-          </button>
-        </a>
-      </div>
-      {% elif gedung == '1' %}
-      <div class="col">
-        <a href="/resep/">
-          <button class="btn btn-primary">
-            <div class="d-flex flex-col">
-              <p class="m-0">Resep</p>
-            </div>
-          </button>
-        </a>
-      </div>
-      {% endif %}
-      {% elif role == '2' %}
-      <div class="col">
-        <a href="/employee/">
-          <button class="btn btn-primary">
-            <div class="d-flex flex-col">
-              <p class="m-0">Karyawan</p>
-            </div>
-          </button>
-        </a>
-      </div>
-      <div class="col">
-        <a href="/gedung/">
-          <button class="btn btn-primary">
-            <div class="d-flex flex-col">
-              <p class="m-0">Gedung</p>
-            </div>
-          </button>
-        </a>
-      </div>
-      {% endif %}
-    </div>
-  </div>
+  <h1 class="">Welcome, <span>{{ username }}</span>.</h1>
+</div>
+
+<div class="LP-menu__container">
+  {% if role == '0' or role == '1' %}
+  <div class="LP-menu__button">
+    <a href="/inventory/" class="icon" /><i class="bi bi-box-seam-fill" style="font-size: 3rem;"></i></a><center>
+    INVENTORY</center></div>
+  <div class="LP-menu__button">
+    <a href="/request/" class="icon" /><i class="bi bi-send-exclamation" style="font-size: 3rem;"></i></a><center>
+    REQUEST</center></div>
+  {% if role == '0' %}
+  <div class="LP-menu__button">
+    <a href="/riwayat/" class="icon" /><i class="bi bi-ui-checks" style="font-size: 3rem;"></i></a><center>
+    RIWAYAT</center></div>
+  <div class="LP-menu__button">
+    <a href="/laporan/" class="icon" /><i class="bi bi-graph-up-arrow" style="font-size: 3rem;"></i></a><center>
+    LAPORAN</center></div>
+  {% endif %}
+  {% if gedung == '0' %}
+  <div class="LP-menu__button">
+    <a href="/supplier/" class="icon" /><i class="bi bi-briefcase-fill" style="font-size: 3rem;"></i></a><center>
+    SUPPLIER</center></div>
+  {% elif gedung == '1' %}
+  <div class="LP-menu__button">
+    <a href="/resep/" class="icon" /><i class="bi bi-filter-square-fill" style="font-size: 3rem;"></i></a><center>
+    RESEP</center></div>
+  {% endif %}
+  {% elif role == '2' %}
+  <div class="LP-menu__button">
+    <a href="/employee/" class="icon" /><i class="bi bi-people-fill" style="font-size: 3rem;"></i></a><center>
+    KARYAWAN</center></div>
+  <div class="LP-menu__button">
+    <a href="/gedung/" class="icon" /><i class="bi bi-building" style="font-size: 3rem;"></i></a><center>
+    GEDUNG</center></div>
+  {% endif %}
 </div>
 {% endblock body %}
+

@@ -29,14 +29,14 @@
                     {% endif %}
 
                     <!--Modal Create-->
-                    <div class="d-flex gap-1">
+                    <div class="d-flex">
                         {% if is_restoran == False %}
                         <div class="btn" style="color: inherit; text-decoration: none">
-                            <a class="btn" href="/request/to_process" style="background: #987554; color: white" role="button">Request dari Restaurant</a>
+                            <a class="btn" href="/request/to_process" style="background: #987554; color: white" role="button"><i class="bi bi-send-exclamation"></i> Request dari Restaurant</a>
                         </div>
                         {% endif %}
                         <div class="btn" style="color: inherit; text-decoration: none">
-                            <a class="btn" href="{% url 'request:create' %}" style="background: #987554; color: white" role="button">Buat Request</a>
+                            <a class="btn" href="{% url 'request:create' %}" style="background: #987554; color: white" role="button"><i class="bi bi-plus-lg"></i> Buat Request</a>
                         </div>
                     </div>
                         <div class="modal fade" id="createRequest" tabindex="-1" role="dialog">
@@ -111,7 +111,7 @@
                   <thead>
                     <tr>
                       <th class="text-center" scope="col">#</th>
-                      <th class="text-center" scope="col">Token</th>
+                      <th class="text-center" scope="col">ID Pemesanan</th>
                       <th class="text-center" scope="col">Dikirim</th>
                       <th class="text-center" scope="col">Diterima</th>
                       <th class="text-center" scope="col">PIC Request</th>
@@ -156,8 +156,7 @@
 
 {#                        #A Tombol lihat detail#}
                           <td class="d-flex justify-content-center gap-5">
-                              <div class="btn" data-bs-toggle="modal" data-bs-target="#detail{{request.id_request}}" style="color: inherit; text-decoration: none">
-                                <img src="{% static 'logo/detail.png'  %}" alt="" width="18" height="18">
+                              <div class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#detail{{request.id_request}}" style="color: inherit; text-decoration: none"><i class="bi bi-list"></i>
                               </div>
                           </td>
                         </tr>
@@ -194,7 +193,7 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Kembali</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
 
 {#                                            #A1 Tombol batalkan buat request#}
                                             {% if request.get_status_display == 'WAITING FOR APPROVAL' %}
@@ -211,18 +210,16 @@
 {#                                                A2 Tombol update request#}
                                                 <a
                                                 id="updatee"
-                                                type="button"
                                                 href="{% url 'request:update' request.id_request %}"
-                                                class="btn btn-success"
+                                                class="btn btn-outline-warning"
                                                 >
                                                     Update
                                                 </a>
 
 {#                                                #A3 Tombol kirim request#}
                                                 <a
-                                                type="button"
                                                 href="#"
-                                                class="btn btn-primary"
+                                                class="btn btn-outline-warning"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#confirm{{request.id_request}}"
                                                 >
@@ -233,9 +230,17 @@
 {#                                            #A4 Tombol terima request#}
                                             {% if request.get_status_display == 'SUBMITTING' and is_restoran == False %}
                                                 <a
+                                                id="updatee"
+                                                type="button"
+                                                href="{% url 'request:update' request.id_request %}"
+                                                class="btn btn-success"
+                                                >
+                                                    Update
+                                                </a>
+                                                <a
                                                 type="button"
                                                 href="#"
-                                                class="btn btn-primary"
+                                                class="btn btn-outline-warning"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#process{{request.id_request}}"
                                                 >
@@ -246,13 +251,13 @@
 {#                                            #A5 Tombol terima request#}
                                             {% if request.get_status_display == 'PROCESSING' %}
                                                 <a
-                                                type="button"
+                                                type="buttonS"
                                                 href="#"
-                                                class="btn btn-primary"
+                                                class="btn btn-outline-success"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#receive{{request.id_request}}"
                                                 >
-                                                    Terima
+                                                    BARANG DITERIMA
                                                 </a>
                                             {% endif %}
 
@@ -278,7 +283,7 @@
                                             <div class="modal-footer">
                                                 <button
                                                     type="button"
-                                                    class="btn btn-outline-dark"
+                                                    class="btn btn-secondary"
     {#                                                data-bs-dismiss="modal"#}
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#detail{{request.id_request}}"
@@ -361,7 +366,7 @@
                                 
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Kembali</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                                                     <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
                                                 </div>
                                             </form>
@@ -383,7 +388,7 @@
                                         <div class="modal-footer">
                                             <button
                                                 type="button"
-                                                class="btn btn-outline-dark"
+                                                class="btn btn-secondary"
 {#                                                data-bs-dismiss="modal"#}
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#detail{{request.id_request}}"
@@ -411,7 +416,7 @@
                                         <div class="modal-footer">
                                             <button
                                                 type="button"
-                                                class="btn btn-outline-dark"
+                                                class="btn btn-secondary"
 {#                                                data-bs-dismiss="modal"#}
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#detail{{request.id_request}}"
@@ -439,7 +444,7 @@
                                         <div class="modal-footer">
                                             <button
                                                 type="button"
-                                                class="btn btn-outline-dark"
+                                                class="btn btn-secondary"
 {#                                                data-bs-dismiss="modal"#}
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#detail{{request.id_request}}"

@@ -1,0 +1,270 @@
+Date: 17/4/2023
+Time: 10:38
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 10:39
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 10:41
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 10:41
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 10:45
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 10:50
+Phone Number: +6287770158205
+Message: cek
+--------------------
+Date: 17/4/2023
+Time: 10:52
+Phone Number: +6287770158205
+Message: cek
+--------------------
+Date: 17/4/2023
+Time: 10:54
+Phone Number: +6287770158205
+Message: cek
+--------------------
+Date: 17/4/2023
+Time: 10:55
+Phone Number: +6287770158205
+Message: cek
+--------------------
+Date: 17/4/2023
+Time: 10:58
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:1
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:3
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:8
+Phone Number: wa_supplier
+Message: cek
+--------------------
+Date: 17/4/2023
+Time: 11:8
+Phone Number: wa_supplier
+Message: cek
+--------------------
+Date: 17/4/2023
+Time: 11:8
+Phone Number: wa_supplier
+Message: cek
+--------------------
+Date: 17/4/2023
+Time: 11:14
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:14
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:14
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:17
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:20
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:22
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:24
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:25
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:25
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:28
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:29
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:29
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:31
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:31
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 17/4/2023
+Time: 11:32
+Phone Number: +6287770158205
+Message: Cek
+--------------------
+Date: 26/4/2023
+Time: 5:29
+Phone Number: +62895417879080
+Message: test
+--------------------
+Date: 1/5/2023
+Time: 21:17
+Phone Number: +6287882154944
+Message: Howdy! This message will be sent instantly! Halo apa kabar? Hai aku baik baik saja
+--------------------
+Date: 1/5/2023
+Time: 21:19
+Phone Number: +6287882154944
+Message: Howdy! This message will be sent instantly! Halo apa kabar? 2 Hai aku baik baik saja
+--------------------
+Date: 1/5/2023
+Time: 21:35
+Phone Number: +6287882154944
+Message: None
+--------------------
+Date: 1/5/2023
+Time: 21:36
+Phone Number: +6287882154944
+Message: None
+--------------------
+Date: 1/5/2023
+Time: 21:38
+Phone Number: +6287882154944
+Message: None
+--------------------
+Date: 1/5/2023
+Time: 22:9
+Phone Number: +6287882154944
+Message: Request Inventory 7CNTT ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 22:08:56.019652 Detail : Ayam @Rp100.000 x 2 kg Total Harga : 200.000
+--------------------
+Date: 1/5/2023
+Time: 22:37
+Phone Number: +6287882154944
+Message: Request Inventory 2JLFP ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 22:37:14.147802 Detail : Ayam @Rp100000.000 x 2 kg Total Harga : 200000.000
+--------------------
+Date: 1/5/2023
+Time: 22:39
+Phone Number: +6287882154944
+Message: Request Inventory 2JLFP ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 22:37:14.147802 Detail : Ayam @Rp100000.000 x 2 kg Total Harga : 200000.000
+--------------------
+Date: 1/5/2023
+Time: 22:46
+Phone Number: +6287882154944
+Message: None Request Inventory AX2U3 ================================= Gedung : Gudang Pusat PIC : staff.gudang1 Dibuat : 2023-05-01 22:46:24.646436 Detail : Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 1/5/2023
+Time: 22:59
+Phone Number: +6287882154944
+Message: Inventory Request Baru Request Inventory BYDCN ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 22:58:46.494031 Detail : Total Harga : 0
+--------------------
+Date: 1/5/2023
+Time: 23:1
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory BYDCN ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 22:58:46.494031 Detail : Total Harga : 0
+--------------------
+Date: 1/5/2023
+Time: 23:4
+Phone Number: +6287882154944
+Message: Inventory Request Baru Request Inventory HLTNW ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:04 Detail : Total Harga : 0
+--------------------
+Date: 1/5/2023
+Time: 23:31
+Phone Number: +6287882154944
+Message: Inventory Request Baru Request Inventory QY56R ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:31 Detail yang diproses: Ayam @Rp100.000 x 3 kg Total Harga : 300.000
+--------------------
+Date: 1/5/2023
+Time: 23:32
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory HLTNW ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:04 Detail yang diproses: Total Harga : 0
+--------------------
+Date: 1/5/2023
+Time: 23:36
+Phone Number: +6287882154944
+Message: Request sedang diproses oleh Gudang Pusat Request Inventory QY56R ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:31 Detail yang diproses: Ayam @Rp100.000 x 3 kg Total Harga : 300.000
+--------------------
+Date: 1/5/2023
+Time: 23:43
+Phone Number: +6287882154944
+Message: Inventory Request Baru Request Inventory DULPL ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:42 Detail yang diproses: Ayam @Rp100.000 x 2 kg Total Harga : 200.000
+--------------------
+Date: 1/5/2023
+Time: 23:44
+Phone Number: +6287882154944
+Message: Request sedang diproses oleh Gudang Pusat Request Inventory DULPL ================================= Gedung : RESTORAN 1 PIC : staff.resto1 Dibuat : 2023-05-01 23:42 Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 1/5/2023
+Time: 23:46
+Phone Number: +6287882154944
+Message: Inventory Request Baru Request Inventory DULPL ================================= Gedung : Gudang Pusat PIC : staff.gudang1 Dibuat : 2023-05-01 23:46 Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 21/5/2023
+Time: 10:57
+Phone Number: +6287882154944
+Message: Inventory Request Baru Request Inventory E5BE4 ================================= Gedung : Resto 1 PIC : staff.resto1 Dibuat : 2023-05-21 10:57 Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 21/5/2023
+Time: 10:57
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory E5BE4 ================================= Gedung : Resto 1 PIC : staff.resto1 Dibuat : 2023-05-21 10:57 Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 22/5/2023
+Time: 21:18
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory VT6G9 ================================= Gedung : Gudang Pusat PIC : manajer.gudang Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 22/5/2023
+Time: 21:18
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory VT6G9 ================================= Gedung : Gudang Pusat PIC : manajer.gudang Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------
+Date: 22/5/2023
+Time: 21:19
+Phone Number: +6287882154944
+Message: Request Ditolak Request Inventory LUDX4 ================================= Gedung : Gudang Pusat PIC : manajer.gudang Detail yang diproses: Ayam @Rp100.000 x 1 kg Total Harga : 100.000
+--------------------

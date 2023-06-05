@@ -9,11 +9,13 @@ from propensi.utils import is_restoran, is_manager, is_staff
 
 @login_required(login_url='/login/')
 def list_inventory_default(request):
-    if (not is_manager(request) and not is_staff(request)):
+    statGedung = request.user.employee.id_gedung.status
+
+    if (not is_manager(request) or statGedung != '0'):
         return render(request, 'error/403.html')
     inventory_def = InventoryDefault.objects.all()
     data = {
-        'title': "Daftar Inventory Default",
+        'title': "List Inventory Default",
         "inventory": inventory_def,
     }
     return render(request, 'list_inventory_default.html', data)
@@ -34,12 +36,27 @@ def create_inventory_default(request):
             return redirect('inventory_default:list_inventory_default')
 
     add = InventoryDefaultForm()
-    context = {
-        'title': "Buat Inventory Baru",
-        'form': add
-    }
-    return render(request, 'create_inventory_default.html', context)
+    return render(request, 'list_inventory_default.html', {'form': add})
 
+@login_required(login_url='/login/')
+def update(request, id_inventory_default):
+    if request.method == 'POST':
+        nama = request.POST['nama']
+        satuan = request.POST['satuan']
+        harga = request.POST['harga']
+        try:
+            inv_default= InventoryDefault.objects.get(pk=id_inventory_default)
+            inv_default.nama = nama
+            inv_default.satuan = satuan
+            inv_default.harga = harga
+            inv_default.save()
+            messages.success(request, f'Data default {nama} berhasil diperbarui')
+            return redirect('inventory_default:list_inventory_default')
+        except:
+            messages.error(request, f'Data inventory default gagal diperbarui')
+            return redirect('inventory_default:list_inventory_default')
+
+    return redirect('/inventory_default/')
 
 @login_required(login_url='/login/')
 def delete(request, id_inventory_default):

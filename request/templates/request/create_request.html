@@ -43,7 +43,7 @@
                               <thead>
                                 <tr>
                                   <th>Barang</th>
-                                  <th>Harga (dalam ribuan) / satuan</th>
+                                  <th>Harga / satuan</th>
                                   <th>Kuantitas</th>
                                   <th></th>
                                 </tr>
@@ -53,12 +53,12 @@
                                             <td>
                                                 <select class="form-select" name="item-name" id="item" required>
                                                     {% for item in inventoryDefault %}
-                                                    <option value="{{ item.id_inventory_default }}">{{ item.nama }}</option>
+                                                    <option value="{{ item.id_inventory_default }}" data-price="{{ item.harga }}">{{ item.nama }}</option>
                                                     {% endfor %}
                                                     </select>
                                             </td>
                                             <td>
-                                                <input class="form-control item-price" type="number" name="item-price" placeholder="Harga" required>
+                                                <input class="form-control item-price" type="number" name="item-price" placeholder="Harga" value="" required>
                                             </td>
                                             <td>
                                                 <input class="form-control item-quantity" type="number" name="item-quantity" placeholder="Kuantitas" required>
@@ -74,7 +74,7 @@
                         <br>
                         <button type="button" class="btn btn-outline-primary add-item">Tambahkan Barang</button>
                         <br><br>
-                        <a type="button" class="btn btn-outline-dark" href="{% url 'request:list' %}">Batal</a>
+                        <a class="btn btn-outline-dark" href="{% url 'request:list' %}">Batal</a>
                         <button class="btn" type="submit" style="background: #987554; color: white">Simpan</button>
                 </form>
             </div>
@@ -107,6 +107,9 @@
             newItemForm.find(".item-quantity").val("");
             newItemForm.appendTo("#inventory-form");
             updateRemoveButtonState();
+
+            // Trigger change event on item name select elements in the new form
+            newItemForm.find(".form-select").trigger("change");
         });
 
         // Remove item form
@@ -127,6 +130,17 @@
         
         // Initialize remove button state
         updateRemoveButtonState();
+
+        // Update price on item select
+        $("#inventory-form").on("change", ".form-select", function() {
+            var selectedOption = $(this).find("option:selected");
+            var priceInput = $(this).closest("tr").find(".item-price");
+            var price = selectedOption.attr("data-price");
+            priceInput.val(price);
+        });
+
+        // Trigger change event on item name select elements
+        $(".form-select").trigger("change");
 
     });
     </script>

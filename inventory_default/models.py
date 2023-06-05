@@ -16,7 +16,7 @@ class InventoryDefault(models.Model):
         super().save(*args, **kwargs)
         ged = list(Gedung.objects.values_list('id_gedung', flat=True))
         for a in ged:
-            Inventory.objects.create(
+            Inventory.objects.update_or_create(
                 default_id = self.id_inventory_default,
                 stok = 0,
                 threshold = 0,

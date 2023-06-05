@@ -5,16 +5,19 @@
     <a href="#">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn"
+        style="background: #987554; color: white"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
-      >
+      ><i class="bi bi-file-earmark-plus"></i>
         Export dari POS
       </button>
     </a>
+    {% if request.user.employee.role == '0' and request.user.employee.id_gedung.status == '0' %}
     <a href="/inventory_default/">
-      <button class="btn btn-primary">Inventory Default</button>
+      <button class="btn" style="background: #987554; color: white"><i class="bi bi-box-seam"></i> Inventory Default</button>
     </a>
+    {% endif %}
     {% if gedung == '0' %}
     {% endif %}
     <!-- <a href="#">
@@ -110,7 +113,7 @@
       <th>Stok</th>
       <th>Threshold</th>
       <th>Harga</th>
-      <th>Action</th>
+      <th class="justify-content-center text-center">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -120,15 +123,15 @@
       <td>{{ item.stok }}</td>
       <td>{{ item.threshold }}</td>
       <td>Rp{{ item.default.harga|stringformat:"d"|intcomma }}</td>
-      <td>
-        <a href="#" class="btn btn-primary">Details</a>
+      <td class="d-flex justify-content-center gap-1">
+        <a href="#" class="btn btn-info"><i class="bi bi-info-circle"></i></a>
         <div
           class="btn btn-warning"
           data-bs-toggle="modal"
           data-bs-target="#update{{item.id_inventory}}"
           style="color: inherit; text-decoration: none"
-        >
-          Update
+        ><i class="bi bi-pencil"></i>
+          
         </div>
         <!-- <a href="#" class="btn btn-danger">Delete</a> -->
 
@@ -180,7 +183,7 @@
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-outline-dark"
+                  class="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Kembali
@@ -232,10 +235,10 @@
                 </div>
                 <div class="modal-footer">
                   <div
-                    class="btn btn-outline-dark"
+                    class="btn btn-secondary"
                     data-bs-toggle="modal"
                     data-bs-target="#update{{item.id_inventory}}"
-                    style="color: inherit; text-decoration: none"
+                    style="color: white; text-decoration: none"
                   >
                     Kembali
                   </div>
@@ -294,10 +297,10 @@
                 </div>
                 <div class="modal-footer">
                   <div
-                    class="btn btn-outline-dark"
+                    class="btn btn-secondary"
                     data-bs-toggle="modal"
                     data-bs-target="#update{{item.id_inventory}}"
-                    style="color: inherit; text-decoration: none"
+                    style="color: white; text-decoration: none"
                   >
                     Kembali
                   </div>
