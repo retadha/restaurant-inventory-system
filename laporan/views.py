@@ -29,6 +29,8 @@ def index(request):
 def pembelian(request):
     statGedung = request.user.employee.id_gedung.status
     gedung = request.user.employee.id_gedung
+    last = Request.objects.latest('approved').approved
+    tahun = datetime.date.today().year
 
     if (not is_manager(request) or statGedung != '0'):
         return render(request, 'error/403.html')
@@ -45,6 +47,7 @@ def pembelian(request):
     month = per_month_purchase(self=request)
     items = per_month_items(self=request)
 
+    
     totalStok = inventory.aggregate(Sum('stok')).get('stok__sum')
     context = {
         'title': "Laporan Pembelian " + gedung.nama,
@@ -59,10 +62,11 @@ def pembelian(request):
         'item': item,
         'month': month,
         'items' : items,
+        'last' : last,
+        'tahun' : tahun,
     }
     template = 'laporan/pembelian.html'
     return render(request, template, context)
-
 
 def waited_orders(self, queryset=None):
     obj = Request.objects.filter(status__exact="0")
@@ -165,13 +169,16 @@ def top_supplier(self, queryset=None):
 
 def per_month_purchase(self, queryset=None):
     arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    obj = Request.objects.annotate(month=ExtractMonth('approved')).values(
+    
+    tahun = datetime.date.today().year
+    
+    obj = Request.objects.filter(approved__year = tahun).annotate(month=ExtractMonth('approved')).values(
         'month').annotate(c=Count('id_request')).values('month', 'c')
 
     for i in range(0, 12):
         for a in obj:
             if a['month'] == i:
-                obj2 = Request.objects.filter(approved__month=i)
+                obj2 = Request.objects.filter(approved__year = tahun, approved__month=i)
                 total = 0
                 for x in obj2:
                     query = Inventory_Line.objects.filter(id_request__exact=x)
@@ -191,13 +198,16 @@ def per_month_purchase(self, queryset=None):
 
 def per_month_items(self, queryset=None):
     arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    obj = Request.objects.annotate(month=ExtractMonth('approved')).values(
+    
+    tahun = datetime.date.today().year
+    
+    obj = Request.objects.filter(approved__year = tahun).annotate(month=ExtractMonth('approved')).values(
         'month').annotate(c=Count('id_request')).values('month', 'c')
 
     for i in range(0, 12):
         for a in obj:
             if a['month'] == i:
-                obj2 = Request.objects.filter(approved__month=i)
+                obj2 = Request.objects.filter(approved__year = tahun, approved__month=i)
                 total = 0
                 for x in obj2:
                     query = Inventory_Line.objects.filter(id_request__exact=x)
