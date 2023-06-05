@@ -2,8 +2,7 @@
 <div class="d-flex justify-content-between py-2">
   <h2>List Gedung</h2>
   <a href="#">
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-      + Gedung
+    <button class="btn" style="background: #987554; color: white"  data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-plus-lg"></i> Gedung
     </button>
   </a>
 
@@ -61,7 +60,7 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Kembali
             </button>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn" style="background: #987554; color: white" >
               Simpan
             </button>
           </div>
@@ -100,7 +99,7 @@
       <th>Nama</th>
       <th>Status</th>
       <th>Alamat</th>
-      <th>Action</th>
+      <th class="d-flex justify-content-center text-center">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -116,11 +115,11 @@
         {% endif %}
       </td>
       <td>{{ item.alamat }}</td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal"
+      <td class="d-flex justify-content-center gap-1">
+        {% comment %} <button class="btn btn-info" data-bs-toggle="modal"
         data-bs-target="#detailModal_{{item.id_gedung}}">
-          Details
-        </button>
+        <i class="bi bi-info-circle"></i>
+        </button> {% endcomment %}
         <div
           class="modal fade"
           id="detailModal_{{item.id_gedung}}"
@@ -156,9 +155,9 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary" data-bs-toggle="modal"
+        <button class="btn btn-warning" data-bs-toggle="modal"
         data-bs-target="#updateModal_{{item.id_gedung}}">
-          Update
+        <i class="bi bi-pencil"></i>
         </button>
         <div
           class="modal fade"
@@ -233,7 +232,8 @@
                   </button>
                   <button
                     type="submit"
-                    class="btn btn-primary"
+                    class="btn"
+                    style="background: #987554;color: white"
                     data-bs-dismiss="modal"
                   >
                     Update
@@ -245,11 +245,11 @@
         </div>
 
         <button
-          class="btn btn-outline-danger"
+          class="btn btn-danger"
           data-bs-toggle="modal"
           data-bs-target="#deleteModal_{{item.id_gedung}}"
         >
-          Delete
+        <i class="bi bi-trash"></i>
         </button>
         <div
           class="modal fade"
@@ -271,7 +271,7 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">Yakin hapus {{item.nama}}?</div>
+              <div class="modal-body">Apakah Anda yakin ingin menghapus Gedung {{item.nama}}?</div>
               <div class="modal-footer">
                 <button
                   type="button"

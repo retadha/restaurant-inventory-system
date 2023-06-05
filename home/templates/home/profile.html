@@ -33,12 +33,6 @@
                 {% elif request.user.user_profile.role == '2' %} Admin
                 {% endif%}
               </h3>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
             </div>
           </div>
 
@@ -98,7 +92,7 @@
                 </div>
 
       <div class="text-center" data-bs-toggle="modal" data-bs-target="#modify{{profile}}">
-          <a class="btn" style="background: #987554; color: white; ">Edit Profile</a>
+          <a class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit Profile</a>
       </div>
 
       <!--Modal Modify-->   
@@ -107,8 +101,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                   </button>
                 </div>
                 <form action="/edit_profile/" method="POST">
