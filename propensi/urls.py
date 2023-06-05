@@ -15,5 +15,5 @@ urlpatterns = [
     path("request/", include('request.urls')),
     path('gedung/', include('gedung.urls')),
     path('laporan/', include('laporan.urls')),
-    path('riwayat/', include('riwayat.urls')),
+    path('riwayat/', include('riwayat.urls')),  
 ]

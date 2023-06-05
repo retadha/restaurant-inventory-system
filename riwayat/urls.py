@@ -8,5 +8,4 @@ urlpatterns = [
     path("pembelian-lines", pembelian_lines, name="pembelian_lines"),
     path('', home_riwayat, name='home_riwayat'),
     path('penjualan/', list_riwayat_penjualan, name='penjualan')
-
 ]

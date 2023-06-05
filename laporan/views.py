@@ -154,12 +154,13 @@ def top_supplier(self, queryset=None):
     
     qty_dict = dict()
     for i in query:
-        namaSupplier = i.id_supplier.nama
-        
-        if namaSupplier in qty_dict.keys():
-                qty_dict[namaSupplier] = qty_dict[namaSupplier] + 1
-        else:
-            qty_dict.update({namaSupplier: 1})
+        if (i.id_gedung.status == "0"):
+            namaSupplier = i.id_supplier.nama
+            
+            if namaSupplier in qty_dict.keys():
+                    qty_dict[namaSupplier] = qty_dict[namaSupplier] + 1
+            else:
+                qty_dict.update({namaSupplier: 1})
         
     max_value = max(qty_dict.values())
     item = [k for k,v in qty_dict.items() if v == max_value]
