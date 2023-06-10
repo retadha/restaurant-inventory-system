@@ -17,7 +17,8 @@ def profile_view(request):
     context = {
         'title': "Profil " + profile.user.username,
         'profile': profile,
-        'gedung': gedung,
+        'username':profile.user.username.replace(".",""),
+        'gedungs': gedung,
     }
     template = 'home/profile.html'  
     return render(request, template, context)

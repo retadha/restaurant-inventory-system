@@ -111,9 +111,7 @@
                   <ol>
                     {% for inventory in request.get_lines %}
                     <li>
-                      {{ inventory.id_inventory_default.nama }} @Rp{{
-                      inventory.harga }} x {{ inventory.qty }} {{
-                      inventory.id_inventory_default.satuan }}
+                      {{ inventory.id_inventory_default.nama }} @Rp{{ inventory.harga }} x {{ inventory.qty }} {{ inventory.id_inventory_default.satuan }}
                     </li>
                     {% endfor %}
                   </ol>

@@ -13,11 +13,19 @@
     REQUEST</center></div>
   {% if role == '0' %}
   <div class="LP-menu__button">
-    <a href="/riwayat/" class="icon" /><i class="bi bi-ui-checks" style="font-size: 3rem;"></i></a><center>
-    RIWAYAT</center></div>
+    {% if gedung == '0' %}
+    <a href="/riwayat/pembelian" class="icon" /><i class="bi bi-ui-checks" style="font-size: 3rem;"></i></a>
+    {% else %}
+    <a href="/riwayat/penjualan" class="icon" /><i class="bi bi-ui-checks" style="font-size: 3rem;"></i></a>
+    {% endif %}
+    <center>RIWAYAT</center></div>
   <div class="LP-menu__button">
-    <a href="/laporan/" class="icon" /><i class="bi bi-graph-up-arrow" style="font-size: 3rem;"></i></a><center>
-    LAPORAN</center></div>
+    {% if gedung == '0' %}
+    <a href="/laporan/pembelian" class="icon" /><i class="bi bi-graph-up-arrow" style="font-size: 3rem;"></i></a>
+    {% else %}
+    <a href="/laporan/penjualan" class="icon" /><i class="bi bi-graph-up-arrow" style="font-size: 3rem;"></i></a>
+    {% endif %}
+    <center>LAPORAN</center></div>
   {% endif %}
   {% if gedung == '0' %}
   <div class="LP-menu__button">

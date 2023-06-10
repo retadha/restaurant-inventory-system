@@ -71,7 +71,7 @@ def delete_supplier(request, id):
         return render(request, 'error/403.html')
     supplier = Supplier.objects.get(id_supplier=id)
     supplier.delete()
-    return redirect("/supplier/list_supplier")
+    return redirect("/supplier/")
 
 
 def auth_gedung_pusat(request):

@@ -123,12 +123,15 @@ def to_process(request):
 def process(request, id_request):
     try:
         inv_request = Request.objects.get(pk=id_request)
-        gedung = Gedung.objects.get(id_gedung=inv_request.id_gedung.id_gedung)  # Gudang Pusat
+        gedung = Gedung.objects.get(id_gedung=request.user.employee.id_gedung.id_gedung)  # Gudang Pusat
         list_inv_gudang = gedung.inventory_set.all()
 
+        # print(gedung)
         for line in inv_request.get_lines:
             inv_gudang = list_inv_gudang.get(default=line.id_inventory_default)
+            # print(inv_gudang)
             inv_gudang.stok -= line.qty
+            # print(inv_gudang.stok)
             if inv_gudang.stok < 0:
                 messages.error(request, f'Inventori gudang tidak mencukupi untuk menangani request {inv_request.token}')
                 return redirect("request:to_process")

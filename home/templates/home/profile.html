@@ -83,7 +83,7 @@
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Cabang</div>
                     <div class="col-lg-9 col-md-8">
-                      {% for gd in gedung %}
+                      {% for gd in gedungs %}
                       {% if gd.id_gedung == profile.id_gedung.id_gedung %} {{ gd.nama }} {% endif %}
                       {% endfor %}
                     </div>
@@ -91,12 +91,12 @@
 
                 </div>
 
-      <div class="text-center" data-bs-toggle="modal" data-bs-target="#modify{{profile}}">
+      <div class="text-center" data-bs-toggle="modal" data-bs-target="#modify_{{username}}">
           <a class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit Profile</a>
       </div>
 
       <!--Modal Modify-->   
-      <div class="modal fade" id="modify{{profile}}" tabindex="-1" role="dialog">
+      <div class="modal fade" id="modify_{{username}}" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -126,7 +126,7 @@
                           </div>
                           <div class="form-floating">
                             <input type="text" id="gedung" name="gedung" style="background-color:#e19c8d; color:white" class="form-control" placeholder=" "
-                              {% for gd in gedung %}
+                              {% for gd in gedungs %}
                               {% if gd.id_gedung == profile.id_gedung.id_gedung %} value="{{ gd.nama }}" {% endif %}
                               {% endfor %}
                               disabled>
