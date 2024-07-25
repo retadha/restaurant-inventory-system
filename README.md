@@ -2,6 +2,8 @@
 
 Noorumi is an integrated Inventory Management System. Our system covers all processes related to inventory management, including ordering, storage, and inventory management at the central warehouse and all restaurant locations. The system also provides financial reports and analysis to ensure optimal material requirement planning. 
 
+![Demo](https://github.com/retadha/restaurant-inventory-system/raw/main/demo.gif)
+
 ## Instructor 👩‍🏫
 **Pramitha Dwi Larasati, S.Kom, M.Kom**
 
